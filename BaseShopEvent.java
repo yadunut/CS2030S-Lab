@@ -10,13 +10,13 @@
 
 abstract class BaseShopEvent extends Event {
 
-    final int customerId;
-    boolean[] availableCounters;
+    final Customer customer;
+    Shop shop;
 
-    public BaseShopEvent(double time, int customerId, boolean[] availableCounters) {
+    public BaseShopEvent(double time, Customer customer, Shop shop) {
         super(time);
-        this.customerId = customerId;
-        this.availableCounters = availableCounters;
+        this.customer = customer;
+        this.shop = shop;
     }
 
 }

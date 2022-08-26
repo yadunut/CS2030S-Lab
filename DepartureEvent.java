@@ -1,14 +1,14 @@
 
 class DepartureEvent extends BaseShopEvent {
 
-    public DepartureEvent(double time, int customerId, boolean[] available) {
-        super(time, customerId, available);
+    public DepartureEvent(double time, Customer customer, Shop shop) {
+        super(time, customer, shop);
     }
 
     @Override
     public String toString() {
         return super.toString()
-                + String.format(": Customer %d departed", this.customerId);
+                + String.format(": %s departed", this.customer);
     }
 
     @Override

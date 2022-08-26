@@ -3,32 +3,24 @@ class ArrivalEvent extends BaseShopEvent {
 
     double serviceTime;
 
-    public ArrivalEvent(double time, int customerId, boolean[] available, double serviceTime) {
-        super(time, customerId, available);
-        this.availableCounters = available;
+    public ArrivalEvent(double time, Customer customer, Shop shop, double serviceTime) {
+        super(time, customer, shop);
         this.serviceTime = serviceTime;
     }
 
     @Override
     public Event[] simulate() {
-        int counter = -1;
-        for (int i = 0; i < this.availableCounters.length; i++) {
-            if (this.availableCounters[i]) {
-                counter = i;
-                break;
-            }
+        ShopCounter availableCounter = this.shop.getAvailableCounter();
+        if (availableCounter == null) {
+            return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
         }
-        if (counter == -1) {
-            return new Event[] { new DepartureEvent(this.getTime(), customerId, availableCounters) };
-        }
-
         return new Event[] {
-                new ServiceBeginEvent(this.getTime(), this.customerId, this.availableCounters, this.serviceTime,
-                        counter) };
+                new ServiceBeginEvent(this.getTime(), customer, shop, this.serviceTime, availableCounter) };
+
     }
 
     @Override
     public String toString() {
-        return super.toString() + String.format(": Customer %d arrives", this.customerId);
+        return super.toString() + String.format(": %s arrives", this.customer);
     }
 }

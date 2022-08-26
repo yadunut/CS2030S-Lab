@@ -7,16 +7,12 @@ import java.util.Scanner;
  * @version CS2030S AY21/22 Semester 2
  */
 class ShopSimulation extends Simulation {
-  /**
-   * The availability of counters in the shop.
-   */
-  public boolean[] availableCounters;
 
   /**
    * The list of customer arrival events to populate
    * the simulation with.
    */
-  public Event[] initEvents;
+  private Event[] initEvents;
 
   /**
    * Constructor for a shop simulation.
@@ -31,16 +27,18 @@ class ShopSimulation extends Simulation {
     initEvents = new Event[sc.nextInt()];
     int numOfCounters = sc.nextInt();
 
-    availableCounters = new boolean[numOfCounters];
+    ShopCounter[] availableCounters = new ShopCounter[numOfCounters];
     for (int i = 0; i < numOfCounters; i++) {
-      availableCounters[i] = true;
+      availableCounters[i] = new ShopCounter(i);
     }
+
+    Shop shop = new Shop(availableCounters);
 
     int id = 0;
     while (sc.hasNextDouble()) {
       double arrivalTime = sc.nextDouble();
       double serviceTime = sc.nextDouble();
-      initEvents[id] = new ArrivalEvent(arrivalTime, id, availableCounters, serviceTime);
+      initEvents[id] = new ArrivalEvent(arrivalTime, new Customer(id), shop, serviceTime);
       id += 1;
     }
   }

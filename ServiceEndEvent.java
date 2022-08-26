@@ -1,23 +1,22 @@
 
 class ServiceEndEvent extends BaseShopEvent {
 
-    int counterId;
+    ShopCounter counter;
 
-    public ServiceEndEvent(double time, int customerId, boolean[] available, int counterId) {
-        super(time, customerId, available);
-        this.counterId = counterId;
-        // TODO Auto-generated constructor stub
+    public ServiceEndEvent(double time, Customer customer, Shop shop, ShopCounter counter) {
+        super(time, customer, shop);
+        this.counter = counter;
     }
 
     @Override
     public String toString() {
         return super.toString()
-                + String.format(": Customer %d service done (by Counter %d)", this.customerId, this.counterId);
+                + String.format(": %s service done (by %s)", this.customer, this.counter);
     }
 
     @Override
     public Event[] simulate() {
-        this.availableCounters[counterId] = true;
-        return new Event[] { new DepartureEvent(this.getTime(), customerId, availableCounters) };
+        this.counter.setAvailable(true);
+        return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
     }
 }
