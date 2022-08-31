@@ -1,4 +1,7 @@
-
+/**
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
+ */
 class ServiceBeginEvent extends BaseShopEvent {
 
     double serviceTime;
@@ -18,7 +21,7 @@ class ServiceBeginEvent extends BaseShopEvent {
 
     @Override
     public Event[] simulate() {
-        this.counter.setAvailable(false);
+        this.counter.occupy();
         double endTime = this.getTime() + this.serviceTime;
         return new Event[] {
                 new ServiceEndEvent(endTime, this.customer, this.shop, this.counter) };

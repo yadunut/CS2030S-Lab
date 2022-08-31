@@ -1,4 +1,7 @@
-
+/**
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
+ */
 class ServiceEndEvent extends BaseShopEvent {
 
     ShopCounter counter;
@@ -16,7 +19,7 @@ class ServiceEndEvent extends BaseShopEvent {
 
     @Override
     public Event[] simulate() {
-        this.counter.setAvailable(true);
+        this.counter.free();
         return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
     }
 }

@@ -1,16 +1,16 @@
 /**
- * The Event class is an abstract class that encapsulates a 
- * discrete event to be simulated. An event encapsulates the 
- * time the event occurs. A subclass of event _must_ override 
- * the simulate() method to implement the logic of the 
+ * The Event class is an abstract class that encapsulates a
+ * discrete event to be simulated. An event encapsulates the
+ * time the event occurs. A subclass of event _must_ override
+ * the simulate() method to implement the logic of the
  * simulation when this event is simulated. The simulate method
- * returns an array of events, which the simulator will then 
- * add to the event queue. Note that an event also implements 
- * the Comparable interface so that a PriorityQueue can 
+ * returns an array of events, which the simulator will then
+ * add to the event queue. Note that an event also implements
+ * the Comparable interface so that a PriorityQueue can
  * arrange the events in the order of event time.
- *
- * @author Wei Tsang
- * @version CS2030S AY21/22 Semester 2
+ * 
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
  */
 abstract class Event implements Comparable<Event> {
   /** The time this event occurs in the simulation. */
@@ -38,8 +38,8 @@ abstract class Event implements Comparable<Event> {
    * Compare this event with a given event e.
    *
    * @param e The other event to compare to.
-   * @return 1 if this event occurs later than e; 
-   *         0 if they occur the same time; 
+   * @return 1 if this event occurs later than e;
+   *         0 if they occur the same time;
    *         -1 if this event occurs earlier.
    */
   @Override

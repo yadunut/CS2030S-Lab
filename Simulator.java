@@ -3,19 +3,19 @@ import java.util.PriorityQueue;
 /**
  * This class implements a discrete event simulator.
  * The simulator maintains a priority queue of events.
- * It runs through the events and simulates each one until 
+ * It runs through the events and simulates each one until
  * the queue is empty.
  *
- * @author Wei Tsang
- * @version CS2030S AY21/22 Semester 2
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
  */
 public class Simulator {
   /** The event queue. */
   private final PriorityQueue<Event> events;
 
-  /** 
-   * The constructor for a simulator.  It takes in
-   * a simulation as an argument, and calls the 
+  /**
+   * The constructor for a simulator. It takes in
+   * a simulation as an argument, and calls the
    * getInitialEvents method of that simulation to
    * initialize the event queue.
    *
@@ -30,10 +30,10 @@ public class Simulator {
 
   /**
    * Run the simulation until no more events is in
-   * the queue.  For each event in the queue (in
-   * increasing order of time), print out its string 
-   * representation, then simulate it.  If the 
-   * simulation returns one or more events, add them 
+   * the queue. For each event in the queue (in
+   * increasing order of time), print out its string
+   * representation, then simulate it. If the
+   * simulation returns one or more events, add them
    * to the queue, and repeat.
    */
   public void run() {

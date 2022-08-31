@@ -1,3 +1,7 @@
+/**
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
+ */
 public class ShopCounter {
     final private int id;
     private boolean available;
@@ -6,8 +10,12 @@ public class ShopCounter {
         return available;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void occupy() {
+        this.available = false;
+    }
+
+    public void free() {
+        this.available = true;
     }
 
     public ShopCounter(int id) {

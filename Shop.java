@@ -1,3 +1,7 @@
+/**
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
+ */
 public class Shop {
     private ShopCounter[] counters;
 

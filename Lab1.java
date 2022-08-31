@@ -3,8 +3,8 @@ import java.util.Scanner;
 /**
  * The main class for CS2030S Lab 1.
  *
- * @author Wei Tsang
- * @version CS2030S AY21/22 Semester 2
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
  */
 class Lab1 {
   public static void main(String[] args) {
@@ -12,8 +12,8 @@ class Lab1 {
     // Create a scanner to read from standard input.
     Scanner sc = new Scanner(System.in);
 
-    // Create a simulation.  The ShopSimulation 
-    // constructor will read the simulation parameters 
+    // Create a simulation. The ShopSimulation
+    // constructor will read the simulation parameters
     // and initial events using the scanner.
     Simulation simulation = new ShopSimulation(sc);
 

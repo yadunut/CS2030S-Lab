@@ -1,3 +1,7 @@
+/**
+ * @author Yadunand Prem
+ * @version CS2030S AY22/23 Semester 2
+ */
 public class Customer {
     final private int id;
 
