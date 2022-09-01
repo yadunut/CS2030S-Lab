@@ -1,31 +1,36 @@
 /**
+ * This is a data class which holds information about a counter. It has a
+ * incrementing counter for the conuter Id.
+ * 
  * @author Yadunand Prem
  * @version CS2030S AY22/23 Semester 2
  */
 public class ShopCounter {
-    final private int id;
-    private boolean available;
+  private static int lastId;
 
-    public boolean isAvailable() {
-        return available;
-    }
+  private final int id;
+  private boolean available;
 
-    public void occupy() {
-        this.available = false;
-    }
+  public boolean isAvailable() {
+    return available;
+  }
 
-    public void free() {
-        this.available = true;
-    }
+  public void occupy() {
+    this.available = false;
+  }
 
-    public ShopCounter(int id) {
-        this.id = id;
-        this.available = true;
-    }
+  public void free() {
+    this.available = true;
+  }
 
-    @Override
-    public String toString() {
-        return "Counter " + id;
-    }
+  public ShopCounter() {
+    this.id = lastId++;
+    this.available = true;
+  }
+
+  @Override
+  public String toString() {
+    return "S" + id;
+  }
 
 }

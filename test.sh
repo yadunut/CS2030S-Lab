@@ -70,4 +70,7 @@ elif [ $num_failed -eq 0 ]
 then
 	echo "$PROG: passed everything 🎉"
 fi
+
+# Run style checker
+java -jar ./checkstyle.jar -c ./cs2030_checks.xml *.java 
 # vim:noexpandtab:sw=4:ts=4

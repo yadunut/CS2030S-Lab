@@ -1,22 +1,45 @@
 /**
+ * The DepartureEvent is an Event which handles the end of a service.
+ * It handles allocating customers in queue to a counter.
+ * 
  * @author Yadunand Prem
  * @version CS2030S AY22/23 Semester 2
  */
-class DepartureEvent extends BaseShopEvent {
+class DepartureEvent extends Event {
 
-    public DepartureEvent(double time, Customer customer, Shop shop) {
-        super(time, customer, shop);
-    }
+  private ShopCounter counter;
+  private Customer customer;
+  private Shop shop;
 
-    @Override
-    public String toString() {
-        return super.toString()
-                + String.format(": %s departed", this.customer);
-    }
+  public DepartureEvent(double time, Customer customer, Shop shop) {
+    super(time);
+    this.customer = customer;
+    this.shop = shop;
+  }
 
-    @Override
-    public Event[] simulate() {
-        return new Event[] {};
+  public DepartureEvent(double time, Customer customer, Shop shop, ShopCounter counter) {
+    super(time);
+    this.customer = customer;
+    this.shop = shop;
+    this.counter = counter;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s: %s departed", super.toString(), this.customer);
+  }
+
+  @Override
+  public Event[] simulate() {
+    // when customer departs, check if there are customers in queue
+    if (this.shop.getQueue().isEmpty() || this.counter == null) {
+      return new Event[] {};
     }
+    Customer c = (Customer) this.shop.getQueue().deq();
+    return new Event[] {
+        new ServiceBeginEvent(this.getTime(), c, this.shop, this.counter),
+    };
+
+  }
 
 }

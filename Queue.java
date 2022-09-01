@@ -59,7 +59,8 @@ class Queue {
   /**
    * Remove the object from the queue.
    *
-   * @return null if the queue is empty; the object removed from the queue otherwise.
+   * @return null if the queue is empty; the object removed from the queue
+   *         otherwise.
    */
   public Object deq() {
     if (this.isEmpty()) {
@@ -101,8 +102,8 @@ class Queue {
   /**
    * Returns the string representation of the queue.
    * 
-   * @return A string consisting of the string representation of 
-   * every object in the queue.
+   * @return A string consisting of the string representation of
+   *         every object in the queue.
    */
   @Override
   public String toString() {
@@ -113,7 +114,7 @@ class Queue {
       str += this.items[i] + " ";
       i = (i + 1) % this.maxSize;
       count++;
-    } 
+    }
     return str + "]";
   }
 }
