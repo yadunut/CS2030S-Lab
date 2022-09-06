@@ -25,7 +25,7 @@ class ArrivalEvent extends Event {
     // check if counters are available. If none, push customer to queue if not full.
     // If full, customer departs
     if (availableCounter == null) {
-      if (this.shop.getQueue().isFull()) {
+      if (this.shop.isQueueFull()) {
         return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
       }
       Queue queue = this.shop.getQueue();

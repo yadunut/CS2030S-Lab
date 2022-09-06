@@ -35,6 +35,11 @@ public class Shop {
   }
 
   public Queue getQueue() {
-    return queue;
+    return this.queue;
   }
+
+  public boolean isQueueFull() {
+    return this.queue.isFull();
+  }
+
 }
