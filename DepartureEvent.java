@@ -32,10 +32,10 @@ class DepartureEvent extends Event {
   @Override
   public Event[] simulate() {
     // when customer departs, check if there are customers in queue
-    if (this.shop.getQueue().isEmpty() || this.counter == null) {
+    if (this.shop.isQueueEmpty() || this.counter == null) {
       return new Event[] {};
     }
-    Customer c = (Customer) this.shop.getQueue().deq();
+    Customer c = this.shop.leaveQueue();
     return new Event[] {
         new ServiceBeginEvent(this.getTime(), c, this.shop, this.counter),
     };

@@ -28,13 +28,7 @@ class ArrivalEvent extends Event {
       if (this.shop.isQueueFull()) {
         return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
       }
-      Queue queue = this.shop.getQueue();
-      System.out
-          .println(String.format("%s: %s joined queue %s",
-              super.toString(),
-              this.customer, queue));
-      queue.enq(customer);
-      return new Event[] {};
+      return new Event[] { new JoinQueueEvent(customer, shop) };
     }
     return new Event[] {
         new ServiceBeginEvent(this.getTime(), customer, shop, availableCounter) };
@@ -46,6 +40,6 @@ class ArrivalEvent extends Event {
     return String.format("%s: %s arrived %s",
         super.toString(),
         this.customer,
-        this.shop.getQueue());
+        this.shop.queueString());
   }
 }

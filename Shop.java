@@ -41,5 +41,20 @@ public class Shop {
   public boolean isQueueFull() {
     return this.queue.isFull();
   }
+  public boolean isQueueEmpty() {
+    return this.queue.isEmpty();
+  }
+
+  public void joinQueue(Customer customer) {
+    this.queue.enq(customer);
+  }
+
+  public Customer leaveQueue() {
+    return (Customer) this.queue.deq();
+  }
+
+  public String queueString() {
+    return this.queue.toString();
+  }
 
 }
