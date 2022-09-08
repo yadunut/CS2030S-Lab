@@ -6,16 +6,16 @@
  * @version CS2030S AY22/23 Semester 2
  */
 public class Shop {
-  private ServiceCounter[] counters;
-  private Queue queue;
+  private Array<ServiceCounter> counters;
+  private Queue<Customer> queue;
 
   public Shop(int numOfCounters, int shopQueueSize, int counterQueueSize) {
-    this.counters = new ServiceCounter[numOfCounters];
+    this.counters = new Array<ServiceCounter>(numOfCounters);
     for (int i = 0; i < numOfCounters; i++) {
-      this.counters[i] = new ServiceCounter(counterQueueSize);
+      this.counters.set(i, new ServiceCounter(counterQueueSize));
     }
 
-    this.queue = new Queue(shopQueueSize);
+    this.queue = new Queue<Customer>(shopQueueSize);
   }
 
   /**
@@ -26,11 +26,14 @@ public class Shop {
    */
 
   public ServiceCounter getAvailableCounter() {
+    // Check if this logic can be moved elsewhere
+    /*
     for (int i = 0; i < this.counters.length; i++) {
       if (this.counters[i].isAvailable()) {
         return counters[i];
       }
     }
+    */
     return null;
   }
 
@@ -46,7 +49,7 @@ public class Shop {
   }
 
   public Customer leaveQueue() {
-    return (Customer) this.queue.deq();
+    return this.queue.deq();
   }
 
   public String queueString() {
