@@ -19,6 +19,6 @@ class JoinShopQueueEvent extends Event {
   public String toString() {
     return String.format("%s: %s joined shop queue %s",
         super.toString(),
-        this.customer, this.shop.queueString());
+        this.customer, this.shop);
   }
 }

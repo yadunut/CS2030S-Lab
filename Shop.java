@@ -59,7 +59,8 @@ public class Shop {
     return null;
   }
 
-  public String queueString() {
+  @Override
+  public String toString() {
     return this.queue.toString();
   }
 

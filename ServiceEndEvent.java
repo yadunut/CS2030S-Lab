@@ -35,7 +35,7 @@ class ServiceEndEvent extends Event {
         return new Event[] {
             new DepartureEvent(this.getTime(), this.customer),
             new ServiceBeginEvent(this.getTime(), serviceCustomer, this.shop, this.counter),
-            new JoinCounterQueueEvent(this.getTime(), this.shop.leaveQueue(), this.shop, counter)
+            new JoinCounterQueueEvent(this.getTime(), this.shop.leaveQueue(), counter)
         };
       }
       return new Event[] {

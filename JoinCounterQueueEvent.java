@@ -1,12 +1,11 @@
 public class JoinCounterQueueEvent extends Event {
   private Customer customer;
-  private Shop shop;
   private ServiceCounter counter;
 
-  public JoinCounterQueueEvent(double time, Customer customer, Shop shop, ServiceCounter counter) {
+  public JoinCounterQueueEvent(double time, Customer customer, ServiceCounter counter) {
     super(time);
     this.customer = customer;
-    this.shop = shop;
+    this.counter = counter;
   }
 
   @Override

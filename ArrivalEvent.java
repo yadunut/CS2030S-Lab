@@ -31,7 +31,9 @@ class ArrivalEvent extends Event {
     // if no counters available, check if queue slots avialable in counters
     availableCounter = this.shop.findCounterWithQueue();
     if (availableCounter != null) {
-      return new Event[] { new JoinCounterQueueEvent(this.getTime(), this.customer, this.shop, availableCounter) };
+      return new Event[] { 
+        new JoinCounterQueueEvent(this.getTime(), this.customer, availableCounter) 
+      };
     }
     // if shop queue isn't empty, join shop queue
     if (!this.shop.isQueueFull()) {
@@ -43,9 +45,6 @@ class ArrivalEvent extends Event {
 
   @Override
   public String toString() {
-    return String.format("%s: %s arrived %s",
-        super.toString(),
-        this.customer,
-        this.shop.queueString());
+    return String.format("%s: %s arrived %s", super.toString(), this.customer, this.shop);
   }
 }
