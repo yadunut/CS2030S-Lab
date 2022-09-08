@@ -26,9 +26,10 @@ class ShopSimulation extends Simulation {
   public ShopSimulation(Scanner sc) {
     initEvents = new Event[sc.nextInt()];
     int numOfCounters = sc.nextInt();
-    int maxQueueSize = sc.nextInt();
+    int maxCounterQueueSize = sc.nextInt();
+    int maxShopQueueSize = sc.nextInt();
 
-    Shop shop = new Shop(numOfCounters, maxQueueSize);
+    Shop shop = new Shop(numOfCounters, maxShopQueueSize, maxCounterQueueSize);
 
     int id = 0;
     while (sc.hasNextDouble()) {

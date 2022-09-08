@@ -9,13 +9,13 @@ public class Shop {
   private ServiceCounter[] counters;
   private Queue queue;
 
-  public Shop(int numOfCounters, int queueSize) {
+  public Shop(int numOfCounters, int shopQueueSize, int counterQueueSize) {
     this.counters = new ServiceCounter[numOfCounters];
     for (int i = 0; i < numOfCounters; i++) {
-      this.counters[i] = new ServiceCounter();
+      this.counters[i] = new ServiceCounter(counterQueueSize);
     }
 
-    this.queue = new Queue(queueSize);
+    this.queue = new Queue(shopQueueSize);
   }
 
   /**
@@ -32,10 +32,6 @@ public class Shop {
       }
     }
     return null;
-  }
-
-  public Queue getQueue() {
-    return this.queue;
   }
 
   public boolean isQueueFull() {
