@@ -7,7 +7,7 @@
  */
 class DepartureEvent extends Event {
 
-  private ShopCounter counter;
+  private ServiceCounter counter;
   private Customer customer;
   private Shop shop;
 
@@ -17,7 +17,7 @@ class DepartureEvent extends Event {
     this.shop = shop;
   }
 
-  public DepartureEvent(double time, Customer customer, Shop shop, ShopCounter counter) {
+  public DepartureEvent(double time, Customer customer, Shop shop, ServiceCounter counter) {
     super(time);
     this.customer = customer;
     this.shop = shop;
@@ -36,6 +36,7 @@ class DepartureEvent extends Event {
       return new Event[] {};
     }
     Customer c = this.shop.leaveQueue();
+    // Move this to ServiceEndEvent
     return new Event[] {
         new ServiceBeginEvent(this.getTime(), c, this.shop, this.counter),
     };

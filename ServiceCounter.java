@@ -5,7 +5,7 @@
  * @author Yadunand Prem
  * @version CS2030S AY22/23 Semester 2
  */
-public class ShopCounter {
+public class ServiceCounter {
   private static int lastId;
 
   private final int id;
@@ -23,7 +23,7 @@ public class ShopCounter {
     this.available = true;
   }
 
-  public ShopCounter() {
+  public ServiceCounter() {
     this.id = lastId++;
     this.available = true;
   }

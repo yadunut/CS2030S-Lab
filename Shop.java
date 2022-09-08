@@ -6,13 +6,13 @@
  * @version CS2030S AY22/23 Semester 2
  */
 public class Shop {
-  private ShopCounter[] counters;
+  private ServiceCounter[] counters;
   private Queue queue;
 
   public Shop(int numOfCounters, int queueSize) {
-    this.counters = new ShopCounter[numOfCounters];
+    this.counters = new ServiceCounter[numOfCounters];
     for (int i = 0; i < numOfCounters; i++) {
-      this.counters[i] = new ShopCounter();
+      this.counters[i] = new ServiceCounter();
     }
 
     this.queue = new Queue(queueSize);
@@ -25,7 +25,7 @@ public class Shop {
    * @return the available counter or null if none found
    */
 
-  public ShopCounter getAvailableCounter() {
+  public ServiceCounter getAvailableCounter() {
     for (int i = 0; i < this.counters.length; i++) {
       if (this.counters[i].isAvailable()) {
         return counters[i];

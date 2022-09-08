@@ -21,7 +21,7 @@ class ArrivalEvent extends Event {
 
   @Override
   public Event[] simulate() {
-    ShopCounter availableCounter = this.shop.getAvailableCounter();
+    ServiceCounter availableCounter = this.shop.getAvailableCounter();
     // check if counters are available. If none, push customer to queue if not full.
     // If full, customer departs
     if (availableCounter == null) {

@@ -7,11 +7,11 @@
  */
 class ServiceEndEvent extends Event {
 
-  private ShopCounter counter;
+  private ServiceCounter counter;
   private Customer customer;
   private Shop shop;
 
-  public ServiceEndEvent(double time, Customer customer, Shop shop, ShopCounter counter) {
+  public ServiceEndEvent(double time, Customer customer, Shop shop, ServiceCounter counter) {
     super(time);
     this.customer = customer;
     this.shop = shop;
