@@ -3,12 +3,12 @@
  * with limited capacity that can store any Object instances.
  * Not to be confused with java.util.Queue.
  *
- * @author Wei Tsang
+ * @author Yadunand Prem
  * @version CS2030S AY21/22 Semester 2
  */
-class Queue {
+class Queue<T> {
   /** An array to store the items in the queue. */
-  private Object[] items;
+  private T[] items;
 
   /** Index of the first element in the queue. */
   private int first;
@@ -29,7 +29,12 @@ class Queue {
    */
   public Queue(int size) {
     this.maxSize = size;
-    this.items = new Object[size];
+    // The only way to add values to `items` is via enq(), and we can only put 
+    // objects of type T via that method. Thus, it is safe to cast Comparable[] 
+    // to T[].
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    T[] temp = (T[]) new Object[size];
+    this.items = temp;
     this.first = -1;
     this.last = -1;
     this.len = 0;
@@ -41,7 +46,7 @@ class Queue {
    * @param e The item to put in the queue.
    * @return false if the queue is full; true if e is added successfully.
    */
-  public boolean enq(Object e) {
+  public boolean enq(T e) {
     if (this.isFull()) {
       return false;
     }
@@ -62,11 +67,11 @@ class Queue {
    * @return null if the queue is empty; the object removed from the queue
    *         otherwise.
    */
-  public Object deq() {
+  public T deq() {
     if (this.isEmpty()) {
       return null;
     }
-    Object item = this.items[this.first];
+    T item = this.items[this.first];
     this.first = (this.first + 1) % this.maxSize;
     this.len -= 1;
     return item;

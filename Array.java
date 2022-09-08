@@ -1,26 +1,38 @@
 /**
  * The Array<T> for CS2030S 
  *
- * @author XXX
+ * @author Yadunand Prem
  * @version CS2030S AY21/22 Semester 2
  */
-class Array<T> { // TODO: Change to bounded type parameter
+
+class Array<T extends Comparable<T>> { 
   private T[] array;
 
-  Array(int size) {
-    // TODO
+  public Array(int size) {
+    // The only way to add values to `array` is via set(), and we can only put 
+    // objects of type T via that method. Thus, it is safe to cast Comparable[] 
+    // to T[].
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    T[] temp = (T[]) new Comparable[size];
+    this.array = temp;
   }
 
   public void set(int index, T item) {
-    // TODO
+    this.array[index] = item;
   }
 
   public T get(int index) {
-    // TODO
+    return this.array[index];
   }
 
   public T min() {
-    // TODO
+    T result = this.array[0];
+    for (T i: this.array) {
+      if (i.compareTo(result) < 0) {
+        result = i;
+      }
+    }
+    return result;
   }
 
   @Override
