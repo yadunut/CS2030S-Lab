@@ -26,20 +26,19 @@ public class Shop {
    */
 
   public ServiceCounter getAvailableCounter() {
-    // Check if this logic can be moved elsewhere
-    /*
-    for (int i = 0; i < this.counters.length; i++) {
-      if (this.counters[i].isAvailable()) {
-        return counters[i];
+    for (int i = 0; i < this.counters.length(); i++) {
+      ServiceCounter counter = this.counters.get(i);
+      if (counter.isAvailable()) {
+        return counter;
       }
     }
-    */
     return null;
   }
 
   public boolean isQueueFull() {
     return this.queue.isFull();
   }
+
   public boolean isQueueEmpty() {
     return this.queue.isEmpty();
   }
@@ -50,6 +49,14 @@ public class Shop {
 
   public Customer leaveQueue() {
     return this.queue.deq();
+  }
+
+  public ServiceCounter findCounterWithQueue() {
+    ServiceCounter minCounter = this.counters.min();
+    if (!minCounter.isQueueFull()) {
+      return minCounter;
+    }
+    return null;
   }
 
   public String queueString() {

@@ -24,6 +24,22 @@ public class ServiceCounter implements Comparable<ServiceCounter> {
     this.available = true;
   }
 
+  public boolean isQueueFull() {
+    return this.queue.isFull();
+  }
+
+  public boolean isQueueEmpty() {
+    return this.queue.isEmpty();
+  }
+
+  public void joinQueue(Customer customer) {
+    this.queue.enq(customer);
+  }
+
+  public Customer leaveQueue() {
+    return this.queue.deq();
+  }
+
   public ServiceCounter(int queueSize) {
     this.id = lastId++;
     this.available = true;
@@ -32,7 +48,7 @@ public class ServiceCounter implements Comparable<ServiceCounter> {
 
   @Override
   public String toString() {
-    return "S" + id;
+    return String.format("S%s %s", id, this.queue);
   }
 
   @Override

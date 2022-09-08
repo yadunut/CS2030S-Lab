@@ -22,16 +22,22 @@ class ArrivalEvent extends Event {
   @Override
   public Event[] simulate() {
     ServiceCounter availableCounter = this.shop.getAvailableCounter();
-    // check if counters are available. If none, push customer to queue if not full.
-    // If full, customer departs
-    if (availableCounter == null) {
-      if (this.shop.isQueueFull()) {
-        return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
-      }
-      return new Event[] { new JoinQueueEvent(customer, shop) };
+    // check if counters are available. If available, start service for that
+    // customer
+    if (availableCounter != null) {
+      return new Event[] {
+          new ServiceBeginEvent(this.getTime(), customer, shop, availableCounter) };
     }
-    return new Event[] {
-        new ServiceBeginEvent(this.getTime(), customer, shop, availableCounter) };
+    // if no counters available, check if queue slots avialable in counters
+    availableCounter = this.shop.findCounterWithQueue();
+    if (availableCounter != null) {
+      return new Event[] { new JoinCounterQueueEvent(this.getTime(), this.customer, this.shop, availableCounter) };
+    }
+    // if shop queue isn't empty, join shop queue
+    if (!this.shop.isQueueFull()) {
+      return new Event[] { new JoinShopQueueEvent(customer, shop) };
+    }
+    return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
 
   }
 

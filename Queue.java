@@ -29,10 +29,10 @@ class Queue<T> {
    */
   public Queue(int size) {
     this.maxSize = size;
-    // The only way to add values to `items` is via enq(), and we can only put 
-    // objects of type T via that method. Thus, it is safe to cast Comparable[] 
+    // The only way to add values to `items` is via enq(), and we can only put
+    // objects of type T via that method. Thus, it is safe to cast Comparable[]
     // to T[].
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings("unchecked")
     T[] temp = (T[]) new Object[size];
     this.items = temp;
     this.first = -1;

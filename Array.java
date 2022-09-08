@@ -1,18 +1,18 @@
 /**
- * The Array<T> for CS2030S 
+ * The Array<T> for CS2030S
  *
  * @author Yadunand Prem
  * @version CS2030S AY21/22 Semester 2
  */
 
-class Array<T extends Comparable<T>> { 
+class Array<T extends Comparable<T>> {
   private T[] array;
 
   public Array(int size) {
-    // The only way to add values to `array` is via set(), and we can only put 
-    // objects of type T via that method. Thus, it is safe to cast Comparable[] 
+    // The only way to add values to `array` is via set(), and we can only put
+    // objects of type T via that method. Thus, it is safe to cast Comparable[]
     // to T[].
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings("unchecked")
     T[] temp = (T[]) new Comparable[size];
     this.array = temp;
   }
@@ -27,12 +27,16 @@ class Array<T extends Comparable<T>> {
 
   public T min() {
     T result = this.array[0];
-    for (T i: this.array) {
+    for (T i : this.array) {
       if (i.compareTo(result) < 0) {
         result = i;
       }
     }
     return result;
+  }
+
+  public int length() {
+    return this.array.length;
   }
 
   @Override

@@ -26,7 +26,33 @@ class ServiceEndEvent extends Event {
 
   @Override
   public Event[] simulate() {
+    // if there are customers in the counter queue, they will be serviced next.
+    // Customers in the shop queue will then be added to the counter queue
+    if (!this.counter.isQueueEmpty()) {
+      Customer serviceCustomer = this.counter.leaveQueue();
+
+      if (!this.shop.isQueueEmpty()) {
+        return new Event[] {
+            new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+            new ServiceBeginEvent(this.getTime(), serviceCustomer, this.shop, this.counter),
+            new JoinCounterQueueEvent(this.getTime(), this.shop.leaveQueue(), this.shop, counter)
+        };
+      }
+      return new Event[] {
+          new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+          new ServiceBeginEvent(this.getTime(), serviceCustomer, this.shop, this.counter),
+      };
+    }
+    // There can also be the case where the counter queue may be empty but there are
+    // customers in the shop queue.
+    if (!this.shop.isQueueEmpty()) {
+      return new Event[] {
+          new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+          new ServiceBeginEvent(this.getTime(), this.shop.leaveQueue(), this.shop, this.counter),
+      };
+    }
+    // else there are no more customers in the queue, and the counter can be freed
     this.counter.free();
-    return new Event[] { new DepartureEvent(this.getTime(), customer, shop, counter) };
+    return new Event[] { new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter) };
   }
 }
