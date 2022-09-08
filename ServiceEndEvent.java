@@ -33,13 +33,13 @@ class ServiceEndEvent extends Event {
 
       if (!this.shop.isQueueEmpty()) {
         return new Event[] {
-            new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+            new DepartureEvent(this.getTime(), this.customer),
             new ServiceBeginEvent(this.getTime(), serviceCustomer, this.shop, this.counter),
             new JoinCounterQueueEvent(this.getTime(), this.shop.leaveQueue(), this.shop, counter)
         };
       }
       return new Event[] {
-          new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+          new DepartureEvent(this.getTime(), this.customer),
           new ServiceBeginEvent(this.getTime(), serviceCustomer, this.shop, this.counter),
       };
     }
@@ -47,12 +47,12 @@ class ServiceEndEvent extends Event {
     // customers in the shop queue.
     if (!this.shop.isQueueEmpty()) {
       return new Event[] {
-          new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter),
+          new DepartureEvent(this.getTime(), this.customer),
           new ServiceBeginEvent(this.getTime(), this.shop.leaveQueue(), this.shop, this.counter),
       };
     }
     // else there are no more customers in the queue, and the counter can be freed
     this.counter.free();
-    return new Event[] { new DepartureEvent(this.getTime(), this.customer, this.shop, this.counter) };
+    return new Event[] { new DepartureEvent(this.getTime(), this.customer) };
   }
 }

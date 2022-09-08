@@ -37,7 +37,7 @@ class ArrivalEvent extends Event {
     if (!this.shop.isQueueFull()) {
       return new Event[] { new JoinShopQueueEvent(customer, shop) };
     }
-    return new Event[] { new DepartureEvent(this.getTime(), customer, shop) };
+    return new Event[] { new DepartureEvent(this.getTime(), customer) };
 
   }
 

@@ -7,21 +7,11 @@
  */
 class DepartureEvent extends Event {
 
-  private ServiceCounter counter;
   private Customer customer;
-  private Shop shop;
 
-  public DepartureEvent(double time, Customer customer, Shop shop) {
+  public DepartureEvent(double time, Customer customer) {
     super(time);
     this.customer = customer;
-    this.shop = shop;
-  }
-
-  public DepartureEvent(double time, Customer customer, Shop shop, ServiceCounter counter) {
-    super(time);
-    this.customer = customer;
-    this.shop = shop;
-    this.counter = counter;
   }
 
   @Override
@@ -32,15 +22,7 @@ class DepartureEvent extends Event {
   @Override
   public Event[] simulate() {
     // when customer departs, check if there are customers in queue
-    if (this.shop.isQueueEmpty() || this.counter == null) {
-      return new Event[] {};
-    }
-    Customer c = this.shop.leaveQueue();
-    // Move this to ServiceEndEvent
-    return new Event[] {
-        new ServiceBeginEvent(this.getTime(), c, this.shop, this.counter),
-    };
-
+    return new Event[] {};
   }
 
 }
