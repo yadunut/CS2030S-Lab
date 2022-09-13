@@ -1,5 +1,5 @@
 /**
- * The Array<T> for CS2030S
+ * The Array for CS2030S
  *
  * @author Yadunand Prem
  * @version CS2030S AY21/22 Semester 2
