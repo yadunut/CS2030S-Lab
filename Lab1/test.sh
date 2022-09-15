@@ -34,7 +34,7 @@ do
 		else
 			out=$(mktemp --suffix=$PROG)
 		fi
-		java $PROG < inputs/$PROG.$i.in | head -c 50MB > $out
+		java $PROG < inputs/$PROG.$i.in  > $out
 		status="$?"
 		if [ "$status" -ne "0" ]
 		then
@@ -72,5 +72,6 @@ then
 	echo "$PROG: passed everything 🎉"
 fi
 # Run style checker
-java -jar ~cs2030s/bin/checkstyle.jar -c ~cs2030s/bin/cs2030_checks.xml *.java 
+#java -jar ~cs2030s/bin/checkstyle.jar -c ~cs2030s/bin/cs2030_checks.xml *.java 
+java -jar ./checkstyle.jar -c ./cs2030_checks.xml *.java 
 # vim:noexpandtab:sw=4:ts=4
