@@ -8,10 +8,10 @@
  * @author Put Your Name (Lab Group)
  */
 
-class  Print<T> implements Action<T> {
+class Print implements Action<Object> {
 
-  @Override
-  public void call(T item) {
+  @Override 
+  public void call(Object item) {
     System.out.println(item);
   }
 

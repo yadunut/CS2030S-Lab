@@ -7,3 +7,10 @@
  *
  * @author Put Your Name (Lab Group)
  */
+
+class Improbable<T> implements Immutator<Probably<T>, T> {
+  @Override
+  public Probably<T> invoke(T param) {
+    return Probably.just(param);
+  }
+}

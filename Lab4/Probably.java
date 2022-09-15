@@ -5,10 +5,10 @@
  * we may return something that contains nothing
  * where the nothing is a null.
  *
- * @author XXX
+ * @author Yadunand Prem (10B)
  * @version CS2030S AY22/23 Semester 1
  */
-class Probably<T> {
+class Probably<T> implements Actionable<T>, Immutatorable<T> {
   private final T value;
 
   private static final Probably<?> NONE = new Probably<>(null);
@@ -50,7 +50,7 @@ class Probably<T> {
     if (value == null) {
       return none();
     }
-    return (Probably<T>) new Probably<>(value);
+    return new Probably<>(value);
   }
   
   /**
@@ -93,4 +93,19 @@ class Probably<T> {
       return "<" + this.value.toString() + ">";
     }
   }
+
+  @Override
+  public void act(Action<? super T> action) {
+    if (this.value == null) {
+      return;
+    }
+    action.call(this.value);
+  }
+
+  @Override
+  public <R> Probably<R> transform(Immutator<Probably<R>, ? super T> immutator) {
+    return immutator.invoke(this.value);
+  }
+
+
 }

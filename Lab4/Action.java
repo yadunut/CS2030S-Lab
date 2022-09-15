@@ -11,5 +11,5 @@
  */
 
 interface Action<T> {
-  void call(T item)
+   void call(T item);
 }
