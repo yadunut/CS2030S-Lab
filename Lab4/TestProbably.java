@@ -54,8 +54,5 @@ class TestProbably {
     we.expect("Probably.none() == Probably.just(null)",
               Probably.none() == Probably.just(null),
               true);
-
-    // we.showStat();
-    // we.print();
   }
 }

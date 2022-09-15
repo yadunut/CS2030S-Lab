@@ -13,18 +13,6 @@ class Test5 {
       }
     }
     
-    we.prefix("jshell> class Incr implements Immutator<Integer,Integer> {");
-    we.prefix("   ...>   public Integer invoke(Integer t1) {");
-    we.prefix("   ...>     return t1 + 1;");
-    we.prefix("   ...>   }");
-    we.prefix("   ...> }");
-    
-    we.prefix("jshell> class Length implements Immutator<Integer,String> {");
-    we.prefix("   ...>   public Integer invoke(String t1) {");
-    we.prefix("   ...>     return t1.length();");
-    we.prefix("   ...>   }");
-    we.prefix("   ...> }");
-    
     we.expect("Probably.just(17).check(new IsModEq(3,2)) // 17 % 3 is equal to 2",
               Probably.just(17).check(new IsModEq(3,2)).toString(),
               "<17>");
@@ -41,8 +29,5 @@ class Test5 {
     we.expect("Probably.<Integer>just(null).check(new IsModEq(0,2))",
               Probably.<Integer>just(null).check(new IsModEq(0,2)).toString(),
               "<>");
-
-    we.showStat();
-    we.print();
   }
 }

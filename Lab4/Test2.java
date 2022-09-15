@@ -38,8 +38,5 @@ class Test2 {
                    "",
                    baos,
                    old);
-
-    we.showStat();
-    we.print();
   }
 }

@@ -28,8 +28,5 @@ class Test1 {
                    "string",
                    baos,
                    old);
-
-    we.showStat();
-    we.print();
   }
 }

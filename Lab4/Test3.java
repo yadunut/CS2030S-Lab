@@ -13,18 +13,6 @@ class Test3 {
       }
     }
     
-    we.prefix("jshell> class Incr implements Immutator<Integer,Integer> {");
-    we.prefix("   ...>   public Integer invoke(Integer t1) {");
-    we.prefix("   ...>     return t1 + 1;");
-    we.prefix("   ...>   }");
-    we.prefix("   ...> }");
-    
-    we.prefix("jshell> class Length implements Immutator<Integer,String> {");
-    we.prefix("   ...>   public Integer invoke(String t1) {");
-    we.prefix("   ...>     return t1.length();");
-    we.prefix("   ...>   }");
-    we.prefix("   ...> }");
-    
     we.expect("new Incr().invoke(4)",
               new Incr().invoke(4).toString(),
               "5");
@@ -50,8 +38,5 @@ class Test3 {
     we.expect("new Improbable<>().invoke(new Improbable<>().invoke(1))",
               new Improbable<>().invoke(new Improbable<Integer>().invoke(1)).toString(),
               "<<1>>");
-
-    we.showStat();
-    we.print();
   }
 }

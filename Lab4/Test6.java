@@ -18,21 +18,6 @@ class Test6 {
     Probably<Immutator<Integer,Integer>> noIncr = Probably.none();
     Probably<Immutator<Integer,String>> noLength = Probably.none();
     
-    we.prefix("jshell> class Incr implements Immutator<Integer,Integer> {");
-    we.prefix("   ...>   public Integer invoke(Integer t1) {");
-    we.prefix("   ...>     return t1 + 1;");
-    we.prefix("   ...> }");
-    
-    we.prefix("jshell> class Length implements Immutator<Integer,String> {");
-    we.prefix("   ...>   public Integer invoke(String t1) {");
-    we.prefix("   ...>     return t1.length();");
-    we.prefix("   ...> }");
-    
-    we.prefix("jshell> Probably<Immutator<Integer,Integer>> justIncr = Probably.just(new Incr());");
-    we.prefix("jshell> Probably<Immutator<Integer,String>> justLength = Probably.just(new Length());");
-    we.prefix("jshell> Probably<Immutator<Integer,Integer>> noIncr = Probably.none();");
-    we.prefix("jshell> Probably<Immutator<Integer,String>> noLength = Probably.none();");
-    
     we.expect("Probably.just(17).<Integer>apply(justIncr)",
               Probably.just(17).apply(justIncr).toString(),
               "<18>");
@@ -58,8 +43,5 @@ class Test6 {
     we.expect("Probably.<String>none().<Integer>apply(noLength)",
               Probably.<String>none().apply(noLength).toString(),
               "<>");
-
-    we.showStat();
-    we.print();
   }
 }
