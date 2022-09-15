@@ -7,3 +7,12 @@
  *
  * @author Put Your Name (Lab Group)
  */
+
+class  Print<T> implements Action<T> {
+
+  @Override
+  public void call(T item) {
+    System.out.println(item);
+  }
+
+}

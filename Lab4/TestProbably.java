@@ -55,7 +55,7 @@ class TestProbably {
               Probably.none() == Probably.just(null),
               true);
 
-    we.showStat();
-    we.print();
+    // we.showStat();
+    // we.print();
   }
 }
