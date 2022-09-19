@@ -12,5 +12,5 @@
  */
 
 interface Applicable<T> {
-    <R> Applicable<R> apply(Immutator<Probably<R>, Probably<T>> immutator);
+    <R> Applicable<R> apply(Probably<Immutator<R, T>> probablyImmutator);
 }

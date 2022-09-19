@@ -124,11 +124,11 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
   }
 
   @Override
-  public <R> Probably<R> apply(Immutator<Probably<R>, Probably<T>> immutator) {
-    if (this.value == null) {
-      return none();
+  public <R> Probably<R> apply(Probably<Immutator<R, T>> probablyImmutator) {
+    if (this.value != null && probablyImmutator.value != null) {
+      return just(probablyImmutator.value.invoke(this.value));
     }
-    return immutator.invoke(this);
+    return none();
   }
 
 }

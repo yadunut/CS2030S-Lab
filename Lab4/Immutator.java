@@ -1,5 +1,5 @@
 /**
- * The Immutator interface that can transform 
+ * The Immutator interface that can transform
  * to type T2, an object of type T1.
  *
  * Contains a single abstract method invoke.
@@ -10,6 +10,6 @@
  * @author Yadunand Prem (10B)
  */
 
-interface Immutator<R,P> {
+interface Immutator<R, P> {
   public R invoke(P param);
 }
