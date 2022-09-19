@@ -12,5 +12,5 @@
  */
 
 interface Immutatorable<T> {
-  public <R> R transform(Immutator<R, ? super T> immutator);
+  public <R> Immutatorable<R> transform(Immutator<R, T> immutator);
 }

@@ -10,3 +10,19 @@
  *
  * @author Put Your Name (Lab Group)
  */
+
+class IsModEq implements Immutator<Boolean, Integer> {
+
+    private int div;
+    private int check;
+
+    public IsModEq(int div, int check) {
+        this.div = div;
+        this.check = check;
+    }
+
+    @Override
+    public Boolean invoke(Integer val) {
+        return val % div == check;
+    }
+}

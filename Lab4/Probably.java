@@ -8,14 +8,14 @@
  * @author Yadunand Prem (10B)
  * @version CS2030S AY22/23 Semester 1
  */
-class Probably<T> implements Actionable<T>, Immutatorable<T> {
+class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
   private final T value;
 
   private static final Probably<?> NONE = new Probably<>(null);
-  
+
   /**
    * Private constructor, can only be invoked inside.
-   * This is called a factory method.  We can only
+   * This is called a factory method. We can only
    * create this using the two public static method.
    *
    * @return The shared NOTHING.
@@ -23,7 +23,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
   private Probably(T value) {
     this.value = value;
   }
-  
+
   /**
    * It is probably nothing, no value inside.
    *
@@ -34,7 +34,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
     Probably<T> res = (Probably<T>) NONE;
     return res;
   }
-  
+
   /**
    * It is probably just the given value.
    * Unless the value is null, then nothing is
@@ -42,7 +42,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
    *
    * @param value Probably this is the value
    *              unless it is null then we say
-   *              that there is no 
+   *              that there is no
    * @return The given value or nothing but
    *         never null.
    */
@@ -52,7 +52,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
     }
     return new Probably<>(value);
   }
-  
+
   /**
    * Check for equality between something that
    * is probably a value but maybe nothing.
@@ -78,7 +78,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
     }
     return false;
   }
-  
+
   /**
    * String representation of something that
    * is probably a value but maybe nothing.
@@ -102,10 +102,33 @@ class Probably<T> implements Actionable<T>, Immutatorable<T> {
     action.call(this.value);
   }
 
-  @Override
-  public <R> Probably<R> transform(Immutator<Probably<R>, ? super T> immutator) {
-    return immutator.invoke(this.value);
+  public Probably<T> check(IsModEq eq) {
+    if (this.value == null) {
+      return none();
+    }
+    if (this.value instanceof Integer) {
+      Integer val = (Integer) this.value;
+      if (eq.invoke(val)) {
+        return this;
+      }
+    }
+    return none();
   }
 
+  @Override
+  public <R> Probably<R> transform(Immutator<R, T> immutator) {
+    if (this.value == null) {
+      return none();
+    }
+    return just(immutator.invoke(this.value));
+  }
+
+  @Override
+  public <R> Probably<R> apply(Immutator<Probably<R>, Probably<T>> immutator) {
+    if (this.value == null) {
+      return none();
+    }
+    return immutator.invoke(this);
+  }
 
 }
