@@ -18,7 +18,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
    * This is called a factory method. We can only
    * create this using the two public static method.
    *
-   * @return The shared NOTHING.
+   * @param value T
    */
   private Probably(T value) {
     this.value = value;
@@ -27,6 +27,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
   /**
    * It is probably nothing, no value inside.
    *
+   * @param <T> type T
    * @return The shared NOTHING.
    */
   public static <T> Probably<T> none() {
@@ -39,6 +40,8 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
    * It is probably just the given value.
    * Unless the value is null, then nothing is
    * given again.
+   *
+   * @param <T> type T
    *
    * @param value Probably this is the value
    *              unless it is null then we say

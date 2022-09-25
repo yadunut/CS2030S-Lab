@@ -2,21 +2,22 @@ class Test6 {
   public static void main(String[] args) {
     CS2030STest we = new CS2030STest();
     
-    class Incr implements Immutator<Integer,Integer> {
+    class Incr implements Immutator<Integer, Integer> {
       public Integer invoke(Integer t1) {
         return t1 + 1;
       }
     }
-    class Length implements Immutator<Integer,String> {
+
+    class Length implements Immutator<Integer, String> {
       public Integer invoke(String t1) {
         return t1.length();
       }
     }
     
-    Probably<Immutator<Integer,Integer>> justIncr = Probably.just(new Incr());
-    Probably<Immutator<Integer,String>> justLength = Probably.just(new Length());
-    Probably<Immutator<Integer,Integer>> noIncr = Probably.none();
-    Probably<Immutator<Integer,String>> noLength = Probably.none();
+    Probably<Immutator<Integer, Integer>> justIncr = Probably.just(new Incr());
+    Probably<Immutator<Integer, String>> justLength = Probably.just(new Length());
+    Probably<Immutator<Integer, Integer>> noIncr = Probably.none();
+    Probably<Immutator<Integer, String>> noLength = Probably.none();
     
     we.expect("Probably.just(17).<Integer>apply(justIncr)",
               Probably.just(17).apply(justIncr).toString(),

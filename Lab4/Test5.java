@@ -2,19 +2,20 @@ class Test5 {
   public static void main(String[] args) {
     CS2030STest we = new CS2030STest();
     
-    class Incr implements Immutator<Integer,Integer> {
+    class Incr implements Immutator<Integer, Integer> {
       public Integer invoke(Integer t1) {
         return t1 + 1;
       }
     }
-    class Length implements Immutator<Integer,String> {
+
+    class Length implements Immutator<Integer, String> {
       public Integer invoke(String t1) {
         return t1.length();
       }
     }
     
     we.expect("Probably.just(17).check(new IsModEq(3,2)) // 17 % 3 is equal to 2",
-              Probably.just(17).check(new IsModEq(3,2)).toString(),
+              Probably.just(17).check(new IsModEq(3, 2)).toString(),
               "<17>");
     we.expect("Probably.just(18).check(new IsModEq(3,2)) // 18 % 3 is not equal to 2",
               Probably.just(18).check(new IsModEq(3,2)).toString(),

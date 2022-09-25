@@ -2,12 +2,13 @@ class Test4 {
   public static void main(String[] args) {
     CS2030STest we = new CS2030STest();
     
-    class Incr implements Immutator<Integer,Integer> {
+    class Incr implements Immutator<Integer, Integer> {
       public Integer invoke(Integer t1) {
         return t1 + 1;
       }
     }
-    class Length implements Immutator<Integer,String> {
+
+    class Length implements Immutator<Integer, String> {
       public Integer invoke(String t1) {
         return t1.length();
       }
