@@ -5,9 +5,10 @@
  * Contains a single abstract method apply.
  * CS2030S Lab 4
  * AY22/23 Semester 1
+ * 
  * @author Yadunand Prem (10B)
  */
 
 interface Applicable<T> {
-  <R> Applicable<R> apply(Probably<Immutator<R, T>> probablyImmutator);
+  <R> Applicable<R> apply(Probably<? extends Immutator<? extends R, ? super T>> probablyImmutator);
 }

@@ -41,7 +41,7 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
    * Unless the value is null, then nothing is
    * given again.
    *
-   * @param <T> type T
+   * @param <T>   type T
    *
    * @param value Probably this is the value
    *              unless it is null then we say
@@ -105,21 +105,18 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
     action.call(this.value);
   }
 
-  public Probably<T> check(IsModEq eq) {
+  public Probably<T> check(Immutator<Boolean, ? super T> eq) {
     if (this.value == null) {
       return none();
     }
-    if (this.value instanceof Integer) {
-      Integer val = (Integer) this.value;
-      if (eq.invoke(val)) {
-        return this;
-      }
+    if (eq.invoke(this.value)) {
+      return this;
     }
     return none();
   }
 
   @Override
-  public <R> Probably<R> transform(Immutator<R, T> immutator) {
+  public <R> Probably<R> transform(Immutator<? extends R, ? super T> immutator) {
     if (this.value == null) {
       return none();
     }
@@ -127,9 +124,9 @@ class Probably<T> implements Actionable<T>, Immutatorable<T>, Applicable<T> {
   }
 
   @Override
-  public <R> Probably<R> apply(Probably<Immutator<R, T>> probablyImmutator) {
-    if (this.value != null && probablyImmutator.value != null) {
-      return just(probablyImmutator.value.invoke(this.value));
+  public <R> Probably<R> apply(Probably<? extends Immutator<? extends R, ? super T>> probablyImmutator) {
+    if (probablyImmutator.value != null) {
+      return this.transform(probablyImmutator.value);
     }
     return none();
   }
