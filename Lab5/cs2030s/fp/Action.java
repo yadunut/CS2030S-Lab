@@ -1,4 +1,5 @@
 package cs2030s.fp;
+
 /**
  * The Action interface that can be called
  * on an object of type T to act.

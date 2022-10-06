@@ -1,23 +1,23 @@
-import cs2030s.fp.Actually;
-import cs2030s.fp.Immutator;
-import cs2030s.fp.Constant;
 import cs2030s.fp.Action;
+import cs2030s.fp.Actually;
+import cs2030s.fp.Constant;
+import cs2030s.fp.Immutator;
 import cs2030s.fp.Transformer;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 class Lab5 {
   public static String getGrade(String module, String student, String assessment,
       Map<String, Map<String, Map<String, String>>> db) {
-    Constant<Actually<Map<String, Map<String, Map<String, String>>>>> cDb = new Constant<>() {
+    Constant<Actually<Map<String, Map<String, Map<String, String>>>>> constantDb = new Constant<>() {
       @Override
       public Actually<Map<String, Map<String, Map<String, String>>>> init() {
         return Actually.ok(db);
       }
     };
 
-    Constant<String> cNoEntry = new Constant<>() {
+    Constant<String> constantNoEntry = new Constant<>() {
       @Override
       public String init() {
         return "No such entry";
@@ -45,12 +45,12 @@ class Lab5 {
 
     };
 
-    return cDb
+    return constantDb
       .init()
       .next(getModule)
       .next(getStudent)
       .next(getAssessment)
-      .except(cNoEntry);
+      .except(constantNoEntry);
   }
 
   public static void main(String[] args) {

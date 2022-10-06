@@ -1,6 +1,19 @@
 package cs2030s.fp;
 
 public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
+
+  public static <T> Actually<T> ok(T value) {
+    return new Success<T>(value);
+  }
+
+  public static <T> Actually<T> err(Exception e) {
+    // It is okay to do an unchecked cast here as failure types don't use 
+    // the value T. 
+    @SuppressWarnings("unchecked")
+    Actually<T> failure = (Actually<T>) new Failure(e);
+    return failure;
+  }
+
   public abstract T unwrap() throws Exception;
 
   public abstract T except(Constant<? extends T> c);
@@ -11,14 +24,6 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
 
   public abstract <R> Actually<R> next(Immutator<Actually<R>, ? super T> immutator);
 
-  public static <T> Actually<T> ok(T value) {
-    return new Success<T>(value);
-  }
-
-  public static <T> Actually<T> err(Exception e) {
-    Actually<T> failure = (Actually<T>) new Failure(e);
-    return failure;
-  }
 
   private static class Success<T> extends Actually<T> {
     private final T value;
