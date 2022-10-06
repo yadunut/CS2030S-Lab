@@ -25,14 +25,12 @@ class Lab5 {
     };
 
     Immutator<Actually<Map<String, Map<String, String>>>, Map<String, Map<String, Map<String, String>>>> getModule = new Immutator<>() {
-
       @Override
       public Actually<Map<String, Map<String, String>>> invoke(Map<String, Map<String, Map<String, String>>> param) {
         return Actually.ok(param.get(module));
       }
     };
     Immutator<Actually<Map<String, String>>, Map<String, Map<String, String>>> getStudent = new Immutator<>() {
-
       @Override
       public Actually<Map<String, String>> invoke(Map<String, Map<String, String>> param) {
         return Actually.ok(param.get(student));
@@ -40,46 +38,48 @@ class Lab5 {
     };
 
     Immutator<Actually<String>, Map<String, String>> getAssessment = new Immutator<>() {
-
       @Override
       public Actually<String> invoke(Map<String, String> param) {
-        return Actually.ok(param.get(assessment));
+        return Actually.ok(param.get(assessment).toString());
       }
 
     };
 
-    return cDb.init().next(getModule).next(getStudent).next(getAssessment).except(cNoEntry);
+    return cDb
+      .init()
+      .next(getModule)
+      .next(getStudent)
+      .next(getAssessment)
+      .except(cNoEntry);
   }
 
   public static void main(String[] args) {
     // Create a scanner to read from standard input.
-    test6();
-    /*
-     * Scanner sc = new Scanner(System.in);
-     * 
-     * // Read a single integer from the test file
-     * // and then run the appropriate test case
-     * switch (sc.nextInt()) {
-     * case 1:
-     * test1();
-     * break;
-     * case 2:
-     * test2();
-     * break;
-     * case 3:
-     * test3();
-     * break;
-     * case 4:
-     * test4();
-     * break;
-     * case 5:
-     * test5();
-     * break;
-     * case 6:
-     * test6();
-     * break;
-     * }
-     */
+    Scanner sc = new Scanner(System.in);
+
+    // Read a single integer from the test file
+    // and then run the appropriate test case
+    switch (sc.nextInt()) {
+      case 1:
+        test1();
+        break;
+      case 2:
+        test2();
+        break;
+      case 3:
+        test3();
+        break;
+      case 4:
+        test4();
+        break;
+      case 5:
+        test5();
+        break;
+      case 6:
+        test6();
+        break;
+    }
+
   }
 
   public static void test1() {

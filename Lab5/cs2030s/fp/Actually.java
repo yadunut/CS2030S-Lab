@@ -1,6 +1,6 @@
 package cs2030s.fp;
 
-public abstract class Actually<T> implements Immutatorable<T> {
+public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
   public abstract T unwrap() throws Exception;
 
   public abstract T except(Constant<? extends T> c);
@@ -9,7 +9,7 @@ public abstract class Actually<T> implements Immutatorable<T> {
 
   public abstract T unless(T other);
 
-  public abstract <R> Actually<R> next(Immutator<Actually<R>, T> immutator);
+  public abstract <R> Actually<R> next(Immutator<Actually<R>, ? super T> immutator);
 
   public static <T> Actually<T> ok(T value) {
     return new Success<T>(value);
@@ -48,7 +48,7 @@ public abstract class Actually<T> implements Immutatorable<T> {
     }
 
     @Override
-    public <R> Actually<R> next(Immutator<Actually<R>, T> immutator) {
+    public <R> Actually<R> next(Immutator<Actually<R>, ? super T> immutator) {
       try {
         return immutator.invoke(this.value);
       } catch (Exception e) {
@@ -63,6 +63,11 @@ public abstract class Actually<T> implements Immutatorable<T> {
       } catch (Exception e) {
         return Actually.err(e);
       }
+    }
+
+    @Override
+    public void act(Action<? super T> action) {
+      action.call(this.value);
     }
 
     @Override
@@ -112,7 +117,7 @@ public abstract class Actually<T> implements Immutatorable<T> {
     }
 
     @Override
-    public void finish(Action action) {
+    public void finish(Action<? super Object> action) {
       return;
     }
 
@@ -122,9 +127,15 @@ public abstract class Actually<T> implements Immutatorable<T> {
     }
 
     @Override
-    public <R> Actually<R> next(Immutator<Actually<R>, Object> immutator) {
+    public <R> Actually<R> next(Immutator<Actually<R>, ? super Object> immutator) {
       return Actually.err(this.e);
 
+    }
+
+    @Override
+    public void act(Action<? super Object> action) {
+      // Do nothing
+      return;
     }
 
     @Override
