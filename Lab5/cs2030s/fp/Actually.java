@@ -7,8 +7,8 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
   }
 
   public static <T> Actually<T> err(Exception e) {
-    // It is okay to do an unchecked cast here as failure types don't use 
-    // the value T. 
+    // It is okay to do an unchecked cast here as failure types don't use
+    // the value T.
     @SuppressWarnings("unchecked")
     Actually<T> failure = (Actually<T>) new Failure(e);
     return failure;
@@ -20,10 +20,9 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
 
   public abstract void finish(Action<? super T> action);
 
-  public abstract T unless(T other);
+  public abstract <U extends T> T unless(U other);
 
-  public abstract <R> Actually<R> next(Immutator<Actually<R>, ? super T> immutator);
-
+  public abstract <R> Actually<R> next(Immutator<? extends Actually<? extends R>, ? super T> immutator);
 
   private static class Success<T> extends Actually<T> {
     private final T value;
@@ -48,21 +47,24 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
     }
 
     @Override
-    public T unless(T other) {
+    public <U extends T> T unless(U other) {
       return this.value;
     }
 
     @Override
-    public <R> Actually<R> next(Immutator<Actually<R>, ? super T> immutator) {
+    public <R> Actually<R> next(Immutator<? extends Actually<? extends R>, ? super T> immutator) {
       try {
-        return immutator.invoke(this.value);
+        // it is okay to cast from <? extends R> to <R>
+        @SuppressWarnings("unchecked")
+        Actually<R> result = (Actually<R>) immutator.invoke(this.value);
+        return result;
       } catch (Exception e) {
         return Actually.err(e);
       }
     }
 
     @Override
-    public <R> Immutatorable<R> transform(Immutator<? extends R, ? super T> immutator) {
+    public <R> Actually<R> transform(Immutator<? extends R, ? super T> immutator) {
       try {
         return Actually.ok(immutator.invoke(this.value));
       } catch (Exception e) {
@@ -127,12 +129,12 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
     }
 
     @Override
-    public <R> Immutatorable<R> transform(Immutator<? extends R, ? super Object> immutator) {
+    public <R> Actually<R> transform(Immutator<? extends R, ? super Object> immutator) {
       return Actually.err(this.e);
     }
 
     @Override
-    public <R> Actually<R> next(Immutator<Actually<R>, ? super Object> immutator) {
+    public <R> Actually<R> next(Immutator<? extends Actually<? extends R>, ? super Object> immutator) {
       return Actually.err(this.e);
 
     }
