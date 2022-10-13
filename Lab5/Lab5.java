@@ -8,49 +8,24 @@ import java.util.Map;
 import java.util.Scanner;
 
 class Lab5 {
+
   public static String getGrade(String module, String student, String assessment,
       Map<String, Map<String, Map<String, String>>> db) {
-    Constant<Actually<Map<String, Map<String, Map<String, String>>>>> constantDb = new Constant<>() {
-      @Override
-      public Actually<Map<String, Map<String, Map<String, String>>>> init() {
-        return Actually.ok(db);
-      }
-    };
+    Constant<Actually<Map<String, Map<String, Map<String, String>>>>> constantDb = () -> Actually.ok(db);
 
-    Constant<String> constantNoEntry = new Constant<>() {
-      @Override
-      public String init() {
-        return "No such entry";
-      }
-    };
+    Constant<String> constantNoEntry = () -> "No such entry";
 
-    Immutator<Actually<Map<String, Map<String, String>>>, Map<String, Map<String, Map<String, String>>>> getModule = new Immutator<>() {
-      @Override
-      public Actually<Map<String, Map<String, String>>> invoke(Map<String, Map<String, Map<String, String>>> param) {
-        return Actually.ok(param.get(module));
-      }
-    };
-    Immutator<Actually<Map<String, String>>, Map<String, Map<String, String>>> getStudent = new Immutator<>() {
-      @Override
-      public Actually<Map<String, String>> invoke(Map<String, Map<String, String>> param) {
-        return Actually.ok(param.get(student));
-      }
-    };
+    Immutator<Actually<Map<String, Map<String, String>>>, Map<String, Map<String, Map<String, String>>>> getModule = param -> Actually
+        .ok(param.get(module));
 
-    Immutator<Actually<String>, Map<String, String>> getAssessment = new Immutator<>() {
-      @Override
-      public Actually<String> invoke(Map<String, String> param) {
-        return Actually.ok(param.get(assessment).toString());
-      }
+    Immutator<Actually<Map<String, String>>, Map<String, Map<String, String>>> getStudent = param -> Actually
+        .ok(param.get(student));
 
-    };
+    Immutator<Actually<String>, Map<String, String>> getAssessment = param -> Actually
+        .ok(param.get(assessment).toString());
 
-    return constantDb
-      .init()
-      .next(getModule)
-      .next(getStudent)
-      .next(getAssessment)
-      .except(constantNoEntry);
+    return constantDb.init().next(getModule).next(getStudent).next(getAssessment).except(constantNoEntry);
+
   }
 
   public static void main(String[] args) {

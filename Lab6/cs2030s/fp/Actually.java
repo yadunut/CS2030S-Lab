@@ -16,7 +16,7 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
 
   public abstract T unwrap() throws Exception;
 
-  public abstract T except(Constant<? extends T> c);
+  public abstract <U extends T> T except(Constant<? extends U> c);
 
   public abstract void finish(Action<? super T> action);
 
@@ -37,7 +37,7 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
     }
 
     @Override
-    public T except(Constant<? extends T> c) {
+    public <U extends T> T except(Constant<? extends U> c) {
       return this.value;
     }
 
@@ -114,7 +114,7 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
     }
 
     @Override
-    public Object except(Constant<? extends Object> c) {
+    public <U> U except(Constant<? extends U> c) {
       return c.init();
     }
 
