@@ -28,6 +28,10 @@ public class Memo<T> extends Lazy<T> {
     return result;
   }
 
+  public <R, S> Memo<R> combine(Memo<? extends S> other, Combiner<? extends R, ? super T, ? super S> combiner) {
+    return Memo.<R>from(() -> combiner.combine(this.get(), other.get()));
+  }
+
   @Override
   public <R> Memo<R> transform(Immutator<? extends R, ? super T> f) {
     return Memo.<R>from(() -> f.invoke(this.get()));
