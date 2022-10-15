@@ -22,7 +22,8 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
 
   public abstract <U extends T> T unless(U other);
 
-  public abstract <R> Actually<R> next(Immutator<? extends Actually<? extends R>, ? super T> immutator);
+  public abstract <R> Actually<R> next(
+      Immutator<? extends Actually<? extends R>, ? super T> immutator);
 
   private static class Success<T> extends Actually<T> {
     private final T value;
@@ -134,7 +135,8 @@ public abstract class Actually<T> implements Immutatorable<T>, Actionable<T> {
     }
 
     @Override
-    public <R> Actually<R> next(Immutator<? extends Actually<? extends R>, ? super Object> immutator) {
+    public <R> Actually<R> next(
+        Immutator<? extends Actually<? extends R>, ? super Object> immutator) {
       return Actually.err(this.e);
 
     }

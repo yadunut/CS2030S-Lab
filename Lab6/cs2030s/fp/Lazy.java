@@ -21,15 +21,11 @@ public class Lazy<T> implements Immutatorable<T> {
 
   @Override
   public <R> Lazy<R> transform(Immutator<? extends R, ? super T> f) {
-    return Lazy.from(() -> f.invoke(this.init.init()));
+    return Lazy.from(() -> f.invoke(this.get()));
   }
 
   public <R> Lazy<R> next(Immutator<? extends Lazy<? extends R>, ? super T> f) {
-
-    @SuppressWarnings("unchecked")
-    Lazy<R> result = (Lazy<R>) Lazy.from(() -> f.invoke(this.init.init()));
-
-    return result;
+    return Lazy.<R>from(() -> f.invoke(this.get()).get());
 
   }
 

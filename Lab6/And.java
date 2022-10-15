@@ -1,7 +1,18 @@
+/**
+ * Represents the And type, a conditional which returns true if both left and
+ * right values are true. This operator short circuits, which means if the first
+ * value is false, the right value is not evaluated
+ */
 class And implements Cond {
   private Cond lVal;
   private Cond rVal;
 
+  /**
+   * Constructor for the And conditional.
+   * 
+   * @param lVal the left value in the And Operation.
+   * @param rVal This is only evaluated if lVal is true
+   */
   public And(Cond lVal, Cond rVal) {
     this.lVal = lVal;
     this.rVal = rVal;
