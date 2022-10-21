@@ -45,19 +45,38 @@ class MemoList<T> {
     return memoList;
   }
 
+  /**
+   * Generate the content of a list, given the size of the list, the first to elements fst, snd and Combiner f, a function to combine fst and snd to generate the next value
+   *
+   * @param <T> The type of elements in the list.
+   * @param n   The number of elements.
+   * @param fst The first element.
+   * @param snd The second element.
+   * @param f   The combiner function go generate the next value based on the previous 2 values
+   * @return    The created list.
+   */
+
   public static <T> MemoList<T> generate(int n, T fst, T snd, Combiner<? extends T, ? super T, ? super T> f) {
     MemoList<T> memoList = new MemoList<>(new ArrayList<>());
-    Memo<T> fstMemo = Memo.from(fst);
-    Memo<T> sndMemo = Memo.from(snd);
-    memoList.list.add(fstMemo);
+    Memo<T> firstMemo = Memo.from(fst);
+    Memo<T> secondMemo = Memo.from(snd);
+    memoList.list.add(firstMemo);
     for (int i = 1; i < n; i++) {
-      memoList.list.add(sndMemo);
-      Memo<T> temp = sndMemo;
-      sndMemo = fstMemo.combine(sndMemo, f);
-      fstMemo = temp;
+      memoList.list.add(secondMemo);
+      Memo<T> temp = secondMemo;
+      secondMemo = firstMemo.combine(secondMemo, f);
+      firstMemo = temp;
     }
     return memoList;
   }
+
+  /**
+   * Generate a new list given an immutator function, which is invoked on each value in the initial list.
+   *
+   * @param <R>       The return type of the elements in the list.
+   * @param immutator The immutator function on the elements.
+   * @return          The created list.
+   */
 
   public <R> MemoList<R> map(Immutator<? extends R, ? super T> immutator) {
     MemoList<R> memoList = new MemoList<>(new ArrayList<>());
@@ -66,6 +85,14 @@ class MemoList<T> {
     }
     return memoList;
   }
+
+  /**
+   * Generate a new list given an immutator function, which returns a list. The list is then added to the returning list
+   *
+   * @param <R>       The return type of the elements in the list.
+   * @param immutator The immutator function on the elements, which returns a MemoList.
+   * @return          The created list.
+   */
 
   public <R> MemoList<R> flatMap(Immutator<MemoList<R>, ? super T> immutator) {
     MemoList<R> memoList = new MemoList<>(new ArrayList<>());
