@@ -72,7 +72,7 @@ public class InfiniteList<T> {
   }
 
   public static <T> InfiniteList<T> iterate(T seed, Immutator<T, T> func) {
-    Memo<Actually<T>> head = Memo.from(() -> Actually.ok(seed));
+    Memo<Actually<T>> head = Memo.from(Actually.ok(seed));
     Memo<InfiniteList<T>> tail = Memo.from(() -> iterate(func.invoke(seed), func));
     return new InfiniteList<>(head, tail);
   }
@@ -101,12 +101,16 @@ public class InfiniteList<T> {
     if (n <= 0) {
       return InfiniteList.end();
     }
-    if (this.isEnd()) {
-      return InfiniteList.end();
-    }
 
-    Memo<Actually<T>> head = Memo.from(() -> Actually.ok(this.head()));
-    Memo<InfiniteList<T>> tail = Memo.from(() -> this.tail().limit(n - 1));
+    Memo<Actually<T>> head = this.head;
+
+    Memo<InfiniteList<T>> tail = Memo.from(() -> {
+      InfiniteList<T> tempTail = this.tail.get();
+      if (tempTail.head.get().unless(null) == null) {
+        return tempTail.limit(n);
+      }
+      return tempTail.limit(n - 1);
+    });
     return new InfiniteList<>(head, tail);
   }
 
