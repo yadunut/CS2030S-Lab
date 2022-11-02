@@ -60,19 +60,10 @@ public class InfiniteList<T> {
       return InfiniteList.end();
     }
 
-    /*
-     * next tail ->
-     * get the current tail
-     * check if actually.err(). If actually.err() then return limit(n). If ok()
-     * return limit - 1
-     */
-
-    Memo<InfiniteList<T>> tail = Memo.from(() -> {
-      if (this.head.get().unless(null) == null) {
-        return this.tail.get().limit(n);
-      }
-      return this.tail.get().limit(n - 1);
-    });
+    Memo<InfiniteList<T>> tail = Memo.from(
+        () -> this.head.get()
+            .transform(h -> this.tail.get().limit(n - 1))
+            .except(() -> this.tail.get().limit(n)));
     return new InfiniteList<>(this.head, tail);
   }
 
