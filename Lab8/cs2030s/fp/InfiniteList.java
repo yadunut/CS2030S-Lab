@@ -80,21 +80,20 @@ public class InfiniteList<T> {
   }
 
   public List<T> toList() {
-    List<T> arrayList = new ArrayList<>();
-    arrayList.add(this.head());
-    arrayList.addAll(this.tail().toList());
-    return arrayList;
+    return this.reduce(new ArrayList<>(), (acc, i) -> {
+      acc.add(i);
+      return acc;
+    });
   }
 
   public <U> U reduce(U id, Combiner<U, U, ? super T> acc) {
-    // reduce by applying this.head to acc, this.tail.head to acc,
-    // this.tail.tail.head to acc, until finally id to acc
-    // return acc.combine(this., acc)
-    return null;
+    return this.head.get().transform((h) -> this.tail.get().reduce(acc.combine(id, this.head.get().unless(null)), acc))
+        .except(() -> this.tail.get().reduce(id, acc));
+
   }
 
   public long count() {
-    return this.reduce(0L, (a, b) -> a + 1);
+    return this.reduce(0L, (a, b) -> a + 1L);
   }
 
   @Override
