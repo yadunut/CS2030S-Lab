@@ -68,8 +68,15 @@ public class InfiniteList<T> {
   }
 
   public InfiniteList<T> takeWhile(Immutator<Boolean, ? super T> pred) {
-    // TODO
-    return new InfiniteList<>(null, null);
+    Memo<Actually<T>> head = Memo.from(() -> Actually.ok(this.head()).check(pred));
+    Memo<InfiniteList<T>> tail = Memo.from(() -> {
+      // if head is err, then return return end
+      return head.get()
+          .transform(h -> this.tail.get().takeWhile(pred))
+          .except(() -> InfiniteList.end());
+    });
+
+    return new InfiniteList<>(head, tail);
   }
 
   public List<T> toList() {
@@ -81,6 +88,7 @@ public class InfiniteList<T> {
 
   public <U> U reduce(U id, Combiner<U, U, ? super T> acc) {
     // TODO
+    this.tail().reduce(acc.combine(id, this.head()), acc);
     return null;
   }
 
@@ -141,6 +149,16 @@ public class InfiniteList<T> {
     @Override
     public List<Object> toList() {
       return List.of();
+    }
+
+    @Override
+    public <U> U reduce(U id, Combiner<U, U, ? super Object> acc) {
+      return id;
+    }
+
+    @Override
+    public InfiniteList<Object> takeWhile(Immutator<Boolean, ? super Object> pred) {
+      return InfiniteList.end();
     }
 
   }
