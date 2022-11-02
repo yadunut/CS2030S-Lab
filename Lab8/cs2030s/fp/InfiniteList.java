@@ -16,48 +16,6 @@ public class InfiniteList<T> {
     return result;
   }
 
-  private static class End extends InfiniteList<Object> {
-    private End() {
-      super(null, null);
-    }
-
-    @Override
-    public Object head() {
-      throw new NoSuchElementException();
-    }
-
-    @Override
-    public InfiniteList<Object> tail() {
-      throw new NoSuchElementException();
-    }
-
-    @Override
-    public boolean isEnd() {
-      return true;
-    }
-
-    @Override
-    public String toString() {
-      return "-";
-    }
-
-    @Override
-    public InfiniteList<Object> limit(long n) {
-      return InfiniteList.end();
-    }
-
-    @Override
-    public InfiniteList<Object> filter(Immutator<Boolean, ? super Object> pred) {
-      return InfiniteList.end();
-    }
-
-    @Override
-    public <R> InfiniteList<R> map(Immutator<? extends R, ? super Object> f) {
-      return InfiniteList.end();
-    }
-
-  }
-
   private InfiniteList(Memo<Actually<T>> head, Memo<InfiniteList<T>> tail) {
     this.head = head;
     this.tail = tail;
@@ -102,16 +60,20 @@ public class InfiniteList<T> {
       return InfiniteList.end();
     }
 
-    Memo<Actually<T>> head = this.head;
+    /*
+     * next tail ->
+     * get the current tail
+     * check if actually.err(). If actually.err() then return limit(n). If ok()
+     * return limit - 1
+     */
 
     Memo<InfiniteList<T>> tail = Memo.from(() -> {
-      InfiniteList<T> tempTail = this.tail.get();
-      if (tempTail.head.get().unless(null) == null) {
-        return tempTail.limit(n);
+      if (this.head.get().unless(null) == null) {
+        return this.tail.get().limit(n);
       }
-      return tempTail.limit(n - 1);
+      return this.tail.get().limit(n - 1);
     });
-    return new InfiniteList<>(head, tail);
+    return new InfiniteList<>(this.head, tail);
   }
 
   public InfiniteList<T> takeWhile(Immutator<Boolean, ? super T> pred) {
@@ -145,5 +107,51 @@ public class InfiniteList<T> {
     return false;
   }
 
-  // Add your End class here...
+  private static class End extends InfiniteList<Object> {
+    private End() {
+      super(null, null);
+    }
+
+    @Override
+    public Object head() {
+      throw new NoSuchElementException();
+    }
+
+    @Override
+    public InfiniteList<Object> tail() {
+      throw new NoSuchElementException();
+    }
+
+    @Override
+    public boolean isEnd() {
+      return true;
+    }
+
+    @Override
+    public String toString() {
+      return "-";
+    }
+
+    @Override
+    public InfiniteList<Object> limit(long n) {
+      return InfiniteList.end();
+    }
+
+    @Override
+    public InfiniteList<Object> filter(Immutator<Boolean, ? super Object> pred) {
+      return InfiniteList.end();
+    }
+
+    @Override
+    public <R> InfiniteList<R> map(Immutator<? extends R, ? super Object> f) {
+      return InfiniteList.end();
+    }
+
+    @Override
+    public List<Object> toList() {
+      return List.of();
+    }
+
+  }
+
 }
