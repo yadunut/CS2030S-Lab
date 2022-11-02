@@ -72,8 +72,8 @@ public class InfiniteList<T> {
     Memo<InfiniteList<T>> tail = Memo.from(() -> {
       // if head is err, then return return end
       return head.get()
-          .transform(h -> this.tail.get().takeWhile(pred))
-          .except(() -> InfiniteList.end());
+          .transform(h -> this.tail().takeWhile(pred))
+          .unless(InfiniteList.end());
     });
 
     return new InfiniteList<>(head, tail);
@@ -87,14 +87,14 @@ public class InfiniteList<T> {
   }
 
   public <U> U reduce(U id, Combiner<U, U, ? super T> acc) {
-    // TODO
-    this.tail().reduce(acc.combine(id, this.head()), acc);
+    // reduce by applying this.head to acc, this.tail.head to acc,
+    // this.tail.tail.head to acc, until finally id to acc
+    // return acc.combine(this., acc)
     return null;
   }
 
   public long count() {
-    // TODO
-    return 0L;
+    return this.reduce(0L, (a, b) -> a + 1);
   }
 
   @Override
