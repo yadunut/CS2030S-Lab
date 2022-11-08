@@ -7,3 +7,5 @@ cs2030_checks.xml
 *.swp
 
 Lab6/docs
+
+.vscode/
