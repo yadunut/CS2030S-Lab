@@ -1,0 +1,601 @@
+%% This is file `1231num.sty',
+%% Copyright (C) 2021 by Tin Lok Wong
+%%
+%% This work may be distributed and/or modified under the conditions
+%% of the LaTeX Project Public License, either version 1.3 of this
+%% license or (at your option) any later version. The latest version
+%% of this license is in
+%%
+%%   http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Tin Lok Wong.
+%%
+%% File last modified: 2021/10/06
+
+% If hyperref is needed, then load it first.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{1231num}[2021/02/26 v0.0 CS1231 line numbers]
+
+\RequirePackage{amsmath}% to align in math
+\RequirePackage{tabto}%   for starting a pfarray mid-line
+
+\newlength{\numpf@templen}
+
+\let\pfln\item
+\let\lnref\ref
+
+% Parameters that controls the margins for proofs
+\newlength{\pfmargin}    \setlength{\pfmargin}{1em}
+\newlength{\pflabelwdI}  \setlength{\pflabelwdI}{1.2em}
+\newlength{\pflabelwdII} \setlength{\pflabelwdII}{2.0em}
+\newlength{\pflabelwdIII}\setlength{\pflabelwdIII}{2.8em}
+\newlength{\pflabelwdIV} \setlength{\pflabelwdIV}{3.6em}
+\newlength{\pflabelwdV}  \setlength{\pflabelwdV}{4.4em}
+\newlength{\pflabelwdi}
+\newlength{\pflabelwdii}
+\newlength{\pflabelwdiii}
+\newlength{\pflabelwdiv}
+\newlength{\pflabelwdv}
+% Define the usual spacing around and within proofs.
+\def\numpf@seti{%
+ \def\@listi{\leftmargin\pflabelwdi
+             \advance\leftmargin\labelsep
+             \labelwidth\pflabelwdi
+             \topsep   \z@
+             \parsep   \z@
+             \itemsep  \z@
+             \partopsep\z@}%
+}
+\def\numpf@setii{%
+ \def\@listii{\leftmargin\pflabelwdii
+              \advance\leftmargin\labelsep
+              \labelwidth\pflabelwdii
+              \topsep   \z@
+              \parsep   \z@
+              \itemsep  \z@
+              \partopsep\z@}%
+}
+\def\numpf@setiii{%
+ \def\@listiii{\leftmargin\pflabelwdiii
+               \advance\leftmargin\labelsep
+               \labelwidth\pflabelwdiii
+               \topsep   \z@
+               \parsep   \z@
+               \itemsep  \z@
+               \partopsep\z@}%
+}
+\def\numpf@setiv{%
+ \def\@listiv {\leftmargin\pflabelwdiv
+               \advance\leftmargin\labelsep
+               \labelwidth\pflabelwdiv
+               \topsep   \z@
+               \parsep   \z@
+               \itemsep  \z@
+               \partopsep\z@}%
+}
+\def\numpf@setv{%
+ \def\@listv {\leftmargin\pflabelwdv
+              \advance\leftmargin\labelsep
+              \labelwidth\pflabelwdv
+              \topsep   \z@
+              \parsep   \z@
+              \itemsep  \z@
+              \partopsep\z@}%
+}
+% Alternative set of spacing that saves more space.
+\def\numpf@seti@star{%
+ \def\@listi{\leftmargin\z@
+             \labelwidth\pflabelwdi
+             \topsep   \z@
+             \parsep   \z@
+             \itemsep  \z@
+             \partopsep \z@}%
+}
+\def\numpf@setii@star{%
+ \def\@listii{\leftmargin\pfmargin
+              \labelwidth\pflabelwdii
+              \topsep   \z@
+              \parsep   \z@
+              \itemsep  \z@
+              \partopsep\z@}%
+}
+\def\numpf@setiii@star{%
+ \def\@listiii{\leftmargin\pfmargin
+               \labelwidth\pflabelwdiii
+               \topsep   \z@
+               \parsep   \z@
+               \itemsep  \z@
+               \partopsep\z@}%
+}
+\def\numpf@setiv@star{%
+ \def\@listiv {\leftmargin\pfmargin
+               \labelwidth\pflabelwdiv
+               \topsep   \z@
+               \parsep   \z@
+               \itemsep  \z@
+               \partopsep\z@}%
+}
+\def\numpf@setv@star{%
+ \def\@listv {\leftmargin\pfmargin
+              \labelwidth\pflabelwdv
+              \topsep   \z@
+              \parsep   \z@
+              \itemsep  \z@
+              \partopsep\z@}%
+}
+
+% There are several places in which
+%  things with beamer are different from standand LaTeX:
+% - the max depth of enumerate allowed;
+% - the way enumerate displays the numbering;
+% - the macros used to display the numbers;
+% - the need to specify colours and fonts with beamer;
+% - overlay options are available with beamer;
+% - beamer sets additional parameters when entering a new enumerate.
+\@ifclassloaded{beamer}{%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definitions for standard BEAMER %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here I increase the max depth of the enumerate environment.
+% Modified from beamerbaselocalstructure.sty
+ \@definecounter{enumiv}
+ \@definecounter{enumv}
+ \setlength\leftmarginiv{2em}
+ \setlength\leftmarginv {2em}
+ \def\@listiv {\leftmargin\leftmarginiv
+               \labelwidth\leftmarginiv
+               \advance\labelwidth-\labelsep}
+ \def\@listv {\leftmargin\leftmarginv
+              \labelwidth\leftmarginv
+              \advance\labelwidth-\labelsep}
+ \def\numpf@enumerate{%
+  \ifnum\@enumdepth>4\relax\@toodeep
+  \else%
+    \advance\@enumdepth\@ne%
+    \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+    \advance\@itemdepth\@ne%
+  \fi%
+  \beamer@computepref\@enumdepth% sets \beameritemnestingprefix
+  \edef\beamer@enumtempl{enumerate \beameritemnestingprefix item}%
+  \@ifnextchar[{\beamer@@enum@}{\beamer@enum@}}
+ \let\endnumpf@enumerate\endenumerate
+ \def\beamer@computepref#1{%
+  \let\beameritemnestingprefix\@empty%
+  \ifcase#1\or\or\def\beameritemnestingprefix{sub}\or
+   \def\beameritemnestingprefix{subsub}\or
+   \def\beameritemnestingprefix{subsubsub}\or
+   \def\beameritemnestingprefix{subsubsubsub}\or
+   \@toodeep\fi}
+ \def\insertsubsubsubenumlabel{\theenumiv}
+ \def\insertsubsubsubsubenumlabel{\theenumv}
+% Modified from beamercolorthemedefault.sty
+ \setbeamercolor{subsubsubitem}{parent=subsubitem}
+ \setbeamercolor{subsubsubsubitem}{parent=subsubsubitem}
+ \setbeamercolor{enumerate subsubsubitem}{parent=subsubsubitem}
+ \setbeamercolor{enumerate subsubsubsubitem}{parent=subsubsubsubitem}
+% Modified from beamerfontthemedefault.sty
+ \setbeamerfont{enumerate subsubsubitem}{parent=subsubsubitem}
+ \setbeamerfont{enumerate subsubsubsubitem}{parent=subsubsubsubitem}
+ \setbeamerfont{itemize/enumerate body}{}
+ \setbeamerfont{itemize/enumerate subbody}{size=\normalfont}
+ \setbeamerfont{itemize/enumerate subsubbody}{size=\normalfont}
+ \setbeamerfont{itemize/enumerate subsubsubbody}{size=\normalfont}
+ \setbeamerfont{itemize/enumerate subsubsubsubbody}{size=\normalfont}
+ \setbeamercolor{enumerate subsubsubbody}{}
+ \setbeamercolor{enumerate subsubsubsubbody}{}
+% Modified from beamerinnerthemedefault.sty
+ \defbeamertemplate*{enumerate subsubsubitem}{default}
+  {\usebeamertemplate*{enumerate subsubitem}\insertsubsubsubenumlabel.}
+ \defbeamertemplate*{enumerate subsubsubsubitem}{default}
+  {\usebeamertemplate*{enumerate subsubsubitem}\insertsubsubsubsubenumlabel.}
+ \defbeamertemplate*{enumerate subsubsubbody begin}{default}{}
+ \defbeamertemplate*{enumerate subsubsubbody end}{default}{}
+ \defbeamertemplate*{enumerate subsubsubsubbody begin}{default}{}
+ \defbeamertemplate*{enumerate subsubsubsubbody end}{default}{}
+% The proof environments in text mode
+ \newenvironment{numpf}
+  {\numpf@
+   \begin{subpf}}
+  {\end{subpf}\ignorespacesafterend}
+ \newenvironment{numpf*}
+  {\numpf@
+   \begin{subpf*}}
+  {\end{subpf*}\ignorespacesafterend}
+ \newcommand{\numpf@}{%
+% Modified from beamerbaselocalstructure.sty to make left-aligned numbers
+  \def\beamer@enum@{%
+   \beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+   \usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+   \usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+   \usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+   \expandafter
+     \list
+       {\usebeamertemplate{\beamer@enumtempl}}
+       {\usecounter\@enumctr%
+         \def\makelabel####1{{\hss\rlap{{%
+                 \usebeamerfont*{enumerate \beameritemnestingprefix item}%
+                 \usebeamercolor[fg]{enumerate \beameritemnestingprefix item}####1}}}\hfill}}%
+   \beamer@cramped%
+   \raggedright%
+   \beamer@firstlineitemizeunskip}%
+% Modified from beamerinnerthemedefault.sty
+  \setbeamertemplate{enumerate item}{\insertenumlabel.}%
+  \setbeamertemplate{enumerate subitem}
+   {\usebeamertemplate*{enumerate item}\insertsubenumlabel.}%
+  \setbeamertemplate{enumerate subsubitem}
+   {\usebeamertemplate*{enumerate subitem}\insertsubsubenumlabel.}%
+  \setbeamertemplate{enumerate subsubsubitem}
+   {\usebeamertemplate*{enumerate subsubitem}\insertsubsubsubenumlabel.}%
+  \setbeamertemplate{enumerate subsubsubsubitem}
+   {\usebeamertemplate*{enumerate subsubsubitem}\insertsubsubsubsubenumlabel.}%
+  \renewcommand{\theenumi}{\arabic{enumi}}%
+  \renewcommand{\theenumii}{\arabic{enumii}}%
+  \renewcommand{\theenumiii}{\arabic{enumiii}}%
+  \renewcommand{\theenumiv}{\arabic{enumiv}}%
+  \renewcommand{\theenumv}{\arabic{enumv}}%
+  \renewcommand{\p@enumi}{}%
+  \renewcommand{\p@enumii}{\theenumi.}%
+  \renewcommand{\p@enumiii}{\p@enumii\theenumii.}%
+  \renewcommand{\p@enumiv}{\p@enumiii\theenumiii.}%
+  \renewcommand{\p@enumv}{\p@enumiv\theenumiv.}%
+  \ifcase\@enumdepth
+   \setlength\pflabelwdi{\pflabelwdI}%
+   \setlength\pflabelwdii{\pflabelwdII}%
+   \setlength\pflabelwdiii{\pflabelwdIII}%
+   \setlength\pflabelwdiv{\pflabelwdIV}%
+   \setlength\pflabelwdv{\pflabelwdV}%
+  \or
+   \setlength\pflabelwdii{\pflabelwdI}%
+   \setlength\pflabelwdiii{\pflabelwdII}%
+   \setlength\pflabelwdiv{\pflabelwdIII}%
+   \setlength\pflabelwdv{\pflabelwdIV}%
+   \setbeamertemplate{enumerate subitem}{\insertsubenumlabel.}%
+   \renewcommand{\p@enumii}{}%
+  \or
+   \setlength\pflabelwdiii{\pflabelwdI}%
+   \setlength\pflabelwdiv{\pflabelwdII}%
+   \setlength\pflabelwdv{\pflabelwdIII}%
+   \setbeamertemplate{enumerate subsubitem}{\insertsubsubenumlabel.}%
+   \renewcommand{\p@enumiii}{}%
+  \or
+   \setlength\pflabelwdiv{\pflabelwdI}%
+   \setlength\pflabelwdv{\pflabelwdII}%
+   \setbeamertemplate{enumerate subsubsubitem}{\insertsubsubsubenumlabel.}%
+   \renewcommand{\p@enumiv}{}%
+  \or
+   \setlength\pflabelwdv{\pflabelwdI}%
+   \setbeamertemplate{enumerate subsubsubsubitem}{\insertsubsubsubsubenumlabel.}%
+   \renewcommand{\p@enumv}{}%
+  \fi}
+ \newenvironment{subpf}
+  {\advance\@enumdepth1
+   \csname numpf@set\romannumeral\the\@enumdepth\endcsname
+   \advance\@enumdepth-1
+   \begin{numpf@enumerate}}
+  {\end{numpf@enumerate}\ignorespacesafterend}
+ \newenvironment{subpf*}
+  {\advance\@enumdepth1
+   \csname numpf@set\romannumeral\the\@enumdepth @star\endcsname
+   \advance\@enumdepth-1
+   \begin{numpf@enumerate}}
+  {\end{numpf@enumerate}\ignorespacesafterend}
+ \newcommand{\linenum}
+  {\usebeamertemplate*{\beamer@enumtempl}}
+% The \relax seems to help avoid an error
+%  if the immediately preceding \item has an overlay specification.
+ \newenvironment<>{pfarray}[1]
+  {\begin{uncoverenv}#2\pfln\relax\numpf@rray{#1}}
+  {\endarray\end{math}\end{uncoverenv}\ignorespacesafterend}
+ \newcommand{\subpfalign@@set}{%
+  \advance\@enumdepth\@ne
+  \setcounter{enum\romannumeral\the\@enumdepth}{1}%
+  \beamer@computepref\@enumdepth% sets \beameritemnestingprefix
+  \edef\beamer@enumtempl{enumerate \beameritemnestingprefix item}%
+  \let\numpf@amsmathLet@\Let@
+  \def\Let@{\let\\\numpf@spf@lignlb}}
+}{%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definitions for standard LaTeX %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here I define one more layer for the numpf environment.
+ \@definecounter{enumv}
+% Modified from report.cls
+ \renewcommand\theenumv{\@Roman\c@enumv}
+ \newcommand\labelenumv{\theenumv.}
+ \renewcommand\p@enumv{\p@enumiv\theenumiv}
+% The proof environments in text mode
+ \newenvironment{numpf}
+  {\numpf@
+   \begin{subpf}}
+  {\end{subpf}\ignorespacesafterend}
+ \newenvironment{numpf*}
+  {\numpf@
+   \begin{subpf*}}
+  {\end{subpf*}\ignorespacesafterend}
+ \newcommand{\numpf@}{%
+  \renewcommand\labelenumi{\theenumi.}%
+  \renewcommand\theenumi{\arabic{enumi}}%
+  \renewcommand\p@enumi{}%
+  \renewcommand\labelenumii{\labelenumi\theenumii.}%
+  \renewcommand\theenumii{\arabic{enumii}}%
+  \renewcommand\p@enumii{\p@enumi\theenumi.}%
+  \renewcommand\labelenumiii{\labelenumii\theenumiii.}%
+  \renewcommand\theenumiii{\arabic{enumiii}}%
+  \renewcommand\p@enumiii{\p@enumii\theenumii.}%
+  \renewcommand\labelenumiv{\labelenumiii\theenumiv.}%
+  \renewcommand\theenumiv{\arabic{enumiv}}%
+  \renewcommand\p@enumiv{\p@enumiii\theenumiii.}%
+  \renewcommand\labelenumv{\labelenumiv\theenumv.}%
+  \renewcommand\theenumv{\arabic{enumv}}%
+  \renewcommand\p@enumv{\p@enumiv\theenumiv.}%
+  \ifcase\@enumdepth
+   \setlength\pflabelwdi{\pflabelwdI}%
+   \setlength\pflabelwdii{\pflabelwdII}%
+   \setlength\pflabelwdiii{\pflabelwdIII}%
+   \setlength\pflabelwdiv{\pflabelwdIV}%
+   \setlength\pflabelwdv{\pflabelwdV}%
+  \or
+   \setlength\pflabelwdii{\pflabelwdI}%
+   \setlength\pflabelwdiii{\pflabelwdII}%
+   \setlength\pflabelwdiv{\pflabelwdIII}%
+   \setlength\pflabelwdv{\pflabelwdIV}%
+   \renewcommand\labelenumii{\theenumii.}%
+   \renewcommand{\p@enumii}{}%
+  \or
+   \setlength\pflabelwdiii{\pflabelwdI}%
+   \setlength\pflabelwdiv{\pflabelwdII}%
+   \setlength\pflabelwdv{\pflabelwdIII}%
+   \renewcommand\labelenumiii{\theenumiii.}%
+   \renewcommand{\p@enumiii}{}%
+  \or
+   \setlength\pflabelwdiv{\pflabelwdI}%
+   \setlength\pflabelwdv{\pflabelwdII}%
+   \renewcommand\labelenumiv{\theenumiv.}%
+   \renewcommand{\p@enumiv}{}%
+  \or
+   \setlength\pflabelwdv{\pflabelwdI}%
+   \renewcommand\labelenumv{\theenumv.}%
+   \renewcommand{\p@enumv}{}%
+  \fi}
+% Modified from latex.ltx to make left-aligned numbers
+ \newenvironment{subpf}{%
+  \ifnum \@enumdepth >4\@toodeep\else
+    \advance\@enumdepth\@ne
+    \csname numpf@set\romannumeral\the\@enumdepth\endcsname
+    \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+      \expandafter
+      \list
+        \csname label\@enumctr\endcsname
+        {\usecounter\@enumctr\def\makelabel##1{\hss\rlap{##1}\hfill}}%
+  \fi}{\endlist}
+ \newenvironment{subpf*}{%
+  \ifnum \@enumdepth >4\@toodeep\else
+    \advance\@enumdepth\@ne
+    \csname numpf@set\romannumeral\the\@enumdepth @star\endcsname
+    \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+      \expandafter
+      \list
+        \csname label\@enumctr\endcsname
+        {\usecounter\@enumctr\def\makelabel##1{\hss\rlap{##1}\hfill}}%
+  \fi}{\endlist}
+ \newcommand{\linenum}
+  {\csname labelenum\romannumeral\the\@enumdepth\endcsname}
+ \newenvironment{pfarray}
+  {\pfln\numpf@rray}
+  {\endarray\end{math}\ignorespacesafterend}
+ \newcommand{\subpfalign@@set}{%
+  \advance\@enumdepth\@ne
+  \setcounter{enum\romannumeral\the\@enumdepth}{1}%
+  \let\numpf@amsmathLet@\Let@
+  \def\Let@{\let\\\numpf@spf@lignlb}}
+}
+
+% Here are the proof environments in math mode.
+% The stem is ``pfalign''.
+% Prefixing by ``sub'' indicates a new layer in the line numbering.
+% Suffixing by ``ed'' specifies that the materials are not displayed.
+% An asterisk used with ``sub'' specifies that
+%  the space-saving margins are to be used.
+% One can play with the usual parameters to modify the spacing, e.g.,
+%  \jot=0pt
+%  \abovedisplayskip=0pt
+%  \afterdisplayskip=0pt
+% These have to be issued before the environment starts.
+% Default overlay specifications in beamer do not apply to these commands.
+
+\def\numpf@mknum@norm#1{\makebox[\labelwidth][l]{#1}\hspace{\labelsep}}
+\def\numpf@mknum@star#1%
+ {\hspace{\pfmargin}\hspace{-\labelsep}\hspace{-\labelwidth}%
+  \makebox[\labelwidth][l]{#1}\hspace{\labelsep}}
+
+\def\numpf@lign@mklbl{%
+ \edef\@currentlabel
+  {\csname p@enum\romannumeral\the\@enumdepth\endcsname
+   \csname theenum\romannumeral\the\@enumdepth\endcsname}%
+% Adapted from \make@display@tag in amsmath.sty
+ \ifmeasuring@\else
+  \ifx\df@label\@empty\else
+   \@xp\ltx@label\@xp{\df@label}%
+   \global\let\df@label\@empty
+  \fi
+ \fi
+}
+
+\newenvironment{subpfalign}
+ {\let\numpf@mknum\numpf@mknum@norm\collect@body\subpfalign@}{}
+\newenvironment{subpfalign*}
+ {\let\numpf@mknum\numpf@mknum@star\collect@body\subpfalign@}{}
+\newcommand{\subpfalign@}[1]{\bgroup
+ \ifnum \@enumdepth >4\@toodeep\else\subpfalign@@{#1}\fi
+\egroup\ignorespaces}
+\newcommand{\subpfalign@@}[1]{\subpfalign@@set
+ \def\numpf@spf@lignlb{\relax\iffalse{\fi\ifnum0=`}\fi
+  \@ifstar{\numpf@spf@lignlb@star}{\numpf@spf@lignlb@}}%
+ \begin{flalign*}
+% Hopefully no one uses \Let@ except amsmath.
+  \global\let\Let@\numpf@amsmathLet@
+  &\numpf@mknum{\linenum}%
+  &#1\numpf@lign@mklbl
+ \end{flalign*}}
+% The starred version has one fewer ampersand before the line break.
+% Modified from amsmath.sty, especially \math@cr
+\def\numpf@spf@lignlb@{%
+ \new@ifnextchar[\numpf@spf@lignlb@@{\numpf@spf@lignlb@@[\z@]}}
+\def\numpf@spf@lignlb@@[#1]{\ifnum0=`{\fi \iffalse}\fi
+ &\numpf@lign@mklbl\math@cr@@@
+ \noalign{\vskip#1\relax}%
+ \refstepcounter{enum\romannumeral\the\@enumdepth}%
+ &\numpf@mknum{\linenum}&}
+\def\numpf@spf@lignlb@star{%
+ \new@ifnextchar[\numpf@spf@lignlb@@star{\numpf@spf@lignlb@@star[\z@]}}
+\def\numpf@spf@lignlb@@star[#1]{\ifnum0=`{\fi \iffalse}\fi
+ \numpf@lign@mklbl\math@cr@@@
+ \noalign{\vskip#1\relax}%
+ \refstepcounter{enum\romannumeral\the\@enumdepth}%
+ &\numpf@mknum{\linenum}&}
+
+
+% This should store the current way to show the line number,
+%  wherever the command is.
+% It should also step the counter.
+% Currently, it only works for pfaligned.
+\newcommand{\numpf@shownum}{}
+\newcommand{\numpf@shownum@backup}{}
+\newcommand{\skippfnum}{%
+ \global\let\numpf@shownum@backup\numpf@shownum
+ \global\def\numpf@shownum
+  {\global\let\numpf@shownum\numpf@shownum@backup}}
+
+% If needed, one can adjust \minalignsep before pfaligned, as in
+%  \renewcommand\minalignsep{4cm}
+% \jot in pfaligned is by default can set to 0pt.
+% To change it back (locally), use
+%  \pfalignedjot=\jot
+% \label's must be put at the beginning of the lines.
+\newlength{\pfalignedjot}
+\setlength{\pfalignedjot}{0pt}
+% The only difference between the beamer and the non-beamer versions
+%  is the overlay option.
+\@ifclassloaded{beamer}{%
+ \newenvironment<>{pfaligned}[1]
+  {\def\numpf@pf@ligned@txt{#1}%
+   \def\numpf@pf@ligned@overlay{#2}%
+   \collect@body\pfaligned@@}
+   {\ignorespacesafterend}
+ \newcommand{\pfaligned@@}[1]{%
+  \let\numpf@amsmathLet@\Let@
+  \def\Let@{\let\\\numpf@pf@lignedlb}%
+  \expandafter\onslide\numpf@pf@ligned@overlay{\pfln
+  \renewcommand{\numpf@shownum}{%
+   \refstepcounter{enum\romannumeral\the\@enumdepth}%
+   \hspace{-\labelwidth}\hspace{-\labelsep}%
+   \numpf@mknum@norm{\linenum}}%
+  \makebox[\linewidth][l]{\begin{math}\jot\pfalignedjot\begin{aligned}[t]
+ % Hopefully no one uses \Let@ except amsmath.
+   \global\let\Let@\numpf@amsmathLet@
+   &\text{\numpf@pf@ligned@txt}%
+   &#1
+  \end{aligned}\end{math}}}\vspace{\pfalignedjot}}
+}{%
+ \newenvironment{pfaligned}[1]
+  {\def\numpf@pf@ligned@txt{#1}%
+   \collect@body\pfaligned@@}{\ignorespacesafterend}
+ \newcommand{\pfaligned@@}[1]{%
+  \let\numpf@amsmathLet@\Let@
+  \def\Let@{\let\\\numpf@pf@lignedlb}%
+  \pfln
+  \renewcommand{\numpf@shownum}{%
+   \refstepcounter{enum\romannumeral\the\@enumdepth}%
+   \hspace{-\labelwidth}\hspace{-\labelsep}%
+   \numpf@mknum@norm{\linenum}}%
+  \makebox[\linewidth][l]{\begin{math}\jot\pfalignedjot\begin{aligned}[t]
+ % Hopefully no one uses \Let@ except amsmath.
+   \global\let\Let@\numpf@amsmathLet@
+   &\text{\numpf@pf@ligned@txt}%
+   &#1
+  \end{aligned}\end{math}}\vspace{\pfalignedjot}}
+}
+% The starred version has one fewer ampersand after the line break.
+% Modified from amsmath.sty, especially \math@cr
+\def\numpf@pf@lignedlb{\relax\iffalse{\fi\ifnum0=`}\fi
+ \@ifstar{\numpf@pf@lignedlb@star}{\numpf@pf@lignedlb@}}
+\def\numpf@pf@lignedlb@{%
+ \new@ifnextchar[\numpf@pf@lignedlb@@{\numpf@pf@lignedlb@@[\z@]}}
+\def\numpf@pf@lignedlb@@[#1]{\ifnum0=`{\fi \iffalse}\fi
+ \math@cr@@@
+ \noalign{\vskip#1\relax}%
+ &\numpf@shownum&%
+  \edef\@currentlabel
+   {\csname p@enum\romannumeral\the\@enumdepth\endcsname
+    \csname theenum\romannumeral\the\@enumdepth\endcsname}}
+\def\numpf@pf@lignedlb@star{%
+ \new@ifnextchar[\numpf@pf@lignedlb@@star{\numpf@pf@lignedlb@@star[\z@]}}
+\def\numpf@pf@lignedlb@@star[#1]{\ifnum0=`{\fi \iffalse}\fi
+ \math@cr@@@
+ \noalign{\vskip#1\relax}%
+ &\numpf@shownum%
+  \edef\@currentlabel
+   {\csname p@enum\romannumeral\the\@enumdepth\endcsname
+    \csname theenum\romannumeral\the\@enumdepth\endcsname}}
+
+% !!! dangerous bend !!!
+% Partly from https://tex.stackexchange.com/a/541683
+% One left-aligned column is always added at the beginning and
+%  one right-aligned column is always added at the end.
+% Best used with \extracolsep plus \stretch{<factor>} or \fill.
+% To temporarily get rid of the added stretchable space,
+%  issue \extracolsep{0pt}.
+\newcommand{\numpf@rray}[1]{%
+ \tabto{\CurrentLineWidth}%
+ \begin{math}\everymath={\displaystyle}%
+  \let\ltx@label\label
+  \let\label\numpf@rray@label
+  \setlength{\numpf@templen}{\linewidth}%
+  \addtolength{\numpf@templen}{-\TabPrevPos}%
+% Modified from array and tabular* in latex.ltx
+  \setlength\dimen@{\numpf@templen}%
+  \let\@acol\@arrayacol
+  \let\@classz\@arrayclassz
+  \let\@classiv\@arrayclassiv
+  \let\\\numpf@rraylb
+  \edef\@halignto{to\the\dimen@}\@tabarray[t]
+   {@{}l@{\extracolsep{\fill}}#1@{\extracolsep{\fill}}r@{}}}
+% The starred form removes the ampersand before the line break.
+\def\numpf@rraylb{\relax\iffalse{\fi\ifnum0=`}\fi
+ \@ifstar{\numpf@rraylb@star}{\numpf@rraylb@}}%
+\def\numpf@rraylb@{%
+ \new@ifnextchar[\numpf@rraylb@@{\numpf@rraylb@@[\z@]}%
+}
+\def\numpf@rraylb@@[#1]{\ifnum0=`{\fi \iffalse}\fi
+ &\@arraycr[#1]%
+ \refstepcounter{enum\romannumeral\the\@enumdepth}%
+ \hspace{-\labelwidth}\hspace{-\labelsep}%
+ \numpf@mknum@norm{\linenum}}
+\def\numpf@rraylb@star{%
+ \new@ifnextchar[\numpf@rraylb@@star{\numpf@rraylb@@star[\z@]}%
+}
+\def\numpf@rraylb@@star[#1]{\ifnum0=`{\fi \iffalse}\fi
+ \@arraycr[#1]%
+ \refstepcounter{enum\romannumeral\the\@enumdepth}%
+ \hspace{-\labelwidth}\hspace{-\labelsep}%
+ \numpf@mknum@norm{\linenum}}
+\def\numpf@rray@label#1{%
+ \edef\@currentlabel
+  {\csname p@enum\romannumeral\the\@enumdepth\endcsname
+   \csname theenum\romannumeral\the\@enumdepth\endcsname}%
+ \ltx@label{#1}}
+
+% You may find \popqed and \qedhere helpful.
+
+% To do
+% - keyval list of options to control, say, spacing.
+% - option to omit numbering for one line via \skippfnum
+%   for other environments
+% - take care of itemize in addition to enumerate.
+\endinput

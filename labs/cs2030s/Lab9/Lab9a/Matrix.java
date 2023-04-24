@@ -22,9 +22,10 @@ class Matrix {
 
   /**
    * Checks if two matrices are equals.
-   * @param   m1  First matrices to check
-   * @param   m2  Second matrices to check against
-   * @return  true if every elements in m1 and m2 are the same; false otherwise.
+   * 
+   * @param m1 First matrices to check
+   * @param m2 Second matrices to check against
+   * @return true if every elements in m1 and m2 are the same; false otherwise.
    */
   public static boolean equals(Matrix m1, Matrix m2) {
     if (m1.dimension != m2.dimension) {
@@ -42,7 +43,8 @@ class Matrix {
 
   /**
    * A constructor for the matrix.
-   * @param  dimension The number of rows.
+   * 
+   * @param dimension The number of rows.
    */
   Matrix(int dimension) {
     this.dimension = dimension;
@@ -51,8 +53,9 @@ class Matrix {
 
   /**
    * Generate a matrix of d x d according to the given supplier.
-   * @param  dimension The dimension of the matrix
-   * @param  supplier The lambda to generate the matrix with.
+   * 
+   * @param dimension The dimension of the matrix
+   * @param supplier  The lambda to generate the matrix with.
    * @return The new matrix.
    */
   static Matrix generate(int dimension, Supplier<Double> supplier) {
@@ -68,6 +71,7 @@ class Matrix {
   /**
    * Return a string representation of the matrix, pretty-printed
    * with each row on a single line.
+   * 
    * @return The string representation of this matrix.
    */
   public String toString() {
@@ -83,14 +87,15 @@ class Matrix {
 
   /**
    * Multiply matrix m with this matrix, return a new result matrix.
-   * @param  m1 The matrix to multiply with.
-   * @param  m2 The matrix to multiply with.
-   * @param  m1Row The starting row of m1.
-   * @param  m1Col The starting col of m1.
-   * @param  m2Row The starting row of m2.
-   * @param  m2Col The starting col of m2.
-   * @param  dimension The dimension of the input (sub)-matrices and the size
-   *     of the output matrix.
+   * 
+   * @param m1        The matrix to multiply with.
+   * @param m2        The matrix to multiply with.
+   * @param m1Row     The starting row of m1.
+   * @param m1Col     The starting col of m1.
+   * @param m2Row     The starting row of m2.
+   * @param m2Col     The starting col of m2.
+   * @param dimension The dimension of the input (sub)-matrices and the size
+   *                  of the output matrix.
    * @return The new matrix.
    */
   public static Matrix nonRecursiveMultiply(Matrix m1, Matrix m2,
@@ -108,9 +113,10 @@ class Matrix {
     }
     return result;
   }
-  
+
   /**
    * Multiple two matrices non-recursively.
+   * 
    * @param m1 The matrix to multiply with.
    * @param m2 The matrix to multiply with.
    * @return The resulting matrix m1 * m2
@@ -121,14 +127,15 @@ class Matrix {
 
   /**
    * Multiply matrix m with this matrix, return a new result matrix.
-   * @param  m1 The matrix to multiply with.
-   * @param  m2 The matrix to multiply with.
-   * @param  m1Row The starting row of m1.
-   * @param  m1Col The starting col of m1.
-   * @param  m2Row The starting row of m2.
-   * @param  m2Col The starting col of m2.
-   * @param  dimension The dimension of the input (sub)-matrices and the size
-   *     of the output matrix.
+   * 
+   * @param m1        The matrix to multiply with.
+   * @param m2        The matrix to multiply with.
+   * @param m1Row     The starting row of m1.
+   * @param m1Col     The starting col of m1.
+   * @param m2Row     The starting row of m2.
+   * @param m2Col     The starting col of m2.
+   * @param dimension The dimension of the input (sub)-matrices and the size
+   *                  of the output matrix.
    * @return The resulting matrix m1 * m2
    */
   public static Matrix recursiveMultiply(Matrix m1, Matrix m2,
@@ -143,10 +150,8 @@ class Matrix {
     // multiply then sum the multiplication result.
     int size = dimension / 2;
     Matrix result = new Matrix(dimension);
-    Matrix a11b11 = recursiveMultiply(m1, m2, m1Row, m1Col, m2Row,
-        m2Col, size);
-    Matrix a12b21 = recursiveMultiply(m1, m2, m1Row, m1Col + size,
-        m2Row + size, m2Col, size);
+    Matrix a11b11 = recursiveMultiply(m1, m2, m1Row, m1Col, m2Row, m2Col, size);
+    Matrix a12b21 = recursiveMultiply(m1, m2, m1Row, m1Col + size, m2Row + size, m2Col, size);
     for (int i = 0; i < size; i++) {
       double[] m1m = a11b11.m[i];
       double[] m2m = a12b21.m[i];
@@ -156,10 +161,8 @@ class Matrix {
       }
     }
 
-    Matrix a11b12 = recursiveMultiply(m1, m2, m1Row, m1Col, m2Row,
-        m2Col + size, size);
-    Matrix a12b22 = recursiveMultiply(m1, m2, m1Row, m1Col + size,
-        m2Row + size, m2Col + size, size);
+    Matrix a11b12 = recursiveMultiply(m1, m2, m1Row, m1Col, m2Row, m2Col + size, size);
+    Matrix a12b22 = recursiveMultiply(m1, m2, m1Row, m1Col + size, m2Row + size, m2Col + size, size);
     for (int i = 0; i < size; i++) {
       double[] m1m = a11b12.m[i];
       double[] m2m = a12b22.m[i];
@@ -169,10 +172,8 @@ class Matrix {
       }
     }
 
-    Matrix a21b11 = recursiveMultiply(m1, m2, m1Row + size, m1Col,
-        m2Row, m2Col, size);
-    Matrix a22b21 = recursiveMultiply(m1, m2, m1Row + size, m1Col + size,
-        m2Row + size, m2Col, size);
+    Matrix a21b11 = recursiveMultiply(m1, m2, m1Row + size, m1Col, m2Row, m2Col, size);
+    Matrix a22b21 = recursiveMultiply(m1, m2, m1Row + size, m1Col + size, m2Row + size, m2Col, size);
     for (int i = 0; i < size; i++) {
       double[] m1m = a21b11.m[i];
       double[] m2m = a22b21.m[i];
@@ -182,10 +183,8 @@ class Matrix {
       }
     }
 
-    Matrix a21b12 = recursiveMultiply(m1, m2, m1Row + size, m1Col,
-        m2Row, m2Col + size, size);
-    Matrix a22b22 = recursiveMultiply(m1, m2, m1Row + size, m1Col + size,
-        m2Row + size, m2Col + size, size);
+    Matrix a21b12 = recursiveMultiply(m1, m2, m1Row + size, m1Col, m2Row, m2Col + size, size);
+    Matrix a22b22 = recursiveMultiply(m1, m2, m1Row + size, m1Col + size, m2Row + size, m2Col + size, size);
     for (int i = 0; i < size; i++) {
       double[] m1m = a21b12.m[i];
       double[] m2m = a22b22.m[i];
@@ -200,6 +199,7 @@ class Matrix {
   /**
    * Multiple two matrices recursively but sequentially with
    * divide-and-conquer algorithm.
+   * 
    * @param m1 The matrix to multiply with.
    * @param m2 The matrix to multiply with.
    * @return The resulting matrix m1 * m2
@@ -208,10 +208,10 @@ class Matrix {
     return Matrix.recursiveMultiply(m1, m2, 0, 0, 0, 0, m1.dimension);
   }
 
-
   /**
    * Multiple two matrices recursively and parallely with
    * divide-and-conquer algorithm.
+   * 
    * @param m1 The matrix to multiply with.
    * @param m2 The matrix to multiply with.
    * @return The resulting matrix m1 * m2

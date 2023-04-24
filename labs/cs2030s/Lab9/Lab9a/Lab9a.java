@@ -10,25 +10,28 @@ class Lab9a {
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     int n = scanner.nextInt();
-    
+
     // Read matrix 1
     Matrix m1 = new Matrix(n);
-    for (int i=0; i<n; i++) {
-      for (int j=0; j<n; j++) {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
         m1.m[i][j] = scanner.nextDouble();
       }
     }
-    
+
     // Read matrix 1
     Matrix m2 = new Matrix(n);
-    for (int i=0; i<n; i++) {
-      for (int j=0; j<n; j++) {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
         m2.m[i][j] = scanner.nextDouble();
       }
     }
-    
+
     // Multiply matrices
+    long startTime = System.currentTimeMillis();
     Matrix res = Matrix.parallelMultiply(m1, m2);
+    long endTime = System.currentTimeMillis();
+    // System.out.println("Taken: " + (endTime - startTime));
     System.out.println(res);
   }
 }

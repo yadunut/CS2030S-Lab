@@ -1,0 +1,280 @@
+\documentclass[a4paper,twoside,notitlepage,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lipsum}
+\usepackage{multicol}
+
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{mathtools}
+\usepackage{parskip}
+\usepackage{blindtext}
+\usepackage{fontspec}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{amsmath}
+\newcolumntype{L}{>{$}l<{$}} % mathmode version of l
+\pgfplotsset{compat = newest}
+
+\setmainfont{texgyrepagella}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic,
+]
+
+\begin{document}
+  
+\title{MA1301 Midterm Reference}
+\author{Yadunand Prem}
+\setlength{\parindent}{0pt}
+
+\begin{landscape}
+\begin{multicols}{3}
+
+\section{AP \& GP}
+
+\subsection{Series}
+
+Let $u_1, u_2,... u_n$ be a sequence
+
+then $S_n = u_1 + u_2 + u_3 + ... + u_n$
+
+Result $u_1 = S_1$, $u_n = S_n - S_{n-1}$
+
+In summation form: $S_n = \sum_{i=1}^{n} u_i$
+
+\subsection{Arithmetic Series}
+
+Arithmetic Progression: $a, a+d, a+2d,...$
+
+Common Difference: $d = u_{n} - u_{n-1}$
+
+Nth Term: $u_n=a+(n-1)d$
+
+Sum of Sequence: $\frac{n}{2}(u_1 + u_n) = \frac{n}{2}[2a+(n-1)d]$
+
+\subsection{Geometric Series}
+
+Geometric Progression: $a, ar, ar^2, ar^3,...$
+
+Common Ratio: $r = \frac{u_2}{u_1} = \frac{u_3}{u_2} = ... = \frac{u_n}{u_n-1}$
+
+Nth Term: $u_n = ar^{n-1}$
+
+Sum: $S_n = \frac{a}{1-r}(1-r^n),\, r \neq 1$ when $r = 1, S_n = na$
+
+Sum to infinite: $\text{for}-1 < r < 1, \, S_{\infty} = \frac{a}{1-r}$
+
+\subsection{Binomial Theorem}
+
+Coeff: $\binom{n}{r} = \frac{n!}{r!(n-r)!}$
+
+Theorem: $(a+b)^n = \binom{n}{0}a^{n}b^{0} + \binom{n}{1}a^{n-1}b^{1} + ...+ \binom{n}{n}a^{0}b^{n}$
+
+Generalized Coeff: $\binom{n}{r} = \frac{n(n-1)(n-2)...(n-r+1)}{r!}$
+
+E.g. $\binom{\frac{1}{2}}{3} = \frac{(\frac{1}{2})(-\frac{1}{2})(-\frac{3}{2}))}{3!}$
+
+Generalized Theorem: $(1+a)^n = 1+na+\frac{n(n-1)}{2!}a^2 + ...\,\\
+\text{when}\, n < 0 \text\,{and} -1 < a < 1$
+
+Telescoping Series: $\sum^n_{r=m}(a_r - a_{r\pm1})$
+
+
+\section{Differentiation}
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l| l}
+  Function & Differential\\
+  $(f(x))^n$ & $nf'(x)(f(x))^{n-1}$\\
+  $\cos(x)$ & $-\sin(x)$\\
+  $\sin(x)$ & $\cos(x)$\\
+  $\tan(x)$ & $\sec^2(x)$\\
+  $\sec(x)$ & $\sec(x)\tan(x)$\\
+  $\csc(x)$ & $-\csc(x)\cot(x)$\\
+  $\cot(x)$ & $-\csc^2(x)$\\
+  $e^{f(x)}$ & $f'(x)e^{f(x)}$\\
+  $\ln(f(x))$ & $\frac{f'(x)}{f(x)}$\\
+  $\sin^{-1}(f(x))$ & $\frac{f'(x)}{\sqrt{1-f(x)^2}}$\\
+  $\cos^{-1}(f(x))$ & $-\frac{f'(x)}{\sqrt{1-f(x)^2}}$\\
+  $\tan^{-1}(f(x))$ & $\frac{f'(x)}{1+f(x)^2}$\\
+\end{tabular}
+
+Product Rule: $\frac{d}{dx}(ab) = \frac{da}{dx}(b) + \frac{db}{dx}(a)$\\
+Quotient Rule: $\frac{d}{dx}(\frac{a}{b}) = \frac{\frac{da}{dx}(b) - \frac{db}{dx}(a)}{b^2}$\\
+Chain Rule: $\frac{dy}{dx} = \frac{dy}{du} \times \frac{du}{dx}$
+
+Implicit: $\frac{d}{dx}(y^n) = ny^{n-1}\frac{dy}{dx}$\\
+$y=f(x)^{g(x)}\\
+\ln(y) = g(x)\ln(f(x))$
+
+$\frac{d}{dx}(a^x) = a^{x}ln(a) \times \frac{d}{dx}(x)$
+
+$\frac{d^2y}{dx^2} = \frac{d}{du}(\frac{dy}{dx}) \times \frac{du}{dx}$
+
+Equation of tangent: $y-y_0 = m(x-x_0)$\\
+Equation of normal: $y-y_0 = -\frac{1}{m}(x-x_0)$
+
+
+\begin{tikzpicture}
+  \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+  \draw[->] (0, 0) -- (0, 3) node[above] {$y$};
+  \draw[scale=0.5, domain=-2:2,smooth,variable=\x] plot({\x}, {\x*\x+1}) node[right] {$y=x^2+1$};
+  \draw[scale=0.5, domain=-2.5:2.5,smooth,variable=\x] plot({\x}, {1}) node[right] {$y=1$};
+\end{tikzpicture}
+
+Tangent $//$ $x$-axis, $\frac{dy}{dx} = 0$
+
+\begin{tikzpicture}
+  \draw[->] (0, 0) -- (2, 0) node[right] {$x$};
+  \draw[->] (0, -2) -- (0, 2) node[above] {$y$};
+  \draw[scale=0.5, domain=-2:2,smooth,variable=\y] plot({\y*\y+1}, {\y}) node[right] {$x=y^2+1$};
+  \draw[scale=0.5, domain=-2.5:2.5,smooth,variable=\y] plot({1}, {\y}) node[right] {$x=1$};
+\end{tikzpicture}
+
+Tangent $//$ $y$-axis, $\frac{dy}{dx} = \pm\infty$
+
+If $f \approx a, f(x) \approx f'(a)[x-a] + f(a)$\\
+If $f'(x) > 0$ it is increasing, else decreasing\\
+If $f''(x) > 0$ it is concave up, else concave down\\\\
+If $f'(x) = 0 \ \& f''(x) < 0$ it is local maximum\\
+If $f'(x) = 0 \ \& f''(x) > 0$ it is local minimum\\
+If $f'(x) = 0 \ \& f''(x) = 0$ test fails\\
+
+
+\subsection{Trigonometric Identities}
+
+\begin{tabular}{|L|}
+  \sin^2{\theta} + \cos^2{\theta} = 1 \\
+  \tan^2{\theta} + 1 = \sec^2{\theta} \\
+  1 + \cot^2{\theta} = \csc^2{\theta} \\
+  \hline
+  \sin{2\theta} = 2\sin{\theta}\cos{\theta} \\
+  \cos{2\theta} = \cos^2{\theta}-\sin^2{\theta} \\
+  \cos{2\theta} = 2\cos^2{\theta}-1 \\
+  \cos{2\theta} = 1-2\sin^2{\theta} \\
+  \tan{2\theta} = \frac{2\tan{\theta}}{1-\tan^2{\theta}} \\
+  \hline
+  \sin({\alpha + \beta}) = \sin{\alpha}\cos{\beta} \pm \cos{\alpha}\sin{\beta} \\
+  \cos({\alpha + \beta}) = \cos{\alpha}\cos{\beta} \mp \sin{\alpha}\sin{\beta}
+\end{tabular}
+
+
+\end{multicols}
+\begin{multicols}{2}
+
+\section{Integration}
+
+\subsection{Standard Integrals}
+\begin{tabular}{|L|L|L}
+1   & \int(ax+b)^n\ dx & \frac{(ax+b)^{n+1}}{(n+1)a} + C \\
+2   & \int \frac{1}{ax+b}\ dx & \frac{1}{a}\ln|ax+b| + C \\
+3   & \int e^{ax+b}\ dx & \frac{1}{a}e^{ax+b} + C \\
+4   & \int \sin(ax+b)\ dx & -\frac{1}{a}\cos(ax+b) + C \\
+5   & \int \cos(ax+b)\ dx & \frac{1}{a}\sin(ax+b) + C \\
+6   & \int \tan(ax+b)\ dx & \frac{1}{a}\ln|\sec(ax+b)| + C \\
+7   & \int \sec(ax+b)\ dx & \frac{1}{a}\ln|\sec(ax+b) + \tan(ax+b)| + C \\
+8   & \int \csc(ax+b)\ dx & -\frac{1}{a}\ln|\csc(ax+b) + \cot(ax+b)| + C \\
+9   & \int \cot(ax+b)\ dx & -\frac{1}{a}\ln|\csc(ax+b)| + C \\
+10  & \int \sec^2(ax+b)\ dx & \frac{1}{a}\tan(ax+b) + C \\
+11  & \int \csc^2(ax+b)\ dx & -\frac{1}{a}\cot(ax+b) + C \\
+12  & \int \sec(ax+b) \cdot \tan(ax+b)\ dx & \frac{1}{a}\sec(ax+b) + C \\
+13  & \int \csc(ax+b) \cdot \cot(ax+b)\ dx & -\frac{1}{a}\csc(ax+b) + C \\
+14  & \int \frac{1}{a^2+(x+b)^2}\ dx &  \frac{1}{a}\tan^{-1}(\frac{x+b}{a})+ C \\
+15  & \int \frac{1}{\sqrt{a^2-(x+b)^2}}\ dx &  \sin^{-1}(\frac{x+b}{a})+ C \\
+16  & \int \frac{-1}{\sqrt{a^2-(x+b)^2}}\ dx &  \cos^{-1}(\frac{x+b}{a})+ C \\
+17  & \int \frac{1}{a^2-(x+b)^2}\ dx &  \frac{1}{2a}\ln|\frac{x+b+a}{x+b-a}|+ C \\
+18  & \int \frac{1}{(x+b)^2-a^2}\ dx &  \frac{1}{2a}\ln|\frac{x+b-a}{x+b+a}|+ C \\
+19  & \int \frac{1}{\sqrt{(x+b)^2+a^2}}\ dx & \ln|(x+b) + \sqrt{(x+b)^2+a^2}| + C \\
+20  & \int \frac{1}{\sqrt{(x+b)^2-a^2}}\ dx & \ln|(x+b) + \sqrt{(x+b)^2-a^2}| + C \\
+21  & \int \frac{1}{\sqrt{(x+b)^2-a^2}}\ dx & \ln|(x+b) + \sqrt{(x+b)^2-a^2}| + C \\
+21  & \int a^x\ dx  & \frac{a^x}{\ln a} + C \\
+
+\end{tabular}
+
+\subsection{Integration by Parts}
+$\int u\ dv = uv - \int v\ du$
+
+Rule for choosing $u$
+
+\begin{tabular}{|l|L|}
+  Logarithm & \ln(ax+b) \\
+  Inverse Trigo & \sin^{-1}(ax+b) \\
+  Algebraic & x, x^{10} \\
+  Trigo & \sin (ax+b) \\
+  Expo & e^x, 19^x \\
+\end{tabular}
+
+\subsection{Area between 2 curves}
+
+$A = \int^b_a g(x) - f(x)dx,\ \text{when}\ g(x)\ \text{is above}\ f(x)$
+
+\subsection{Volume of Revolution}
+
+$V = \pi\int^b_a(f(x)-a)^2\ dx$ when $a$ is a line parallel to $x$ or axis
+
+$V = \pi\int^b_a(f(x))^2\ dx - \pi\int^b_a(g(x))^2\ dx$ when $f(x)$ is higher than $g(x)$
+
+\section{Vectors}
+
+$\overrightarrow{OA} = a = \big(\begin{smallmatrix}
+  x_1 \\
+  y_1 \\
+  z_1 \\
+\end{smallmatrix}\big)= x_1\text{i} + y_1\text{j}+ z_1\text{k}$
+
+$\overrightarrow{OB} = b = \big(\begin{smallmatrix}
+  x_2 \\
+  y_2 \\
+  z_2 \\
+\end{smallmatrix}\big) = x_2\text{i} + y_2\text{j}+ z_2\text{k}$
+
+Magnitude = $|\overrightarrow{AB}| = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$
+
+$\overrightarrow{AB} =\overrightarrow{OB} - \overrightarrow{OA}$ = $\big(\begin{smallmatrix}
+  x_2  -  x_1 \\
+  y_2  -  y_1 \\
+\end{smallmatrix}\big)$
+
+Unit Vector : $\hat{v} = \frac{1}{|v|}v$
+
+Dot Product: $a \cdot b = x_1x_2+y_1y_2+z_1z_2 = |a||b|\cos\theta $
+
+If  $a\perp b$, $a \cdot b = 0$
+
+$\theta = \cos^{-1}\big(\frac{a \cdot b}{|a||b|}\big)$
+
+Cross Product: $a \times b  = \begin{pmatrix} 
+  y_1z_2 - y_2z_1 \\
+  -(x_1z_2 - x_2z_2)\\
+  x_1y_2 - x_2y_1)
+\end{pmatrix}$
+
+Area of $\triangle ABC = \frac{1}{2}|\overrightarrow{CA} \times \overrightarrow{CB}|$
+
+$|a \times b| = |a||b|\sin\theta$
+
+Line: $r = a + \lambda u \Leftrightarrow r = (x_1\text{i} + y_1\text{j} + z_1\text{k}) + t(a\text{i} + b\text{j} + c\text{k})$ where $a$ is a point and $u$ is a direction vector
+
+If Point $P\perp$ to line $r = a + s \overrightarrow{u}$, $Q = (a + \lambda \overrightarrow{u})$, $\overrightarrow{PQ} \cdot \overrightarrow{u} = 0$
+
+Shortest distance = $|PQ|$
+
+Plane: $(\overrightarrow{r} - \overrightarrow{a}) \cdot n = 0 \Leftrightarrow \overrightarrow{r} \cdot \overrightarrow{n} = \overrightarrow{a} \cdot \overrightarrow{n}$, where $a$ and $r$ are 2 vectors on the plane and $n$ is normal to the plane
+
+Cartesian Eqn of plane: $r \cdot n = d \Leftrightarrow ax + by + cz = d$, where $n = ai + bj + ck$ and $r = xi + yj + zk$
+
+Angle between planes: $\cos\theta =|\frac{n_1 \cdot n_2}{|n_1||n_2|}|$
+Angle between line and plane: $\sin\theta = |\frac{u \cdot n}{|u||n|}|$
+
+Intersection of 2 planes: $r = a + \lambda(n_1 \times n_2)$
+
+\end{multicols}
+
+\end{landscape}
+
+\end{document}

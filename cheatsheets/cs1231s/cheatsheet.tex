@@ -1,0 +1,1107 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+        
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{url}
+% \usepackage{subcaption}
+\usepackage{emptypage}
+% \usepackage{multicol}
+\usepackage{cancel}
+\usepackage{mathtools}
+
+\usepackage{lscape}
+\usepackage{pdflscape}
+
+\usepackage{float}
+
+
+\usepackage{xifthen}
+\usepackage[skip=10pt]{parskip}
+
+\usepackage{comment}
+\usepackage[margin=0.5in]{geometry}
+\setlength{\parindent}{0pt}
+
+\usepackage{1231num}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Defn}
+
+\newtheorem*{propos}{Proposition}
+
+\renewcommand{\qedsymbol}{}
+
+\newtheorem{innertheorem}{Theorem}
+\newenvironment{theorem}[1]
+  {\renewcommand\theinnertheorem{#1}\innertheorem}
+  {\endinnertheorem}
+
+
+\author{Yadunand Prem}
+
+\title{Midterms Cheatsheet}
+
+\begin{document}
+\section{Tables}
+
+\begin{tabular} {|l|c|c|}
+  Commutative  & $p \land q \equiv q \land p$ & $p \lor q \equiv q \lor p$\\
+  Associative  & $p \land q \land r \equiv (p \land q) \land r$&\\
+  Distributive & $p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$&$p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)$\\
+  Identity & $p \land \text{true} \equiv p$ & $p \lor \text{false} \equiv p$\\
+  Negation & $p \lor \sim p \equiv \text{true}$ & $p \land \sim p \equiv \text{false}$\\
+  Double Negative & $\sim(\sim p) \equiv p$ & \\
+  Idempotent & $p \lor p \equiv p$ & $p \land p \equiv p$\\
+  Universal bound & $p \lor \text{true} \equiv \text{true}$ & $p \land \text{false} \equiv \text{false}$\\
+  de Morgan's & $\sim(p \land q) \equiv \sim p \lor \sim q$ & $\sim(p \lor q) \equiv \sim p \land \sim q$\\
+  Absorption & $p \lor (p \land q) \equiv p$ & $p \land (p \lor q) \equiv p$\\
+  Implication & $p \Rightarrow q \equiv \sim p \lor q$ & $$\\
+  $\sim$(Implication) & $\sim (p \Rightarrow q) \equiv p \land \sim q$ & \\
+  \hline & & \\
+  Modus Ponens &$p \implies q, p$& $q$ \\
+  Modus Tollens &$p \implies q, \sim q$& $\sim p$ \\
+  Generalization &$p$& $p \lor q$ \\
+  Specialization &$p \land q$& $p$ \\
+  Conjunction &$p, q$& $p \land q$ \\
+  Elimination &$p \lor q, \sim q$& $p$ \\
+  Transitivity &$p \implies q, q \implies r$& $p \implies r$ \\
+  Division into cases &$p \land q, p \implies r, q \implies r$& $r$ \\
+  Contradiction &$\sim p \implies \text{false}$& $p$ \\
+  \hline & & \\
+  Commutative  & $A \cup B = B \cup A$ & \\
+  Associative  & $(A \cup B) \cup C = A \cup (B \cup C)$ & \\
+  Distributive & $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ & $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$\\
+  Identity     & $A \cup \emptyset = A$ & $A \cap U = A$\\
+  Complement   & $A \cup \bar A = U$ & $A \cap \bar A = \emptyset$\\
+  Double Complement & $\bar{\bar A} = A$ & \\
+  Idempotent        & $A \cup A = A$ & $A \cap A = A$\\
+  Universal Bound   & $A \cup U = U$ & $A \cap \emptyset = \emptyset$ \\
+  De Morgan's       & $\overline{A \cup B} = \bar{A} \cap \bar{B}$ & $\overline{A \cap B} = \bar{A} \cup \bar{B}$\\
+  Absorption        & $A \cup (A \cap B) = A$ & $A \cap (A \cup B) = A$\\
+  Complements of U and $\emptyset$ & $\bar U =\emptyset$ & $\bar \emptyset = U$\\
+  Set Difference & $A \setminus B = A \cap \bar B$ &\\
+  \hline & & \\
+  F1 Commutative & $a + b = b + a$ & $ab = ba$ \\
+  F2 Associative & $(a + b)+c = a + (b + c)$ & $(ab)c = a(bc)$ \\
+  F3 Distributive & $a(b+c) = ab + ac$ & $(b+c)a = ba + ca$ \\
+  F4 Identity & $0 +a = a + 0 = a$ & $1 \cdot a = a \cdot 1 = a $ \\
+  F5 Additive inverses & $a + (-a) = (-a) + a = 0$ & \\
+  F6 Reciprocals & $a \cdot \frac{1}{a} = \frac{1}{a} \cdot a = 1$ & $a \not = 0$ \\
+  \hline & & \\
+  T1 Cancellation Add & $a + b = a + c$ & $b = c$ \\
+  T2 Possibility of Sub & There is one $x, a + x = b$ & $x = b - a$ \\
+  T3 & $b - a = b + (-a)$ & \\
+  T4 & $-(-a) = a$ & \\
+  T5 & $a(b-c)=ab-ac$ & \\
+  T6 & $0 \cdot a = a \cdot 0 = 0$ & \\
+  T7 Cancellation Mul & $ab = ac$ & $b = c, a \not = 0$ \\
+  T8 Possibility of Div & $a \not = 0, ax = b$ & $x = \frac{b}{a}$ \\
+  T9 & $a \not = 0, \frac{b}{a} = b \cdot a^{-1}$ & \\
+  T10 & $a \not = 0, (a^{-1})^{-1} = a$ & \\
+  T11 Zero Product& $ab = 0 \Rightarrow a = 0 \lor b = 0$ & \\
+  T12 Mul with -ve & $(-a)b = a(-b) - -(ab)$ & $-\frac{a}{b} = \frac{-a}{b} = \frac{a}{-b}$\\
+  T13 Equiv Frac & $\frac{a}{b} = \frac{ac}{bc}$ & $b \not = 0, c \not = 0$\\
+  T14 Add Frac & $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$ & $b \not = 0, d \not = 0$\\
+  T15 Mul Frac & $\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$ & $b \not = 0, d \not = 0$\\
+  T16 Div Frac & $\frac{\frac{a}{b}}{\frac{c}{d}} = \frac{ac}{bd}$ & $b \not = 0, d \not = 0$\\
+\end{tabular}
+
+\begin{tabular} {|l|c|c|}
+  \hline & & \\
+  Ord1 & $\forall a,b \in \mathbb{R}^+$ & $a + b > 0, ab > 0$\\
+  Ord2 & $\forall a,b \in \mathbb{R}_{\not = 0}$ & $a$ is positive or negative and not both\\
+  Ord3 & 0 is not positive & \\
+  $a < b$ & means $b + (-a)$ is positive & \\
+  $a \leq b$ & means $a < b$ or $a = b$ & \\
+  $a < 0$ & means a is negative& \\
+  T17 Trichotomy Law & $a < b \lor b > a \lor a = b$ & \\
+  T18 Transitive Law & $a < b$ and $b < c$ & $a < c$\\
+  T19 & $a < b$ & $a + c < b + c$ \\
+  T20 & $a < b$ and $c > 0$ & $ac < bc$ \\
+  T21 & $a \not = 0$ & $a^2 > 0$ \\
+  T22 & $1 > 0$ &  \\
+  T23 & $a < b$ and $c < 0$ & $ac > bc$ \\
+  T24 & $a < b$ & $-a > -b$ \\
+  T25 & $ab > 0$ & a and b are both positive or negative \\
+  T26 & $a < c$ and $b < d$ & $a+b < c+d$ \\
+  T27 & $0 < a < c$ and $<0 < b < d$ & $0 < ab < cd$ \\
+\end{tabular}
+
+\section{Math}
+
+\begin{defn}{Even and Odd Integers}\\
+  n is even $\Leftrightarrow \exists$ an integer $k$ s.t. $n = 2k$\\
+  n is odd $\Leftrightarrow \exists$ an integer $k$ s.t. $n = 2k + 1$
+\end{defn}
+
+\begin{defn}{Divisibility}\\
+  $n$ and $d$ are integers and $d \not= 0$ \\
+  $d | n \Leftrightarrow \exists k \in \mathbb{Z}$ s.t. $n = dk$
+\end{defn}
+
+\begin{theorem}{4.2.1} Every Integer is a rational number \end{theorem}
+
+\begin{theorem}{4.2.2} The sum of any two rational numbers is rational \end{theorem}
+
+\begin{theorem}{4.3.1} For all $a, b \in \mathbb{Z}^+$, if $a | b$, then $a \leq b$ \end{theorem}
+
+\begin{theorem}{4.3.2} Only divisors of $1$ are $1$ and $-1$ \end{theorem}
+
+\begin{theorem}{4.3.3} $\forall a, b, c \in \mathbb{Z}$ if $a | b$, $b | c$, $a | c$ \end{theorem}
+
+\begin{theorem}{4.6.1} There is no greatest integer \end{theorem}
+
+\begin{propos}{4.6.4} For all integers $n$, if $n^2$ is even, then $n$ is even. \end{propos}
+
+\begin{defn}{Rational} $r$ is rational $\Leftrightarrow \exists a, b \in \mathbb{Z}$ s.t. $r = \frac{a}{b}$ and $b \not=0$ \end{defn}
+
+\begin{defn}{Fraction in lowest term:} fraction $\frac{a}{b}$ is lowest term if largest $\mathbb{Z}$ that divies both $a$ and $b$ is 1 \end{defn}
+
+\begin{theorem}{4.7.1} $\sqrt{2}$ is irrational \end{theorem}
+
+\section{Logic of Combound Statements}
+
+\begin{theorem}{3.2.1} Negation of universal stmt $\sim(\forall x \in D, P(x)) \equiv \exists x \in D$ s.t. $\sim P(x)$ \end{theorem}
+
+\begin{theorem}{3.2.1} Negation of existential stmt $\sim(\exists x \in D$ s.t. $P(x)) \equiv \forall x \in D, \sim P(x)$ \end{theorem}
+
+\begin{defn}{Contrapositive} of $p \Rightarrow q \equiv \sim q \Rightarrow \sim p$ \end{defn}
+
+\begin{defn}{Converse} of $p \Rightarrow q$ is $q \Rightarrow p$ \end{defn}
+
+\begin{defn}{Inverse} of $p \Rightarrow q$ is $\sim p \Rightarrow \sim q$ \end{defn}
+
+\begin{defn}{Only if:} $p$ only if $q$ means $\sim q \Rightarrow \sim p \equiv p \Rightarrow q$ \end{defn}
+
+\begin{defn}{Biconditional:} $p \Leftrightarrow q \equiv (p \Rightarrow q) \land (q \Rightarrow p)$ \end{defn}
+
+\begin{defn} $r$ is sufficient condition for $s$ means if $r$ then $s$, $r \Rightarrow s$ \end{defn}
+
+\begin{defn} $r$ is necessary condition for $s$ means if $\sim r$ then $\sim s$, $s \Rightarrow r$ \end{defn}
+
+\begin{defn}{Proof by Contradiction}\\ If you can show that the supposition that sttatement $p$ is false leads to a contradiction, then you can conclude that $p$ is true \end{defn}
+
+\section{Methods of Proof}
+
+\begin{tabular} {|c|l|}
+  \hline
+  Statement & Proof Approach \\
+  $\forall x \in D\ P(X)$ & Direct: Pick arbitrary x, prove P is true for that x. \\
+                    & Contradiction: Suppose not, i.e. $ \exists x(\sim p)$... Hence supposition $\sim p$ is false (P3) \\
+  \hline
+  $\exists x \in D\ P(X)$ & Direct: Find x where P is true. \\
+                    & Contradiction: Suppose not, i.e. $\forall x (\sim p)$... Hence supposition $\sim p$ is false (P3) \\
+  \hline
+  $P \Rightarrow Q$ & Direct: Assume P is true, prove Q \\
+                    & Contradiction: Assume P is true and Q is false, then derive contradiction \\
+                    & Contrapositive: Assume $\sim Q$, then prove $\sim P$ \\
+  \hline
+  $P \Leftrightarrow Q$ & Prove both $P \Rightarrow Q$ and $Q \Rightarrow P$ \\
+  \hline
+  $xRy$. Prove R is equivalence  & Prove Reflexive, Symmetric and Transitive \\
+  \hline
+  Reflexive &  \\
+  \hline
+  Symmetric &  \\
+  \hline
+  Antisymmetric &  \\
+  \hline
+  Transitive &  \\
+  \hline
+
+
+\end{tabular}
+
+\begin{defn}{Proof by Contraposition}\\
+  1. Statement to be proved $\forall x \in D\ (P(x) \Rightarrow Q(x))$\\
+  2. Contrapositive Form: $\forall x \in D\ (\sim Q(x) \Rightarrow \sim P(x))$\\
+  3. Prove by direct proof\\
+  3.1 Suppose x is an element of D s.t. $Q(X)$ is false\\
+  3.2 Show that P(x) is false.\\
+  4. Therefore, original statement is true
+\end{defn}
+
+
+\section{Set Theory}
+
+\begin{defn}{Set: Unordered collection of objects}\\ Order and duplicates don't matter \end{defn}
+
+\begin{defn}{Membership of Set $\in$: } If $S$ is set, $x \in S$ means $x$ is an element of $S$ \end{defn}
+
+\begin{defn}{Cardinality of Set $|S|$: } The number of elements in $S$ \end{defn}
+
+Common Sets:
+
+$\mathbb{N}$ - Natural Numbers, $\{0, 1, 2\}$
+
+$\mathbb{Z}$ - Integers
+
+$\mathbb{Q}$ - Rational
+
+$\mathbb{R}$ - Real
+
+$\mathbb{C}$ - Complex
+
+$\mathbb{Z}^\pm$ - Positive/Negative Integers
+
+\begin{defn}{Subset}
+  $A \subseteq B \Leftrightarrow$ Every element of $A$ is also an element of $B$\\
+  $A \subseteq B \Leftrightarrow \forall x(x\in A \Rightarrow x \in B)$
+\end{defn}
+
+\begin{defn}{Proper Subset} $A \subsetneq B \Leftrightarrow (A \subseteq B \land A \not = B)$ \end{defn}
+
+\begin{theorem}{6.2.4} An empty set is a subset of every set, i.e. $\emptyset \subseteq A$ for all sets $A$ \end{theorem}
+
+\begin{defn}{Cartesian Product} $A \times B = \{(a, b): a \in A \land b \in B\} $ \end{defn}
+
+\begin{defn}{Set Equality}
+  $A = B \Leftrightarrow A \subseteq B \land B \subseteq A$ \\
+  $A = B \Leftrightarrow \forall x (x \in A \Leftrightarrow x \in B)$
+\end{defn}
+
+\begin{defn}{Union:} $A \cup B = \{x \in U: x \in A \lor x \in B\}$ \end{defn}
+
+\begin{defn}{Intersection:} $A \cap B = \{x \in U: x \in A \land x \in B\}$ \end{defn}
+
+\begin{defn}{Difference:} $B \setminus A = \{x \in U: x \in B \land x \not\in A\}$ \end{defn}
+
+\begin{defn}{Disjoint:} $A \cap B = \emptyset$ \end{defn}
+
+\begin{theorem}{4.4.1} Quotient-Remainder
+  $n \in \mathbb{Z}, d \in \mathbb{Z}^+$\\ there exists unique integers q and r such that  $n = dq + r$ and $0 \leq r < d$
+\end{theorem}
+
+\begin{defn}{Power Set:} The set of all subsets of $A$, has $2^n$ elements. \end{defn}
+
+\begin{theorem}{6.3.1}
+  Suppose $A$ is a finite set with $n$ elements, then $P(A)$ has $2^n$ elements.
+  $|P(A)| = 2^{|n|}$
+\end{theorem}
+
+\begin{defn}{Cartesian Product of $A_n$}
+  $= A_1 \times A_2 \times ... \times A_n = \{(a_1, a_2,...a_n): a_1 \in A_1 \land a_2 \in A_2...$
+\end{defn}
+
+\begin{theorem}{6.2.1} Subset Relations
+  \begin{numpf*}
+    \pfln Inclusion of Intersection: $A \cap B \subseteq A, A \cap B \subseteq B$
+    \pfln Inclusion in Union $A \subseteq A \cup B, B \subseteq A \cup B$
+    \pfln Transitive Property of Substs: $A \subseteq B \land B \subseteq C \Rightarrow A \subseteq C$
+  \end{numpf*}
+\end{theorem}
+
+\section{Relations}
+
+\begin{defn} Relation from A to B is a subset of $A \times B$\\
+  Given an ordered pair$(x, y) \in A\times B$, $x$ is 
+  related to y by $R$ is written $xRy \Leftrightarrow (x, y) \in R$
+\end{defn}
+
+\begin{defn} Domain, Co-domain, Range\\
+  Let $A$ and $B$ be sets and $R$ be a relation from $A$ to $B$
+  \begin{numpf*}
+    \pfln Domain of R: is set $\{a \in A: aRb$ for some $b \in B\}$
+    \pfln Codomain of R: Set B
+    \pfln Range of R: is set $\{b \in B: aRb$ for some $a \in A\}$
+  \end{numpf*}
+\end{defn}
+
+\begin{defn} Inverse Relation\\
+  Let $R$ be a relation from $A$ to $B$, 
+  $R^{-1} = \{(y, x) \in B\times A: (x, y) \in R\}$\\
+  $\forall x \in A, \forall y \in B ((y, x) \in R^{-1} \Leftrightarrow (x, y) \in R)$
+\end{defn}
+
+\begin{defn} 
+  Relation on a Set $A$ is a relation from $A$ to $A$.
+\end{defn}
+
+\begin{defn} Composition of Relations\\
+  A, B and C be sets. $R \subseteq A \times B$ be a relation. $S \subset B \times C$ be relation. Composition of R with S, denoted $S \circ R$ is relation from A to C such that: \\
+  $\forall x \in A, \forall z \in C(x S \circ R z \Leftrightarrow (\exists y \in B (xRy \land ySz)))$
+\end{defn}
+
+\begin{propos} Composition is Associative
+  $A, B, C, D$ be sets. $R \subseteq A \times B$, $S \subseteq B \times C$, $T \subseteq C \times D$\\
+  $T \circ ( S \circ R) = T \circ S \circ R$
+\end{propos}
+
+\begin{propos} Inverse of Composition
+  $A, B, C$ be sets. $R \subseteq A \times B$, $S \subseteq B \times C$\\
+  $(S \circ R)^{-1} = R^{-1} \circ S^{-1}$
+\end{propos}
+
+\begin{defn} \textbf{Reflexivity, Symmetry, Transitivity}
+  \begin{numpf*}
+    \pfln Reflexivity: $\forall x \in A (xRx)$
+    \pfln Symmetry: $\forall x,y \in A (xRy \Rightarrow yRx)$
+    \pfln Transitivity:$\forall x,y,z \in A (xRy \land yRz \Rightarrow xRz)$
+  \end{numpf*}
+  Refer to proof 6
+\end{defn}
+
+\begin{defn} Transitive Closure\\
+  Transitive closure of R is relation $R^t$ on A that satiesfies
+  \begin{numpf*}
+    \pfln $R^t$ is transitive
+    \pfln $R \subseteq R^t$
+    \pfln If $S$ is any other transitive relation that contains $R$, then $R^t \subseteq S$
+  \end{numpf*}
+\end{defn}
+
+\begin{defn} Partition\\
+  $P$ is partition of set A if
+  \begin{numpf*}
+    \pfln $P$ is a set of which all elements are non empty subsets of A, $\emptyset \not = S \subseteq A$ for all $S \in P$
+    \pfln Every element of $A$ is in exactly on element of P, \\
+    $\forall x \in A\ \exists S \in P (x \in S)$ and \\
+    $\forall x \in A\ \exists S_1, S_2 \in P(x \in S_1 \land x \in S_2 \Rightarrow S_1 = S_2)$
+  \end{numpf*}
+  OR $\forall x \in A\ \exists!S \in P(x \in S)$\\
+  Elements of a partition are called components
+\end{defn}
+
+\begin{defn} Relation Induced by a partition\\
+  Given partition $P$ of $A$, the relation $R$ induced by partition: \\
+  $\forall x, y \in A, xRy \Rightarrow \exists$ a component of $S$ of $P$ s.t. $x, y \in S$
+\end{defn}
+
+\begin{theorem}{8.3.1}[Relation Induced by a Partition]
+  Let $A$ be a set with a partition and let R be a relation induced by the partition. Then $R$ is reflexive, symmetric and transitive
+\end{theorem}
+
+\begin{defn}[Equivalence Relation]
+  $A$ be set and $R$ be relation. $R$ is equivalence relation iff $R$ is reflexive, symmetric and transitive
+\end{defn}
+
+\begin{defn} Equivalence Class\\
+  Suppose $A$ is set and $\sim$ is equivalence relation on A. For each $A \in A$, equivalence class of $a$, denoted $[a]$ and called class of $a$ is set of all elements $x \in A$ s.t. $a\sim x$\\
+  $[a]_{\sim} = \{x \in A: a \sim x \}$
+\end{defn}
+
+\begin{theorem}{8.3.4} The partition induced by an Equivalence Relation\\
+  If $A$ is a set and $R$ is an equivalence relation on $A$, then distinct equivalence classes of $R$ form a partition of $A$; that is, the union of the equivalence classes is all of $A$, and the intersection of any 2 disctinct classes is empty.
+\end{theorem}
+
+\begin{defn} Congruence\\
+  Let $a, b \in \mathbb{Z}$ and $n \in \mathbb{Z}^+$. Then $a$ is congruent to $b$ modulo $n$ iff $a - b = nk$, for some $k \in \mathbb{Z}$. In other words, $n | (a - b)$. We write $a \equiv b (\text{mod}\ n)$
+\end{defn}
+
+\begin{defn} Set of equivalence classes\\
+  Let $A$ be set and $\sim$ be an equivalence relation on $A$. Denote by $A/\sim$, the set of all equivalence classes with respect to $\sim$, i.e.
+
+  $A/\sim = \{[x]_\sim: x \in A\}$
+\end{defn}
+
+\begin{theorem}{Equivalence Classes} form a partition
+  Let $\sim$ be an equiv. relation on $A$. Then $A/\sim$ is a partition of A.
+\end{theorem}
+
+\begin{defn}[Antisymmetry]
+  $R$ is antisymmetric iff $\forall x, y \in A(xRy \land yRx \Rightarrow x = y)$ \textit{(DOES NOT IMPLY NOT SYMMETRIC)}
+\end{defn}
+
+\begin{defn}[Partial Order Relation]
+  $R$ is Partial Order iff R is \textit{reflexive}, \textit{antisymmetric} and \textit{transitive}.
+\end{defn}
+
+\begin{defn}{Partially Ordered Set}
+  Set A is called poset with respect to partial order relation $R$ on $A$, denoted by $(A, R)$ (Proof 7)
+\end{defn}
+
+\begin{defn}{$x \preccurlyeq y$}
+  is used as a general partial order relation notation
+\end{defn}
+
+\begin{defn}[Hasse Diagram]
+  Let $\preccurlyeq$ be a partial order on set $A$. Hasse diagram satisfies the following condition for all distinct $x, y, m \in A$ \\
+  If $x \preccurlyeq y$ and no $m \in A$ is s.t. $x \preccurlyeq m \preccurlyeq y$, then x is placed below y with a line joining them, else no line joins $x$ and $y$.
+\end{defn}
+
+\begin{defn}[Comparability]
+  $a, b \in A$ are comparable iff $a \preccurlyeq b$ or $b \preccurlyeq a$. Otherwise, they are \textbf{noncomparable}
+\end{defn}
+
+\begin{defn}[Maximal, Minimal, Largest Smallest]
+  Set $A$ be partially ordered w.r.t. a relation $\preccurlyeq$ and $c \in A$
+  \begin{numpf}
+    \pfln c is maximal element of $A$ iff $\forall x \in A$, either $x \preccurlyeq c$ or $x$ and $c$ are non-comparable. OR $\forall x in A(c \preccurlyeq x \Rightarrow c = x)$
+    \pfln c is minimal element of $A$ iff $\forall x \in A$, either $c \preccurlyeq x$ or $x$ and $c$ are non-comparable. OR $\forall x in A(x \preccurlyeq c \Rightarrow c = x)$
+    \pfln c is largest element of $A$ iff $\forall x \in A (x \preccurlyeq c)$
+    \pfln c is smallest element of $A$ iff $\forall x \in A (c \preccurlyeq x)$
+  \end{numpf}
+\end{defn}
+
+\begin{propos} A smallest element is minimal\\
+  Consider a partial order $\preccurlyeq$ on set $A$. Any smallest element is minimal. 
+  \begin{numpf}
+    \pfln Let $c$ be smallest elemnt
+    \pfln Take any $x \in A$ s.t. $x \preccurlyeq c$
+    \pfln By smallestness, we know $c \preccurlyeq x$ too.
+    \pfln So $c = x$ by antisymmetry
+  \end{numpf}
+\end{propos}
+
+\begin{defn}[Total Order Relations] All elements of the set are comparable\\
+  R is total order iff $R$ is a partial order and $\forall x, y \in A (xRy \lor yRx)$
+\end{defn}
+
+\begin{defn}[Linearization of a partial order]
+  Let $\preccurlyeq$ be a partial order on set $A$. A linearization of $\preccurlyeq$ is a total order $\preccurlyeq *$ on $A$ s.t. $\forall x, y \in A (x \preccurlyeq y \Rightarrow x \preccurlyeq *\ y)$
+\end{defn}
+
+\begin{defn}[Kahn's Algorithm]
+  Input: A finite set $A$ and partial order $\preccurlyeq$ on $A$
+  \begin{numpf}
+  \pfln Set $A_0 := A$ and $i := 0$
+  \pfln Repeat until $A_i = \emptyset$
+  \begin{subpf}
+    \pfln Find minimal element $c_i$ of $A_i$ wrt $\preccurlyeq$ 
+    \pfln Set $A_{i+1} = A_i \setminus {c_i}$
+    \pfln Set $i = i+1$
+  \end{subpf}
+  \end{numpf}
+
+  Output: A linearization $\preccurlyeq *$ of $\preccurlyeq$ defined by setting, for all indicies $i, j$\\ $c_i \preccurlyeq*\ c_j \Leftrightarrow i \leq j$
+\end{defn}
+
+\begin{defn}[Well ordered set] Let $\preccurlyeq$ be a total order on set $A$. $A$ is well ordered iff every nonempty subset of A contains a smallest element. OR\\
+  $\forall S \in P(A), S \not = \emptyset \Rightarrow (\exists x \in S \forall y \in S (x \preccurlyeq y))$ E.g. $(\mathbb{N}, \leq)$ is well ordered but $(\mathbb{Z}, \leq)$ is not as there is no smallest integer (Theorem 4.6.1)
+
+\end{defn}
+
+\section{Proofs}
+
+\begin{proof} [\proofname\ L1S28]
+Prove that the product of two consecutive odd numbers is always odd. 
+\begin{numpf*}
+  \pfln Let $a$ and $b$ be two consecutive odd numbers
+  \begin{subpf*}
+    \pfln Without loss of generality, assume that $a < b$, hence $b = a + 2$
+    \pfln Now, $a = 2k+1$ (by defn of odd numbers)
+    \pfln Similarly, $b = a + 2 = 2k + 3$
+    \pfln Therefore, $ab = (2k+1)(2k+3) = (4k^2 + 6k) + (2k + 3) = 4k^2 + 8k + 3 = 2(2k^2 + 4k + 1) + 1$ (by Basic Algebra)
+    \pfln Let $m = (2k^2 + 4k + 1)$ which is an integer (by closure of integers under $\times$ and $+$)
+    \pfln Then $ab = 2m + 1$ which is odd (by defn of odd numbers)
+  \end{subpf*}
+  \pfln Therefore, the product of two consecutive odd numbers is always odd.
+\end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ L4S16] Sum of 2 even $\mathbb{Z}$ is even
+  \begin{numpf*}
+  \pfln Let m and n be two particular but arbitrarily chosen even intergers
+  \begin{subpf*}
+    \pfln Then $m = 2r$ and $n = 2s$ for some $\mathbb{Z}$ $r$ and $s$ (by defn of even number)
+    \pfln $m + n = 2r + 2s = 2(r+s)$ (by basic algebra)
+    \pfln 2(r+s) is an integer(closure of int under $\times$ and $+$) and an even number (by defn of even number)
+    \pfln Hence $m+n$ is an even number
+  \end{subpf*}
+  \pfln Therefore sum of any two even integers is even
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T 4.6.1] There is no greatest integer (Contradiction)
+  \begin{numpf*}
+    \pfln Suppose not, i.e. there is a greatest intger
+    \begin{subpf*}
+      \pfln Lets call this greatest integer g, and $g \geq n$ for all integers n
+      \pfln Let $G = g + 1$
+      \pfln Now, $G$ is an integer (closure of integers under $+$) and $G > g$
+      \pfln Hence, g is not the greatest integer, contradicting 1.1
+    \end{subpf*}
+    \pfln Hence, the supposition that there is a greatest integer is false.
+    \pfln Therefore there is no greatest integer
+  \end{numpf*}
+\end{proof}
+\begin{proof}[\proofname\ L5S19] L5S19 Two sets are equal
+  \begin{numpf*}
+    \pfln Let sets $X$ and $Y$ be given. To prove $X$ = $Y$
+    \pfln ($\subseteq$) Prove $X \subseteq Y$
+    \pfln ($\supseteq$) Prove $X \supseteq Y$
+    \pfln From (2) and (3), we can conclude that $X = Y$
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ L5S22] L5S22 $\{x \in Z: x^2 = 1\} = \{1, -1\}$
+  \begin{numpf*}
+    \pfln $\rightarrow$
+    \begin{subpf*}
+      \pfln Take any $z \in \{x \in \mathbb{Z} : x^2 = 1\}$
+      \pfln Then $z \in \mathbb{Z}$ and $z^2 = 1$
+      \pfln So, $z^2 -1 = (z-1)(z+1) = 0$ (by basic algebra)
+      \pfln $\therefore$ $z-1 = 0$ or $z +1 = 0$
+      \pfln $\therefore$ $z = 1$ or $z = -1$
+      \pfln So, $z \in \{1, -1\}$
+    \end{subpf*}
+    \pfln $\leftarrow$
+    \begin{subpf*}
+      \pfln Take any $z \in \{1, -1\}$
+      \pfln Then $z = 1$ or $z=-1$
+      \pfln In either case, we have $z \in \mathbb{Z}$ and $z^2 = 1$
+      \pfln So, $z \in \{x \in \mathbb{Z} : x^2 = 1\}$
+    \end{subpf*}
+    \pfln Therefore, $\{x \in Z: x^2 = 1\} = \{1, -1\}$ (from (1) and (2))
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ L6S27] $\forall x,y \in \mathbb{Z} (xRy \Leftrightarrow 3 | (x-y))$ is reflexive, symmetric, transitive
+  \begin{numpf*}
+    \pfln Proof of Reflexivity
+    \begin{subpf*}
+      \pfln Let $a$ be an arbitrarily chosen integer.
+      \pfln Now $a - a = 0$
+      \pfln $3 | 0 $(since $ 0 = 3 \cdot 0)$, hence $3 |(a - a)$
+      \pfln Therefore $aRa$ (by defn of R)
+    \end{subpf*}
+    \pfln Proof of Symmetry
+    \begin{subpf*}
+      \pfln Let a, b be arbitrarily chosen integers
+      \pfln Then $3|(a-b)$ (by defn of R), hence $a-b = 3k$ for some integer k (by defn of divisibility)
+      \pfln Multiplying both sides by $-1$ gives $b-a = 3(-k)$
+      \pfln Since $-k$ is an integer, $3 | (b-a)$ (by defn of divisibility)
+      \pfln Therefore, $aRb \Rightarrow bRa$ (by defn of R)
+    \end{subpf*}
+    \pfln Proof of Transitivity
+    \begin{subpf*}
+      \pfln Let a, b, c be arbitrarily chosen integers
+      \pfln Then, $3 | (a - b)$ and $3 | (b - c)$ (by defn of R), hence $a-b = 3r$ and $b-c = 3s$ (by defn of divisiblity)
+      \pfln Adding both equations gives $a - c = 3r + 3s$
+      \pfln Since $r+s$ is an integer, $3 | (a - c)$ (by defn of divisiblity)
+      \pfln Therefore $aRb \land bRc \Rightarrow aRc$ (by defn of R)
+    \end{subpf*}
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[Lemma Rel.1 Equivalence Class L6S47] Let $\sim$ be an equivalence relation on $A$. The following are equivalent for all $x, y \in A$ (i) $x\sim y$, (ii) $[x] = [y]$, (iii) $[x] \cap [y] \not = \emptyset$
+  \begin{numpf*}
+    \pfln $x \sim y \Rightarrow [x] = [y]$
+    \begin{subpf*}
+      \pfln Suppose $x \sim y$
+      \pfln Then $y \sim x$ (by symmetry)
+      \pfln For every $z \in [x]$
+      \begin{subpf*}
+        \pfln $x \sim z$ (by defn of x)
+        \pfln $\therefore y \sim z$ (by transitivity of $y\sim x$)
+        \pfln $\therefore z \in [y]$ (by defn of $[y]$)
+      \end{subpf*}
+      \pfln This shows $[x] \subseteq [y]$
+      \pfln Switching roles of $x$ and $y$, we can also see that $[y] \subseteq [x]$
+      \pfln Therefore, $[x] = [y]$
+    \end{subpf*}
+    \pfln $[x] = [y] \Rightarrow [x] \cap [y] \not = \emptyset$
+    \begin{subpf*}
+      \pfln Suppose $[x] = [y]$
+      \pfln Then $[x] \cap [y] = [x]$ (by idempotent law for $\cap$)
+      \pfln However, we know $x\sim x$ (by reflexivity of $\sim$)
+      \pfln This shows $x \in [x] = [x] \cap [y]$ (by defn of [x] and (2.2))
+      \pfln Therefore $[x] \cap [y] \not = \emptyset$
+    \end{subpf*}
+    \pfln $[x] \cap [y] \not = \emptyset \Rightarrow x \sim y$
+    \begin{subpf*}
+      \pfln Suppose $[x] \cap [y] \not = \emptyset$
+      \pfln Take $z \in [x] \cap [y]$
+      \pfln Then $z \in [x]$ and $z \in [y]$ (by defn of $\cap$)
+      \pfln Then $x \sim z$ and $y \sim z$ (by defn of $[x]$ and $[y]$)
+      \pfln $y \sim z$ implies $z \sim y$ (by defn of symmetry)
+      \pfln Therefore, $x \sim y$ (by transitivity)
+    \end{subpf*}
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[Proposition L6S54] Congruence-mod $n$ is an equivalence relation on $\mathbb{Z}$ for every $n \in \mathbb{Z}^+$
+  \begin{numpf*}
+    \pfln (Reflexivity) For all $a \in \mathbb{Z}$
+    \begin{subpf*}
+      \pfln $a - a = 0 = n \times 0$
+      \pfln So $a \equiv a (\text{mod}\ n)$ (by defn of congruence)
+    \end{subpf*}
+    \pfln (Symmetry)
+    \begin{subpf*}
+      \pfln Let $a, b \in \mathbb{Z}$ s.t. $a \equiv a (\text{mod}\ n)$
+      \pfln Then there is a $k \in \mathbb{Z}$ s.t. $a - b = nk$
+      \pfln Then $b - a = -(a - b) = -nk = n(-k)$
+      \pfln $-k \in \mathbb{Z}$ (by closure of integers under $\times$), so $b \equiv a (\text{mod}\ n)$ (by defn of congruence)
+    \end{subpf*}
+    \pfln (Transitivity)
+    \begin{subpf*}
+      \pfln Let $a, b,c \in \mathbb{Z}$ s.t. $a \equiv a (\text{mod}\ n)$ and $b \equiv c (\text{mod}\ n)$
+      \pfln Then there is a $k,l \in \mathbb{Z}$ s.t. $a - b = nk$ and $b - c = nl$
+      \pfln Then $a - c = (a - b) + (b - c) = nk + nl = n(k + 1)$
+      \pfln $k + l \in \mathbb{Z}$ (by closure of integers under $+$), so $a \equiv c (\text{mod}\ n)$ (by defn of congruence)
+    \end{subpf*}
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ L6S69] $\forall a, b \in \mathbb{Z}^+, \forall a | b \Leftrightarrow b = ka$ for some integer $k$. Prove $|$ is a partial order relation on $A$
+  \begin{numpf*}    
+    \pfln $|$ is reflexive: Suppose $a \in A$. Then $a = 1 \dot a$, so $a|a$ (by defn of divisiblity)
+    \pfln $|$ is antisymmetric
+    \begin{subpf*}
+      \pfln Suppose $a, b \in \mathbb{Z}^+$ such that $aRb$ and $bRa$
+      \pfln Then $b = ra$ and $a = sb$ for some integers $r$ and $s$ (by defn of divides). It follows that $b = ra = r(sb)$
+      \pfln Dividing both sides by $b$ gives $1 = rs$
+      \pfln Only product of two positive integers that equals 1 is $1 \dot 1$. 
+      \pfln Thus $r = s = 1$, and so $a = sb = 1 \dot b = b$
+      \pfln Therefore, $|$ is antisymmetric
+    \end{subpf*}
+    OR
+    \begin{subpf*}
+      \pfln Suppose $a, b \in \mathbb{Z}^+$ such that $a|b$ and $b|a$
+      \pfln then $a \leq b$ and $b \leq a$ (by theorem 4.3.1)
+      \pfln So $a = b$
+    \end{subpf*}
+    \pfln $|$ is transitive: Show that $\forall a, b, c \in A, a|b \land b|c \Rightarrow a |c)$ (theorem 4.3.3)
+  \end{numpf*}
+
+\end{proof}
+
+
+\begin{proof}[\proofname\ T01Q9] The product of any two odd integers is an odd integer
+  \begin{numpf*}
+    \pfln Take any 2 odd numbers $a$ and $b$
+    \pfln Then $a = 2k+1$ and $b = 2p + 1$ for $k,p \in Z$ (by defn of odd number)
+    \pfln Then $a\cdot b = (2k+1)(2p+1) = (4kp + 2k) + (2p + 1) = 2(2kp + p + k) +1$ (by defn of odd number)
+    \pfln Let $q = 2kp + p +k$ which is an integer (by closure of int under $+$ and $\times$
+    \pfln Then nm = 2q + 1 which is odd (by defn of odd numbers)
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T01Q10] Let $n$ be an integer. Then $n^2$ is odd iff $n$ is odd
+  \begin{numpf*}
+    \pfln Proof By Contraposition, that is "if n is even, $n^2$ is even $(\Rightarrow)$
+    \begin{subpf*}
+      \pfln Suppose $n$ is even.
+      \pfln Then $\exists k \in \mathbb{Z}$ s.t. $n = 2k$ (by defn of even integers)
+      \pfln $n^2 = (2k)^2 = 4k^2 = 2(2k^2)$
+      \pfln Hence, $n^2$ = 2p, where $p = 2k^2 \in \mathbb{Z}$ (by closure of integers under $\times$)
+      \pfln Therefore, $n^2$ is even and this proves that if $n^2$ is odd, $n$ is odd.
+    \end{subpf*}
+    \pfln If $n$ is odd, then $n \times n = n^2$ is odd (T01Q9)
+    \pfln Therefore $n^2$ is odd if and only if $n$ is odd.
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T02Q3] Rational numbers are closed under addition
+  \begin{numpf*}
+    \pfln Let r and s be rational numbers
+    \pfln $\exists a,b,c,d \in \mathbb{Z}$ s.t. $r =\frac{a}{b}, s = \frac{c}{d}$ and $b \not = 0, d \not = 0$ (by defn of rational numbers)
+    \pfln Hence $r + s = \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$ (by basic algebra)
+    \pfln $ad + bd \in Z$ and $bd \in Z$ (closure of integers under $+$ and $\times$)
+    \pfln $bd \not = 0$ since $b \not = 0, d \not = 0$
+    \pfln Hence $r+s$ is rational, therefore rational numbers are closed under addition
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T02Q10] if $n$ is a product of 2 positive integers $a$ and $b$, then $a \leq n^{1/2}$ or $b \leq n^{1/2}$ 
+  \begin{numpf*}
+    \pfln Proof by contraposition, that is if $a > n^{1/2}$ and $b > n^{1/2}$, then $n$ is not a product of $a$ and $b$
+    \pfln Suppose $a > n^{1/2}$ and $b > n^{1/2}$, then $ab > n^{1/2} \cdot n^{1/2} = n$ (by Appendix A T27)
+    \pfln Since $ab \not = n$, the contrapositive statement is true
+  \end{numpf*}
+   or by contradiction
+  \begin{numpf*}
+    \pfln Proof by contradiction, that is $n = ab$ and $a > n^{1/2}$ and $b > n^{1/2}$
+    \pfln Since $a > n^{1/2}$ and $b > n^{1/2}$, then $ab > n^{1/2} \cdot n^{1/2} = n$ (by Appendix A T27)
+    \pfln This contradicts $n = ab$. Therefore original statement is true
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T03Q04] Let $A = \{2n+1: n \in \mathbb{Z}\}$ and $B = \{2n-5: n \in \mathbb{Z}\}$. Is $A$ = $B$?
+  \begin{numpf*}
+    \pfln $\subseteq$
+    \begin{subpf}
+      \pfln Let $a \in A$, and $a = 2n + 1, n \in \mathbb{Z}$
+      \pfln Then $a = 2n + 1 = 2 (n+3) - 5$ 
+      \pfln $n + 3 \in Z$ (by closure of int under $+$)
+      \pfln Therefore, $a \in B$ (by defn of B)
+    \end{subpf}
+    \pfln $\supseteq$
+    \begin{subpf}
+      \pfln Let $b \in A$, and $b = 2n - 5, n \in \mathbb{Z}$
+      \pfln Then $b = 2n - 5 = 2 (n-3) + 1$ 
+      \pfln $n - 3 \in Z$ (by closure of int under $-$)
+      \pfln Therefore, $b \in A$ (by defn of B)
+    \end{subpf}
+    \pfln Therefore, A = B
+  \end{numpf*}
+\end{proof}
+\begin{proof}[\proofname\ T03Q05] Prove $\forall A, B, C, A \cap (B \setminus C) = (A \cap B) \setminus C$
+  \begin{numpf*}
+    \pfln $A \cap (B \setminus C) = \{x: x \in A \land x \in (B \setminus C) \}$ (by defn of $\cap$)
+    \pfln $ = \{x: x \in A \land (x \in B \land x \not \in C) \}$ (by defn of $\setminus$)
+    \pfln $ = \{x: x \in (A \land x \in B) \land x \not \in C \}$ (by associativity of $\land$)
+    \pfln $ = \{x: x \in (A \cap  B) \land x \not \in C \}$ (by defn of $\cap$)
+    \pfln $ = \{x: x \in (A \cap  B) \setminus C$ (by defn of $\setminus$)
+  \end{numpf*}
+\end{proof}
+\begin{proof}[\proofname\ T03Q05] Prove $\forall A, B, C, A \cap (B \setminus C) = (A \cap B) \setminus C$
+  \begin{numpf*}
+    \pfln $A \cap (B \setminus C) = \{x: x \in A \land x \in (B \setminus C) \}$ (by defn of $\cap$)
+    \pfln $ = \{x: x \in A \land (x \in B \land x \not \in C) \}$ (by defn of $\setminus$)
+    \pfln $ = \{x: x \in (A \land x \in B) \land x \not \in C \}$ (by associativity of $\land$)
+    \pfln $ = \{x: x \in (A \cap  B) \land x \not \in C \}$ (by defn of $\cap$)
+    \pfln $ = \{x: x \in (A \cap  B) \setminus C$ (by defn of $\setminus$)
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname T03Q8] Let $A$ and $B$ be set. Show that $A \subseteq B$ if and only if $A \cup B = B$\\
+  To show $A \cup B = B$, we need to show $A \cup B \subseteq B$ and $B \subseteq A \cup B$
+  \begin{numpf*}
+    \pfln $\implies$
+    \begin{subpf}
+      \pfln Suppose $A \subseteq B$
+      \pfln (Show $A \cup B \subseteq B$)
+      \begin{subpf}
+        \pfln Let $z \in A \cup B$
+        \pfln Then $z \in A$ or $z \in B$ (by defn of $\cup$)
+        \pfln Case 1: Suppose $z \in A$, then $Z \in B$ as $A \subseteq B$ line (1.1)
+        \pfln Case 2: Suppose $z \in B$, then $z \in B$. We have $z\in B$ in either case
+      \end{subpf}
+      \pfln (Show  $A \cup B \supseteq B$)
+      \begin{subpf}
+        \pfln Let $z \in B$
+        \pfln Then $z \in A$ or $z \in B$ (by generalization)
+        \pfln So $z \in A \cup B$ (by defn of $\cup$)
+      \end{subpf}
+      \pfln Therefore $A \cup B = B$
+    \end{subpf}
+    \pfln $\impliedby$
+    \begin{subpf}
+      \pfln Suppose $A \cup B = B$
+      \pfln Let $z \in A$
+      \begin{subpf}
+        \pfln Then $z \in A$ or $z \in B$ (by generalization)
+        \pfln So $z \in A \cup B$ (by defn of $\cup$)
+        \pfln So $z \in B$ since $A \cup B = B$ (2.1)
+      \end{subpf}
+      \pfln Therefore $A \subseteq B$
+    \end{subpf}
+    \pfln Therefore, $A \subseteq B$ if and only iff $A \cup B = B$
+  \end{numpf*}
+\end{proof}
+
+\begin{proof}[\proofname\ T04Q05] Relation $S = \{(m,n) \in \mathbb{Z}^2: m^3 + n^3 \text{is even} \}$, Proof $S \circ S = S$
+  \begin{numpf*}
+    \pfln ($\subseteq$) Suppose $(x, z) \in S \circ S$
+    \begin{subpf}
+      \pfln Then $(x, y) \in S$ and $(y, z) \in S$ for some $y \in Z$ (defn of composition of relations)
+      \pfln So $x^3 + y^3$ is even and $y^3 + z^3$ is even
+      \pfln This implies that $x^3 + 2y^3 + z^3$ is even
+      \pfln This implies that $x^3 + z^3$ is even as $2y^3$ is even
+      \pfln Therefore, $(x, z) \in S$ (by defn of $S$)
+    \end{subpf}
+    \pfln ($\supseteq$) Suppose $(x,z) \in S$
+    \begin{subpf}
+      \pfln Then $x^3 + z^3$ is even (by defn of S)
+      \pfln Case 1: $x^3$ is odd.
+      \begin{subpf}
+        \pfln Then $z^3$ is also odd. 
+        \pfln This implies that $x^3 + 1^3$ is even and $1^3 + z^3$ is even
+        \pfln Thus, $(x,1) \in S$ and $(1,z) \in S$ (by defn of S)
+        \pfln So, $(x,z) \in S \circ S$
+      \end{subpf}
+      \pfln Case 2: $x^3$ is even.
+      \begin{subpf}
+        \pfln Then $z^3$ is also even. 
+        \pfln This implies that $x^3 + 0^3$ is even and $0^3 + z^3$ is even
+        \pfln Thus, $(x,0) \in S$ and $(0,z) \in S$ (by defn of S)
+        \pfln So, $(x,z) \in S \circ S$
+      \end{subpf}
+      \pfln In all cases, $(x,z) \in S \circ S$
+    \end{subpf}
+     OR 
+     \pfln ($\supseteq$) Suppose $(x,z) \in S$
+     \begin{subpf}
+       \pfln Note that $(x, x) \in S$ as $x^3 + x^3$ is even
+       \pfln Since $(x, x) \in S$ and $(x,z) \in S$, we have $(x, z) \in S \circ S$ (by defn of composition of relations)
+     \end{subpf}
+  \end{numpf*}
+
+\end{proof}
+
+\begin{proof} $R$ is asymmetric if and only if $R$ is antisymmetric and irreflexive.
+  \begin{numpf}
+  \pfln $\implies$
+  \begin{subpf}
+    \pfln R is irreflexive (R is irreflexive $\implies$ R is antisymmetric and irreflexive)
+    \begin{subpf}
+      \pfln Let $x \in A$ s.t. $xRx \implies x \not R x$ (R is Asymmetric)
+      \pfln Since $x\not R x$, R is irreflexive (by defn of irreflexive)
+    \end{subpf}
+  \end{subpf}
+  \begin{subpf}
+    \pfln R is antisymmetric (Tutorial Qn 6c)
+  \end{subpf}
+  \pfln $\impliedby$ (R is antisymmetric and irreflexive $\implies$ asymmetry)
+  \begin{subpf}
+    \pfln Let $x, y \in A$, s.t. xRy is antisymmetric and irreflexive
+    \pfln There is 2 cases to consider, $x = y$ and $x \not = y$
+    \pfln $x = y$
+    \begin{subpf}
+      \pfln $xRx$ is not valid as it contradicts irreflexive, $\forall x \in A(x\not R x)$
+      \pfln Therefore, $xRx \implies x\not R x$
+    \end{subpf}
+    \pfln $x \not = y$
+    \begin{subpf}
+      \pfln $xRy \land yRx \implies x = y$
+    \end{subpf}
+  \end{subpf}
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ L07S26 Eg 14] $f: \mathbb{Q} \Rightarrow \mathbb{Q}$ by setting $f(x) = 3x+1, x \in Q$. Is $f$ injective?
+  Yes
+  \begin{numpf}
+    \pfln Let $x_1, x_2 \in \mathbb{Q}$ s.t. $f(x_1) = f(x_2)$
+    \pfln Then $3x_1 + 1 = 3x_2 + 1$
+    \pfln So $x_1 = x_2$
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ L07S28 Eg 16] $f: \mathbb{Q} \Rightarrow \mathbb{Q}$ by setting $f(x) = 3x+1, x \in Q$. Is $f$ surjective?
+  Yes
+  \begin{numpf}
+    \pfln Take any $y \in \mathbb{Q}$
+    \pfln Let $x = (y - 1) / 3$
+    \pfln Then $x \in \mathbb{Q}$ and $f(x) = 3x + 1 = 3(\frac{y-1}{3}) + 1 = y$
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ L07S34] If $g_1$ and $g_2$ are inverses of $f: X \Rightarrow Y$, then $g_1 = g_2$
+  \begin{numpf}
+    \pfln Note that $g_1, g_2: Y \Rightarrow X$
+    \pfln Since $g_1$ and $g_2$ are inverses of $f$, for all $x \in X$ and $y \in Y, x = g_1(y) \Leftrightarrow y = f(x) \Leftrightarrow x = g_2(y)$
+    \pfln Therefore, $g_1 = g_2$
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ Theorem 7.2.3] $f: X \Rightarrow Y$ is bijective iff $f$ has inverse
+  \begin{numpf}
+    \pfln ("if") Suppose $f$ has an inverse, say $g: Y \Rightarrow X$
+    \begin{subpf}
+      \pfln We show injectivity of $f$
+      \begin{subpf}
+        \pfln Let $x_1, x_2 \in X s.t. f(x_1) = f(x_2)$
+        \pfln Define $y = f(x_1) = f(x_2)$
+        \pfln Then $x_1 = g(y)$ and $x_2 = g(y)$ as $g$ is an inverse of $f$
+        \pfln Hence $x_1 = x_2$
+      \end{subpf}
+      \pfln We show surjectivity of f
+      \begin{subpf}
+        \pfln Let $y \in Y$
+        \pfln Define $x = g(y)$
+        \pfln Then $y = f(x)$ as g is an inverse of f
+      \end{subpf}
+      \pfln Therefore f is bijective
+    \end{subpf}
+    \pfln ("Only if") Suppose $f$ is bijective
+    \begin{subpf}
+      \pfln Then $\forall y \in Y\ \exists!x \in X(y = f(x))$ (by defn of bijection)
+      \pfln Define the function $g: Y \Rightarrow X$ by setting $g(y)$ to be the unique $x \in X$ s.t. $y = f(x)$ for all $y \in Y$
+      \pfln This $g$ is well defined and is an inverse of $f$ (by defn of inverse function)
+    \end{subpf}
+    \pfln Therefore $f: X \Rightarrow Y$ is bijective iff $f$ has an inverse
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ S07S47] $(h \circ g) \circ f = h \circ (g \circ f)$
+  \begin{numpf}
+    \pfln Domains of $(h \circ g) \circ f$ and $h \circ (g \circ f)$ are both $A$.
+    \pfln Codomains of $(h \circ g) \circ f$ and $h \circ (g \circ f)$ are both $D$.
+    \pfln For every $x \in A$, $((h \circ g) \circ f)(x) = (h \circ g)(f(x)) = h(g(f(x))) = h((g \circ f)(x)) = (h \circ (g \circ f))(x)$
+  \end{numpf}
+
+\end{proof}
+
+\begin{proof}[\proofname\ Theorem 7.3.3] If $f: X \Rightarrow Y$ and $g: Y \Rightarrow Z$ are both injective, then $g \circ f$ is injective
+  \begin{numpf}
+    \pfln Suppose $f: X \Rightarrow Y$ and $g: Y \Rightarrow Z$ are injections and let $x_1, x_2 \in X$ such that $(g \circ f)(x_1) = (g \circ f)(x_2)$
+    \pfln Then $g(f(x_1)) = g(f(x_2))$ (by defn of function composition)
+    \pfln Since $g$ is injective, so $f(x_1) = f(x_2)$ (by defn of injection)
+    \pfln Since $f$ is injective, so $x_1 = x_2$ (by defn of injection)
+    \pfln Therefore $g \circ f$ is injective
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ Theorem 7.3.4] If $f: X \Rightarrow Y$ and $g: Y \Rightarrow Z$ are both surjective, then $g \circ f$ is surjective
+  \begin{numpf}
+    \pfln Suppose $f: X \Rightarrow Y$ and $g: Y \Rightarrow Z$ are surjections and let $z \in Z$ such that $(g \circ f)(x_1) = (g \circ f)(x_2)$
+    \pfln Since $g$ is surjective, so there is an element $y \in Y$ s.t. $g(y) = z$ (by defn of surjection)
+    \pfln Since $f$ is surjective, so there is an element $x \in X$ s.t. $f(x) = y$ (by defn of surjection)
+    \pfln Hence there exists an element $x \in X$ s.t. $(g \circ f)(x) = g(f(x)) = g(y) = z$
+    \pfln Therefore, $g \circ f$ is surjective
+  \end{numpf}
+\end{proof}
+
+\begin{proof}{\proofname\ Addition on $\mathbb{Z}_n$ is well defined}
+  \begin{numpf}
+    \pfln Let $[x_1], [y_1], [x_2], [y_2] \in \mathbb{Z}_n$ s.t. $[x_1] = [x_2]$ and $[y_1] = [y_2]$
+    \pfln Then $x_1 \equiv x_2$ (mod n) and $y_1 \equiv y_2$ (mod n) (by defn of congruence)
+    \pfln Using defn of congruence to find $k, l \in \mathbb{Z}$ s.t. $x_1 - x_2 = nk$ and $y_1 - y_2 = nl$
+    \pfln Note that $(x_1 + y_1) - (x_2 + y_2) = (x_1 - x_2) + (y_1 - y_2) = nk + nl = n(k+l)$
+    \pfln So $x_1 + y_1$ = $x_2 + y_2$ (mod n) (by defn of congruence)
+    \pfln Therefore, $[x_1] + [y_1] = [x_1+y_1] = [x_2+y_2] = [x_2] + [y_2]$ (by lemma Rel.1 Equivalence classes)
+  \end{numpf}
+\end{proof}
+
+\begin{proof}{\proofname\ Multiplication on $\mathbb{Z}_n$ is well defined}
+  \begin{numpf}
+    \pfln Let $[x_1], [y_1], [x_2], [y_2] \in \mathbb{Z}_n$ s.t. $[x_1] = [x_2]$ and $[y_1] = [y_2]$
+    \pfln Then $x_1 \equiv x_2$ (mod n) and $y_1 \equiv y_2$ (mod n) (by defn of congruence)
+    \pfln Using defn of congruence to find $k, l \in \mathbb{Z}$ s.t. $x_1 - x_2 = nk$ and $y_1 - y_2 = nl$
+    \pfln Note that $(x_1 \cdot y_1) - (x_2 \cdot y_2) = (nk + x_2) \cdot (nl + y_2) - (x_2 \cdot y_2) = n(nkl + ky_2 + lx_2)$ where $(nkl, ky_2, lx_2) \in \mathbb{Z}$ (Closure of integer addition)
+    \pfln So $x_1 \cdot y_1$ = $x_2 \cdot y_2$ (mod n) (by defn of congruence)
+    \pfln Therefore, $[x_1] \cdot [y_1] = [x_1\cdot y_1] = [x_2\cdot y_2] = [x_2] \cdot [y_2]$ (by lemma Rel.1 Equivalence classes)
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ Theorem 5.2.2] for all $n \geq 1, 1 + 2 + 3 + ... + n = \frac{n(n+1)}{2}$
+  \begin{numpf}
+    \pfln Let $p(n) \equiv (1+2+...+n = \frac{n(n+1)}{2}, \forall n \in \mathbb{Z}^+$
+    \pfln Basis step: $1 = \frac{1(1+1)}{2}$, therefore P(1) is true.
+    \pfln Assume $P(k)$ is true for some $k \geq 1$. That is $1+2+...+k = \frac{k(k+1)}{2}$
+    \pfln Inductive Step: (To show P(k+1) is true)
+    \begin{subpf}
+      \pfln $1+2+...+k + (k+1) = \frac{k(k+1)}{2} + (k+1) = \frac{(k+1)((k+1)+1)}{2}$
+      \pfln Therefore $P(k+1)$ is true
+    \end{subpf}
+    \pfln Therefore, $P(n)$ is true for $n\in \mathbb{Z}^+$ (We have proved P(1) and $P(k) \Rightarrow P(k+1)$)
+  \end{numpf}
+\end{proof}
+
+
+\begin{proof}[\proofname\ Theorem 5.2.3] for any real number $r \not = 1$, and any integers $n \geq 0, \sum^{n}_{i=0} r^i = \frac{r^{n+1}-1}{r-1}$
+  \begin{numpf}
+    \pfln Let $P(n) \equiv (\sum^n_{i=0}r^i = \frac{r^{n+1}-1}{r-1}, r \not = 1, n \geq 0$
+    \pfln Basis step: $r^0 = 1 = \frac{r^1 - 1}{r-1}$, therefore $P(0)$ is true
+    \pfln Assume P(k) is true for $k \geq 0$. That is, $\sum^k_{i=0}r^i = \frac{r^{k+1}-1}{r-1}$
+    \pfln Inductive Step: (To show $P(k+1)$ is true)
+    \begin{subpf}
+    \pfln $\sum^{k+1}_{i=0}r^i = \sum^k_{i=0}r^i + r^{k+1} = \frac{r^{k+1}-1}{r-1} + r^{k+1} = \frac{r^{k+1}-1+r^{k+1}(r-1)}{r-1} = \frac{r^{((k+1)+1)}-1}{r-1}$
+    \pfln Therefore $P(k+1)$ is true. 
+    \end{subpf}
+    \pfln Therefore, $P(n)$ is true for $n \geq 0$
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ Proposition 5.3.1] For all integers $n \geq 0, 2^{2n} - 1$ is divisible by 3
+  \begin{numpf}
+    \pfln Let $P(n) \equiv (3 | (2^{2n} - 1))$ for all integers $n \geq 0$
+    \pfln Basis Step: $2^{2 \cdot 0} - 1 = 0$ is divisible by 3, therefore P(0) is true
+    \pfln Assume P(k) is true for $k \geq 0$. That is $3 | (2^{2k} - 1)$
+    \begin{subpf}
+      \pfln This means that $2^{2k} - 1 = 3r$ for some integer r (by defn of divisibility)
+    \end{subpf}
+    \pfln Inductive Step: To show $P(k+1)$ is true
+    \begin{subpf}
+      \pfln $2^{2(k+1)} - 1 = 2^{2k} \cdot 4 - 1 = 2^{2k}(3 \cdot 1) - 1 = 3 \cdot 2^{2k} + (2^{2k} - 1) = 3 \cdot 2^{2k} + 3r =3(2^{2k} + r)$ 
+      \pfln Since $3 | 2^{2(k+1)} - 1$, therefore $P(k+1)$ is true
+    \end{subpf}
+      \pfln Therefore, P(n) is true for all integers $n \geq 0$
+  \end{numpf}
+\end{proof}
+
+\begin{proof}[\proofname\ Proposition 5.3.2] For all integers $n \geq 3, 2n+1 < 2^n$
+  \begin{numpf}
+    \pfln Let $P(n) \equiv 2n+1 < 2^n$, for all integers $n \geq 3$
+    \pfln Basis Step: $2(3) + 1 = 7 < 8 = 2^3$, therefore P(3) is true
+    \pfln Assume P(k) is true for $k \geq 3$. That is $2k+1 < 2^k$
+    \pfln Inductive Step: To show $P(k+1)$ is true
+    \begin{subpf}
+      \pfln $2(k+1) + 1 = (2k + 1) + 2 < 2^k + 2 < 2^k + 2^k = 2^{k+1}$ (because $2 < 2^k$ for all integers $k \geq 2$
+      \pfln Therefore P(k+1) is true
+    \end{subpf}
+    \pfln Therefore, P(n) is true for all integers $n \geq 3$
+  \end{numpf}
+\end{proof}
+
+\begin{proof} Any integer $> 1$ is divisible by a prime number (Proof by 2PI)
+  \begin{numpf}
+    \pfln Let $P(n) \equiv (n$ is divisible by a prime$)$, for $n > 1$
+    \pfln Basis step: $P(2)$ is true since 2 is divisible by 2.
+    \pfln Inductive step: To show that for all integers $k \geq 2$, if $P(i)$ is true for all integers $i$ from 2 through $k$, then P(k+1) is also true.
+    \begin{subpf}
+      \pfln Case 1(k+1 is prime): In this case k+1 is divisible by a prime number which is itself
+      \pfln Case 2(k+1 is not prime): In this case: $k+1 = ab$ where $a$ and $b$ are integers with $1 < a < k + 1$ and $1 < b < k + 1$.
+      \begin{subpf}
+        \pfln Thus, in particular, $2 \leq a \leq k$ and so by inductive hypothesis, $a$ is divisible by a prime number $p$.
+        \pfln In addition, because $k+1 = ab$, so $k + 1$ is divisible by a
+        \pfln By transitivity of divisibility, $k+1$ is divisible by prime $p$
+      \end{subpf}
+    \end{subpf}
+    \pfln Therefore, any integer greater than 1 is divisible by a prime
+  \end{numpf}
+\end{proof}
+
+\begin{proof} For all integers $n \geq 12, n = 4a + 5b$, for some $a,b \in \mathbb{N}$ (Proof with 1PI)
+  \begin{numpf}
+    \pfln Let $P(n) \equiv$ (amount of $\$n$ can be formed by \$4 and \$5 coins) for $n \geq 12$
+    \pfln Basis step: $12 = 3 \times 4$, so 3 \$4 can be used. Therefore, P(12) is true.
+    \pfln Assume P(k) is true for $k \geq 12$
+    \pfln Inductive Step: (To show $P(k+1)$ is true.)
+    \begin{subpf}
+      \pfln Case 1: If a \$4 coin is used for \$k amount, replace it with a \$5 coin to make $\$(k+1)$
+      \pfln Case 2: If a no \$4 coin is used for \$k amount, then $k \geq 15$, so there must be at least three \$5 coins. We can replace three \$5 coins with 4 \$4 coins to make $\$(k+1)$
+      \pfln In both cases, P(k+1) is true. 
+    \end{subpf}
+    \pfln Therefore, $P(n)$ is true for $n \geq 12$
+  \end{numpf}
+\end{proof}
+
+\begin{proof} For all integers $n \geq 12, n = 4a + 5b$, for some $a,b \in \mathbb{N}$ (Proof with 2PI)
+  \begin{numpf}
+    \pfln Let $P(n) \equiv (n = 4a + 5b)$ for some $a, b \in \mathbb{N}, n \geq 12$
+    \pfln Basis step: Show $P(12), P(13), P(14), P(15)$ hold. 
+
+    $12 = 4 \cdot 3 + 5 \cdot 0; 13 = 4 \cdot 2 + 5 \cdot 1; 14 = 4 \cdot 1 + 5 \cdot 2; 15 = 4 \cdot 0 + 5 \cdot 3$
+    \pfln Assume P(i) holds for $12 \leq i \leq k$ given some $k \geq 15$
+    \pfln Inductive Step: (To show $P(k+1)$ is true.)
+    \begin{subpf}
+      \pfln $P(k-3)$ holds(by induction hypothesis), so $k-3 = 4a+5b$ for some $a, b \in \mathbb{N}$
+      \pfln $k + 1 = (k-3)+4 = (4a+5b)+4 = 4(a+1) + 5b$
+      \pfln Hence $P(k+1)$ is true
+    \end{subpf}
+    \pfln Therefore, $P(n)$ is true for $n \geq 12$
+  \end{numpf}
+\end{proof}
+
+\begin{proof} For any positive integer n, if $a_1, a_2,...,a_n$ and $b_1, b_2,...,b_n$ are real numbers, then $\sum^n_{i=1}(a_i+b_i) = \sum^n_{i=1}a_i + \sum^n_{i=1}b_i$ 
+  \begin{numpf}
+    \pfln Let $P(n) = (\sum^n_{i=1}(a_i+b_i) = \sum^n_{i=1}a_i + \sum^n_{i=1}b_i$) for $n \geq 1$
+    \pfln Basis step: P(1) is true since $\sum^1_{i=1}(a_i+b_i) = a_1 + b_1 = \sum^1_{i=1}a_i + \sum^1_{i=1}b_i$
+    \pfln Inductive Hypothesis for some $k \geq 1$, $\sum^k_{i=1}(a_i+b_i) = \sum^k_{i=1}a_i + \sum^k_{i=1}b_i$
+    \pfln Inductive Step: $\sum^{k+1}_{i=1}(a_i+b_i) = \sum^{k}_{i=1}(a_i+b_i) + (a_{k+1} + b_{k+1})$ (by defn of $\sum$)\\
+    $ = \sum^k_{i=1}a_i + \sum^k_{i=1}b_i + (a_{k+1} + b_{k+1})$ (by inductive hypothesis)\\
+    $ = \sum^k_{i=1}a_i + a_{k+1} +  \sum^k_{i=1}b_i + b_{k+1}$ (by the associative and commutative laws of algebra)\\
+    $ = \sum^{k+1}_{i=1}a_i + \sum^{k+1}_{i=1}b_i$ (by defn of $\sum$)\\
+    Therefore $P(k+1)$ is true
+    \pfln Therefore $P(n)$ is true for any positive integer $n$
+  \end{numpf}
+\end{proof}
+
+\begin{proof} Pigeonhole Principle
+  \begin{numpf}
+    \pfln Note that $A$ is finite. Suppose $A = \{a_1, a_2, ..., a_m\}$ where $m = |A|$
+    \pfln Injectivity of $f$ tells us that if $a_i \not = a_j$, then $f(a_i) \not = f(a_j)$
+    \pfln So $f(a_1), f(a_2), ..., f(a_m)$ are $m$ different elements of $B$.
+    \pfln This shows that $|B| \geq m = |A|$
+  \end{numpf}
+\end{proof}
+
+\begin{proof} Dual Pigeonhole Principle
+  \begin{numpf}
+    \pfln Note that $B$ is finite. Suppose $B = \{b_1, b_2, ..., b_m\}$ where $m = |B|$
+    \pfln For each $b_i$, use the surjectivity of $f$ to find $a_i \in A$ s.t. $f(a_i) = b_i$
+    \pfln If $b_i \neq b_j$, then $f(a_i) \neq f(a_j)$ and so $a_i \neq a_j$ as $f$ is a function
+    \pfln So $a_1, a_2, ..., a_n$ are n different elements of A
+    \pfln This shows that $|A| \geq n = |B|$
+  \end{numpf}
+\end{proof}
+
+\end{document}
