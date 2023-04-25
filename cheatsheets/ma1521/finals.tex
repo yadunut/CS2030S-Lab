@@ -357,6 +357,25 @@ $S = \iint_R\sqrt{f_x^2 + f_y^2 + 1} dA$
   $y' + P(x)y = Q(x)y^n$ & \makecell{$z = y^{1-n}$ \\ $\Then$ sub in Z \\ solve linear}\\
 \end{tabular}
 
+\section{Population Models}
+\begin{center}
+  $N_{\infty} = \frac{B}{s}$, $\hat{N} = $ Population Now
+\begin{multicols}{2}
+  \textbf{Malthus}\\
+  $N(t) = \hat{N}e^{kt}$\\
+  $k = B - D$
+
+  \columnbreak
+  \textbf{Logistic}\\
+  $\frac{1}{N} = \frac{1}{N_{\infty}} + (\frac{1}{\hat{N}} - \frac{1}{N_{\infty}})e^{-Bt}$\\
+  $N = \frac{N_{\infty}}{1+(\frac{N_{\infty}}{N} - 1)e^{-Bt}}$
+\end{multicols}
+\end{center}
+
+\subsection{Uranium Decay into Thorium}
+$U(t) = U_{0}e^{-k_ut}$, $k = \frac{\ln2}{\text{halflife}}, \frac{dU}{dt} = -k_{u}U$\\
+Thorium: $T(t) = \frac{K_{u}U_{0}}{K_{t}-K_{u}}(e^{-k_{u}t} - e^{-k_{t}t}), \frac{dT}{dt} = k_{u}U - k_{T}T$
+
 
 \end{multicols*}
 \end{document}

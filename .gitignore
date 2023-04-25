@@ -9,3 +9,10 @@ cs2030_checks.xml
 Lab6/docs
 
 .vscode/
+
+# Tectonic files
+*.aux
+*.log
+*.out
+*.synctex.gz
+cheatsheets/ma1521/.auctex-auto
