@@ -14,6 +14,7 @@
 \usepackage{vwcol}
 \usepackage{tikz}
 \usepackage{wrapfig}
+\usepackage{pgfplots}
 \usepackage{makecell}
 % Testing %
 \usepackage{blindtext}
@@ -464,13 +465,14 @@ For $-1 < x < 1$
 
 \begin{itemize}
   \item Line: $y-y_{1} = \frac{y_{2}-y_{1}}{x_{2}-x_{1}}(x-x_{1})$
-  \item $\int \sqrt{a^{2}-x^{2}}, x = a'\sin\theta, dx = a\cos\theta, = \frac{a^{2}}{2}\sin^{-1}(\frac{x}{a}) + \frac{x}{2}\sqrt{a^{2}-x^{2}}$
-  \item $\sqrt{a^{2}+x^{2}}dx, x = a\tan\theta, \frac{-\pi}{2} < \theta < \frac{\pi}{2}$, $= \frac{1}{2}\left(x\sqrt{a^{2}+x^{2}} + a^{2}\ln\left|\frac{x+\sqrt{a^{2}+x^{2}}}{a}\right|\right)$
+  \item $\int \sqrt{a^{2}-x^{2}}dx = \frac{a^{2}}{2}\sin^{-1}(\frac{x}{a}) + \frac{x}{2}\sqrt{a^{2}-x^{2}}, x = a\sin\theta, dx = a\cos\theta d\theta, $A
+  \item $\sqrt{a^{2}+x^{2}}dx = \frac{1}{2}\left(x\sqrt{a^{2}+x^{2}} + a^{2}\ln\left|\frac{x+\sqrt{a^{2}+x^{2}}}{a}\right|\right), x = a\tan\theta, \frac{-\pi}{2} < \theta < \frac{\pi}{2}$
   \item $\int\cos^{2}x = \frac{1}{4} \sin2x + \frac{x}{2} = \frac{1}{2}\cos x \sin x + \frac{1}{2}x$
   \item $\int\sin^{2}x = -\frac{1}{4} \sin2x + \frac{x}{2}$
+  \item $(x-y)^{3} = x^{3} - 3x^{2}y + 3xy^{2}-y^{3}$
+  \item $(x+y)^{3} = x^{3} + 3x^{2}y + 3xy^{2}+y^{3}$
 
 \end{itemize}
-
 
 \end{multicols*}
 \end{document}
