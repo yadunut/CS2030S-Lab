@@ -141,7 +141,7 @@
 
   \textbf{Second Derivative} Test: $f'(c) = 0, f''(c) < 0$ then local max, $f''(c) > 0$ local min.
 
-  \textbf{L'Hopital's Rule}: Given $\lim\limits_{x\to c}f(x) $ and $ g(x) = 0 / \pm \infty$ $ \lim\limits_{x \to c}\frac{f(x)}{g(x)} = \lim\limits_{x \to c}\frac{f'(x)}{g'(x)}$
+  \textbf{L'Hopital's Rule}: Given $\lim\limits_{x\to c}f(x) $ and $ g(x) = 0 $ or $ \pm \infty$ $ \lim\limits_{x \to c}\frac{f(x)}{g(x)} = \lim\limits_{x \to c}\frac{f'(x)}{g'(x)}$
   \begin{itemize}
     \item Use for $\frac{0}{0}$ or $\frac{\infty}{\infty}$
   \end{itemize}
@@ -227,9 +227,12 @@
   \begin{center}
     \begin{multicols}{2}
       $|\vv{a} \times \vv{b}| = |\vv{a}||\vv{b}|\sin\theta$
+
       $a \perp b \Then a \times b = |a||b|$
+
       $a \parallel b \Then a \times b = 0$
-      Parallelogram = $|\vv{a} \times \vv{b}|$
+
+      Area Parallelogram = $|\vv{a} \times \vv{b}|$
     \end{multicols}
   \end{center}
 
@@ -292,7 +295,10 @@
    Tangent Plane: $\langle f_{x}, f_{y} -1 \rangle \cdot \langle x-x_0, y-y_0,z-z_0\rangle = 0$
 
    \subsection{Critical Points}
-   $D = f_{xx}(a,b)f_{yy}(a,b) - (f_{x,y}(a,b))^2$
+
+   $f_x = 0$ and $f_y = 0$, OR ($f_x$ or $f_y$ does not exist)
+
+   $D = f_{xx}(a,b)f_{yy}(a,b) - (f_{xy}(a,b))^2$
    \def\arraystretch{1.2}
    \begin{tabular}{| c | c | c |}
      \hline $D$ & $f_{xx}(a,b)$ & \textbf{local}
@@ -404,7 +410,7 @@
        Root \tiny{If nth power} & $0 \geq \lim\limits_{n \to \infty} \sqrt[n]{a_{n}}=L < 1$ abs. convergent, $> 1$ divergent, $= 1$ inconclusive \\\hline
        Alternating series & $b_{n}$ decreasing, $\lim\limits_{n \to \infty}b_{n} = 0$, then $\sum_{n=1}^{\infty}(-1)^{n-1}b_{n} = b_{1}-b_{2}+b_{3}... $ is convergent \\\hline
        Power Series & $b_{n}$ decreasing, $\lim\limits_{n \to \infty}b_{n} = 0$, then $\sum_{n=1}^{\infty}(-1)^{n-1}b_{n} = b_{1}-b_{2}+b_{3}... $ is convergent \\\hline
-       Comparison Test & Compare to well known series such as p-series, harmonic \\\hline
+       Comparison Test & $\sum a_{n} $ and $ \sum b_{n} $ s.t. $a_{n} \leq b_{n}$ Then if $\sum b_{n}$ convergent, $\sum a_{n}$ convergent. If $\sum a_{n}$ divergent, $\sum b_{n}$ divergent\\\hline
      \end{tabular}
  \end{center}
 
@@ -418,9 +424,16 @@
 
  If $\lim_{n \to \infty} \left| \frac{c_{n+1}}{c_{n}} = L \right|$ or $\lim_{n \to \infty} \sqrt[n]{|c_{n}|}=L$, $L \in \mathbb{R}$ or $\infty$, then $R = \frac{1}{L}$
 
+ If power series $\sum_{n=0}^{\infty} c_{n}(x-a)^{n}$ has radius of convergence $R>0$, then function $f$ is differentiable on interval $|x-a| < R$ and
+
+ \begin{itemize}
+   \item $f'(x) = \sum_{n=1}^{\infty} nc_{n}(x-a)^{n-1}$, for $|x-a| < R$
+   \item $\int f(x) = \sum_{n=0}^{\infty} c_{n}\frac{(x-a)^{n+1}}{n+1}+C$ for $|x-a| < R$
+ \end{itemize}
+
+
  \subsection{Taylor and Maclaurin Series}
  If f has power series repr @ $f = a$, $f(x) = \sum_{n=0}^{\infty} c_{n}(x-a)^{n}, |x-a| < R, R > 0$, then $c_{n} = \frac{f^{(n)}(a)}{n!}$. \\
- \columnbreak
  Maclaurin Series: $f(x) = \sum_{n=0}^{\infty} \frac{f^{n}(0)}{n!}x^{n}$
 For $-\infty < x < \infty$
 \\ \;  % spacing
@@ -446,8 +459,6 @@ For $-1 < x < 1$
         \\ $(1 + x)^k$ & $= \sum\limits^\infty_{n = 0} \binom{k}{n}x^n$
         \\   & $= 1 + kx + \frac{k(k-1)}{2!}x^2 + \dots$
 \end{tabular}
-
-\columnbreak
 
 \subsection{Useful Math}
 
