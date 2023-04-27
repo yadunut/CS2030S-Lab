@@ -285,11 +285,11 @@
    $\frac{\partial z}{\partial y} =- \frac{F_y}{F_z}$
 
    \subsection{Directional Derivative}
-   Gradient vector at $f(x,y): \triangle f = f_x\vv{i} + f_y\vv{j}$
+   Gradient vector at $f(x,y): \triangledown f = f_x\vv{i} + f_y\vv{j}$
 
-   $D_uf(x, y) = \langle f_x, f_y \rangle \cdot \langle a, b \rangle = \langle f_x, f_y\rangle \cdot \hat{\vv{u}} = \triangle f \cdot \hat{\vv{u}}$ (Unit Vector)
+   $D_uf(x, y) = \langle f_x, f_y \rangle \cdot \langle a, b \rangle = \langle f_x, f_y\rangle \cdot \hat{\vv{u}} = \	\triangledown f \cdot \hat{\vv{u}}$ (Unit Vector)
 
-   Tangent Plane: $\triangle f \cdot \langle x-x_0, y-y_0,z-z_0\rangle = 0$
+   Tangent Plane: $\langle f_{x}, f_{y} -1 \rangle \cdot \langle x-x_0, y-y_0,z-z_0\rangle = 0$
 
    \subsection{Critical Points}
    $D = f_{xx}(a,b)f_{yy}(a,b) - (f_{x,y}(a,b))^2$
@@ -338,7 +338,7 @@
    \end{multicols}
 
    \subsection{Surface Area}
-   $S = \iint_R\sqrt{f_x^2 + f_y^2 + 1} dA$
+   $S = \iint_R\sqrt{f_x^2 + f_y^2 + 1} dA$, get in the form of $z = f(x,y)$ first
 
    \section{ODE}
    \begin{tabular}{|>{\color{black}}c | >{\color{black}}c|}
@@ -446,6 +446,20 @@ For $-1 < x < 1$
         \\ $(1 + x)^k$ & $= \sum\limits^\infty_{n = 0} \binom{k}{n}x^n$
         \\   & $= 1 + kx + \frac{k(k-1)}{2!}x^2 + \dots$
 \end{tabular}
+
+\columnbreak
+
+\subsection{Useful Math}
+
+\begin{itemize}
+  \item Line: $y-y_{1} = \frac{y_{2}-y_{1}}{x_{2}-x_{1}}(x-x_{1})$
+  \item $\int \sqrt{a^{2}-x^{2}}, x = a'\sin\theta, dx = a\cos\theta, = \frac{a^{2}}{2}\sin^{-1}(\frac{x}{a}) + \frac{x}{2}\sqrt{a^{2}-x^{2}}$
+  \item $\sqrt{a^{2}+x^{2}}dx, x = a\tan\theta, \frac{-\pi}{2} < \theta < \frac{\pi}{2}$, $= \frac{1}{2}\left(x\sqrt{a^{2}+x^{2}} + a^{2}\ln\left|\frac{x+\sqrt{a^{2}+x^{2}}}{a}\right|\right)$
+  \item $\int\cos^{2}x = \frac{1}{4} \sin2x + \frac{x}{2} = \frac{1}{2}\cos x \sin x + \frac{1}{2}x$
+  \item $\int\sin^{2}x = -\frac{1}{4} \sin2x + \frac{x}{2}$
+
+\end{itemize}
+
 
 \end{multicols*}
 \end{document}
