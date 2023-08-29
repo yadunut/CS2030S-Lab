@@ -2,7 +2,7 @@ package pset0;
 
 import java.util.Scanner;
 
-public class ProblemH {
+public class coffeecupcombo {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int lectures = 0;

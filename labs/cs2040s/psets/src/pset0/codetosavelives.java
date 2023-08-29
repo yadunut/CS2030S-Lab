@@ -1,7 +1,7 @@
 package pset0;
 import java.util.Scanner;
 
-public class ProblemB {
+public class codetosavelives {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int nums = Integer.parseInt(sc.nextLine());
