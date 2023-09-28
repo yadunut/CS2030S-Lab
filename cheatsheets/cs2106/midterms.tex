@@ -1,0 +1,469 @@
+\documentclass[10pt,landscape]{article}
+\usepackage[scaled=0.8]{helvet}
+
+\usepackage{calc}
+\usepackage{multicol}
+\usepackage{ifthen}
+\usepackage[a4paper,margin=3mm,landscape]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{newtxtext} 
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{vwcol}
+\usepackage{makecell}
+% Testing %
+\usepackage{blindtext}
+
+\setlist{nosep}
+
+\pagestyle{empty}
+\newenvironment{tightcenter}{%
+  \setlength\topsep{0pt}
+  \setlength\parskip{0pt}
+  \begin{center}
+  }{%
+  \end{center}
+}
+
+% redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%x
+{\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+  {-1explus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%
+{\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+{\normalfont\small\bfseries}}%
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand\rmdefault{\sfdefault}
+% makes nested numbering (e.g. 1.1.1, 1.1.2, etc)
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+\renewcommand\labelitemii{•}
+% for logical not operator
+\renewcommand{\lnot}{\mathord{\sim}}
+\renewcommand{\bf}[1]{\textbf{#1}}
+\newcommand{\abs}[1]{\vert #1 \vert}
+\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
+\newcommand{\vv}[1]{\boldsymbol{#1}}
+\newcommand{\VV}[1]{\overrightarrow{#1}}
+\newcommand{\cvv}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+
+\makeatother
+\definecolor{myblue}{cmyk}{1,.72,0,.38}
+% Define BibTeX command
+\everymath\expandafter{\the\everymath \color{myblue}}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\let\iff\leftrightarrow
+\let\Iff\Leftrightarrow
+\let\then\rightarrow
+\let\Then\Rightarrow
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+%% this changes all items (enumerate and itemize)
+\setlength{\leftmargini}{0.5cm}
+\setlength{\leftmarginii}{0.5cm}
+\setlist[itemize,1]{leftmargin=2mm,labelindent=1mm,labelsep=1mm}
+\setlist[itemize,2]{leftmargin=4mm,labelindent=1mm,labelsep=1mm}
+
+\title{CS2106 Midterms Cheatsheet}
+\author{Yadunand Prem}
+
+\begin{document}
+\raggedright
+\footnotesize
+\begin{multicols*}{4}
+  \section*{Intro}
+  \begin{itemize}
+    \item Monolitic OS
+      \begin{itemize}
+        \item + Good performance, well understood
+        \item - Coupled, very complex internal structure
+      \end{itemize}
+    \item Microkernel OS
+      \begin{itemize}
+        \item Very small, provides basic functionalities
+        \item - More robust and extendible, better isolation and protection between kernel and services
+        \item - lower performacne
+      \end{itemize}
+    \item Type 1 Hypervisor - Bare Metal
+      \begin{itemize}
+        \item Hardware --> Hypervisor --> OS1, OS2, OS3 (VMWare ESXi)
+      \end{itemize}
+    \item Type 2 Hypervisor - Host OS
+      \begin{itemize}
+        \item Hardware --> OS --> Hypervisor --> OS1, OS2
+      \end{itemize}
+  \end{itemize}
+
+
+  \section*{Process Abstraction}
+  Every process has PID
+
+  \textbf{States}
+  \begin{enumerate}
+    \item New
+    \item Ready
+    \item Running
+    \item Blocked
+    \item Terminated
+  \end{enumerate}
+
+  \textbf{Transitions}
+  \begin{enumerate}
+    \item Create (nil -> New)
+    \item Admit (New -> Ready)
+    \item Switch (Ready -> Running)
+    \item Switch (Running -> Ready)
+    \item Event Wait (Running -> Blocked)
+    \item Event occurs (Blocked -> Ready)
+  \end{enumerate}
+
+  \textbf{Syscall Mechanism}
+  \begin{enumerate}
+    \item User prog invokes library call
+    \item Library call places syscall No in register
+    \item Library call exec TRAP to switch to kernel
+    \item Handler determined by dispatcher using syscall no
+    \item Syscall executed
+    \item Syscall ended, restore CPU and return to library, switch from kernel to user mode
+    \item Library call return to user program
+  \end{enumerate}
+
+  \textbf{Exceptions} are synchronous and have to execute exception handler. Arithmetic Error, Memory Access Error
+
+  \textbf{Interrupts} are async external event that can interrupt exec of program, and have to execute interrupt handler
+
+  \section*{PA in Unix}
+  \texttt{fork()} is main way to create new process, returns PID of new process (parent) or 0 for child process.
+
+  Differ in \texttt{PID, PPID, fork()} return value
+
+  \texttt{execl(const char *path, const char *arg0..n, NULL)} replaces currently executing process with new one
+
+  \texttt{fork() + exec()} is the main way of new process for new program
+
+  \texttt{init} process, PID=1 watches for other processes and respawns when needed, \texttt{fork()} creates process tree, init is the root process
+
+  \texttt{exit()} to end execution of process, status returned to parent process, 0 for normal, !0 for others. On exit, most resources released, some not released (PID, status, CPU time). Return from main implicitly calls exit
+
+  \texttt{wait(int *status)} blocks and cleans up remainder of child resources. Returns PID of terminated child process. Stores exit status of terminated child process. 
+
+  \textbf{zombie} when child finishes but parent does not wait()
+
+  \textbf{orphan} when parent terminates before child. \texttt{init} becomes parent and handles cleanup
+
+  \textbf{Fork Impl}
+  \begin{enumerate}
+    \item Create address space of child
+    \item Allocate \texttt{p' = new PID}
+    \item Create entry in process table
+    \item Copy kernel environment of parent process (Priority for scheduling)
+    \item initialize child process ctx, \texttt{PID=p', PPID=parent}
+    \item Copy mem region from parent (prog, data, stack)
+    \item Acquire shared resources (files, CWD, etc)
+    \item Init hardware CTX (copy registers)
+    \item Add to scheduler queue
+  \end{enumerate}
+
+  \section*{Process Scheduling}
+  \textbf{Concurrent Execution} multiple processes progress in execution at same time. This can be \textbf{Virual Parallelism} or \textbf{Physical Parallelism}
+
+  A typical process goes through phases of \textbf{CPU Activity} (Computation) and \textbf{IO Activity} (Disk, print to screen)
+
+  \subsubsection{Criteria for Scheduling}
+  \begin{itemize}
+    \item \textbf{Fairness} - Fair share of CPU time, and no starvation
+    \item \textbf{Utilization} - All parts of computer utilized
+  \end{itemize}
+  \subsubsection{When to Perform Scheduling}
+  \begin{itemize}
+    \item \textbf{Non-Preemptive} (Cooperative)- Process stays scheduled until blocks / gives up CPU
+    \item \textbf{Preemptive} - Given fix time quota to run, at the end, process suspended
+  \end{itemize}
+  \subsection{Batch Processing}
+  \subsubsection{Criteria}
+  \begin{itemize}
+    \item \textbf{Turnaround time} Total time taken (finish - arrival)
+    \item \textbf{Waiting time} Turnaround - work done
+    \item \textbf{Throughput} - Number of tasks finished per unit time
+    \item \textbf{CPU Utilization} - \% of time when CPU working
+  \end{itemize}
+  \subsubsection{Algorithms}
+
+  \underline{\textbf{First Come First Served}} - FIFO queue based on arrival time. First task in queue until task blocked or done.
+
+  \begin{itemize}
+    \item \textbf{No Starvation} No of tasks infront of task X in FIFO is always decreasing
+    \item \textbf{Convoy Effect} Long running CPU bound task A followed by IO bound tasks X. While A running, X is waiting in ready queue, once A is blocked on IO, X will execute and go to IO queue, CPU is idling
+  \end{itemize}
+
+
+  \underline{\textbf{Shortest Job First}} - Select Task with shortest CPU time. Need to know total CPU time for task.
+  \begin{itemize}
+    \item Minimizes average waiting time
+    \item Starvation possible (Biased towards short jobs, long jobs might never get a chance)
+    \item Predicting CPU time $\text{Predicted}_{n+1} = \alpha\text{Actual}_n + 1(1-\alpha)\text{Predicted}_n$
+  \end{itemize}
+
+  \underline{\textbf{Shortest Remaining Time}} - Select job with shortest remaining / expected time. New jobs with shorter time can preempt currently running job
+
+  \subsection{Interactive}
+  \subsubsection{Criteria}
+  \begin{itemize}
+    \item \textbf{Response Time} - Time between request and response
+    \item \textbf{Predictability} - Less variation == more predictable
+  \end{itemize}
+
+  \subsubsection{Timer Mechanism}
+  \textbf{Timer Interrupt} goes of periodically, calling the scheduler
+
+  \textbf{Interval of Timer Interrupt(ITI)} Scheduler invoked on every interrupt, ranging from 1ms to 10ms
+
+  \textbf{Time Quantum} Duration given to process. Multiple of timer interrupt, 5ms to 100ms
+
+  \subsubsection{Algorithms}
+
+  \underline{\textbf{Round Robin}} - FIFO queue, where first taslk run until time quantum elapsed / gives up CPU / blocks. Placed at and of queue
+  \begin{itemize}
+    \item \textbf{Response Time Guarentee} - $n$th task will run by $(n-1)q$
+    \item \textbf{Choice of Quantum} - Big quantum (better utilization, longer wait time), Smaller Quantum (worse overhead, but shorter wait time)
+  \end{itemize}
+
+  \underline{\textbf{Priority Scheduling}} - Task with highest priority will be executed first. Preemptive (Higher priority task can preempt lower priority), or Non-preemptive (late coming high priority process has to wait for next round of scheduling)
+  \begin{itemize}
+    \item \textbf{Starvation} Low priority tasks can starve. Solution:
+      \begin{itemize}
+        \item Decrease priority of current running process after every quantum
+        \item Process not considered in next round of scheduling
+        \item Lower priority task can lock a resource higher priority needs. Lower preempts higher priority task
+      \end{itemize}
+  \end{itemize}
+
+  \underline{\textbf{Multi-level Feedback Queue}} - Designed to solve issue of scheduling without knowledge. 
+  \begin{itemize}
+    \item \textbf{Adaptive} - Learns process behaviour automatically
+    \item \textbf{Minimises} response time for IO bound and turnaround time for CPU bound
+    \item \textbf{Rules} 
+      \begin{itemize}
+        \item If Priority(A) > Priority B -> A runs
+        \item if Priority(A) == Priority(B) -> A and B run in RR
+        \item New Job -> Highest Priority
+        \item On fully using time quantum -> Priority reduced
+        \item If gives up / blocks before time quantum -> Priority Maintained
+      \end{itemize}
+
+  \end{itemize}
+
+  \underline{\textbf{Lottery Scheduling}} - Give lottery ticket to processes for system resources. When scheduling needed, lottery ticket randomly chosen, winner granted resource
+  \begin{itemize}
+    \item \textbf{Responsive} - New process can participate
+    \item \textbf{Good level of control} - Process can be given Y tickets, important process can have more tickets, and each resource can have own set of tickets
+  \end{itemize}
+
+  \section*{Threads}
+Process is expensive as it Duplicates memory, process context, and context switching requires saving and restoring process info. Hard for multiple process to communicate due to independent memory space. Add threads so multiple parts of same program execute concurrently
+
+\subsection{Thread Model}
+\begin{itemize}
+  \item Single process can have multiple threads
+  \item Threads share Memory Context (Text, Data, Heap)
+  \item Threads share OS Context (PID, files, etc)
+  \item Each thread needs ThreadID, Register, Stack
+\end{itemize}
+
+\textbf{Context Switching} - 
+Thread switch only requires changing hardware ctx (register, FP, SP), whereas Process Switch requires (OS, Hardware, Memory CTX)
+
+\textbf{Benefits}
+\begin{itemize}
+  \item \textbf{Economy} - Multiple threads in same process requires less resource than multiple processes
+  \item \textbf{Resource Sharing} - Share most resources of process, no need for additional mechanism for passing info
+  \item \textbf{Responsive} - Multithreaded can appear responsive
+  \item \textbf{Scalable} - Can take advantage of multiple CPU
+\end{itemize}
+
+\textbf{Problems}
+\begin{itemize}
+  \item \textbf{System Call Concurrency} - Parallel exec of multiple threads -> parallel sys calls -> Guarentee correctness and determine correct behavior
+  \item \textbf{Process Behaviour}
+    \begin{itemize}
+      \item fork() called in thread, only 1 thread is cloned
+      \item If thread calls exit(), all threads exit
+      \item If thread calls exec(), all threads exit and new executable runs
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{User Thread}
+Implemented as user library, runtime system in process will handle thread related operations. Kernel not aware of threads
+
+\textbf{Advantages}
+\begin{itemize}
+  \item Multithreaded program on ANY OS
+  \item Thread operations are library calls
+  \item More flexible and configurable
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+  \item OS not aware of threads, scheduling done at process level
+  \item One thread blocked --> Process blocked --> All threads blocked
+  \item Cannot use multi-CPU
+\end{itemize}
+\subsubsection{Kernel Thread}
+Thread implemented in OS, operations handled as syscalls. Kernel can schedule by threads instead of process
+\textbf{Advantages}
+\begin{itemize}
+  \item Can schdule on thread level - More than 1 thread in same process can run on multiple CPUs
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+  \item Thread ops now syscall - Slower and more resources
+  \item Less flexible (If impl with many features, overkill), (If impl with less features, not flexible enough)
+\end{itemize}
+\subsubsection{Hybrid Thread}
+Both Kernel and User thread. OS Schedule Kernel thread, user thread binds to kernel thread
+
+\subsubsection{Posix Theads: pthread}
+
+
+\texttt{pthread\_t} : TID,
+\texttt{pthread\_attr} : attribute of thread
+
+\texttt{pthread\_create}
+
+\texttt{pthread\_exit}
+
+\texttt{pthread\_join}
+
+\section*{IPC}
+Hard for cooperating processes to share information as memory space is independent, and IPC mechanisms is needed
+
+\subsection{Shared Memory}
+\begin{enumerate}
+  \item Process $P_1$ creates shared memory $M$
+  \item Process $P_1$ and $P_2$ attach $M$ to its own memory space
+  \item $P_1$ and $P_2$ communicate using $M$
+\end{enumerate}
+
+\textbf{Advantages}
+\begin{itemize}
+  \item \textbf{Efficient} - Only initial step require OS
+  \item \textbf{Ease of Use} - Behaves similar to normal memory space, information of any type / size can be written
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+  \item \textbf{Synchronization} - Need to synchronize access
+  \item Implementation is harder
+\end{itemize}
+
+\subsection{Message Passing}
+\begin{enumerate}
+  \item Process $P_1$ prepares message $M$ and sends it to $P_2$
+  \item Process $P_2$ receives message
+  \item Send / receive provided as syscalls
+\end{enumerate}
+
+\subsubsection{Direct Communication}
+\begin{itemize}
+  \item Sender / Receiver explicitly name other party (Domain Socket)
+  \item 1 link per pair of communicating process
+  \item Need to know identity of other party
+\end{itemize}
+
+\subsubsection{Indirect Communication}
+\begin{itemize}
+  \item Sender / Receiver send to mailbox / port. (Message Queue)
+  \item 1 mailbox shared among processes
+\end{itemize}
+
+\subsubsection{Synchronization Behaviours}
+\begin{itemize}
+  \item \textbf{Blocking Primitives} - Receive() blocked until message
+  \item \textbf{Non-Blocking primitives} - Receive() will receive message / indicate message not ready
+\end{itemize}
+
+\textbf{Advantages}
+\begin{itemize}
+  \item \textbf{Portable} - Easily impl on diff processing env (WAN, distributed systems)
+  \item \textbf{Easier sync} - Sender and receiver implicitly synchronized
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+  \item \textbf{Inefficient} - OS intervention, extra copying
+\end{itemize}
+
+\subsection{Pipe}
+Process has 3 different comms channels, \texttt{stdin, stdout, stderr}
+
+Process P writes n bytes, Q consumes m bytes. FIFO, must access data in order
+
+Byte buffer with implicit synchronization, Writers wait when full, Readers wait when empty
+
+\subsection{Signal}
+Asynchronous notification regarding event sent to process/thread. Must be handled by default set of handlers / user supplied. Common signals: Kill, Interrupt, Stop, etc.
+
+\section*{Synchronization}
+\subsection{Race Condition}
+\textbf{Problems}
+\begin{itemize}
+  \item When 2 or more processes execute concurrently and share modifiable resource -> Can cause sync problems
+  \item Execution of single sync process is deterministic
+  \item Execution concurrent processes non-deterministic (order in which resource is accessed / modified)
+\end{itemize}
+
+Solution: Designate code segment with race condition as critical section. At any point in time, only 1 process can execute in CS. Other processes prevented from entering CS.
+
+\subsection{Critical Section}
+\textbf{Properties}
+\begin{itemize}
+  \item \textbf{Mutual Exclusion} - $P_1$ in CS, all other processes prevented
+  \item \textbf{Progress} - No process in CS, one waiting process given access
+  \item \textbf{Bounded Wait} - After $P_1$ requests to enter CS, upper bound on other process in CS before $P_1$
+  \item \textbf{Independence} - Not executing in CS should never block other process
+\end{itemize}
+
+\textbf{Incorrect Synchronization}
+\begin{itemize}
+  \item \textbf{Deadlock} - All processes blocked -> No progress
+  \item \textbf{Livelock} - Deadlock avoidance mechanism -> Process keeps changing state to avoid deadlock and makes no progress
+  \item \textbf{Starvation} - never makes progress in execution as its perpetually denied resources
+\end{itemize}
+
+\subsection{Implementation of CS}
+\subsubsection{Test and Set}
+Common machine instruction to aid synchronization
+
+\textbf{Behavior}
+\begin{enumerate}
+  \item Load current content at MemLoc to register
+  \item Store 1 into MemLoc
+\end{enumerate}
+This is operated as single operation
+
+\texttt{EnterCS(int *Lock) \{ while TestAndSet(Lock) == 1\} }
+
+\texttt{ExitCS(int *Lock) \{ *Lock = 0\} }
+
+EnterCS will set the value of the lock to 1 and return its previous value. If teh value is 1, that means that its still held by another process. If the value is 0, then the lock has been released, and this process can run. The value is set to 1 imediately. This detects the "change" in Lock. 
+
+\subsubsection{Observation and Comments}
+Implementation works, however spinlock wastes resources (processing power)
+\end{multicols*}
+
+\end{document}
