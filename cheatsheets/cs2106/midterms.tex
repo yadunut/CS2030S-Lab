@@ -464,6 +464,27 @@ EnterCS will set the value of the lock to 1 and return its previous value. If te
 
 \subsubsection{Observation and Comments}
 Implementation works, however spinlock wastes resources (processing power)
+
+\subsubsection{Random Notes}
+To abuse MLFQ, you can spawn a child process and do work there.
+
+Stack Frame setup / teardown
+\begin{enumerate}
+  \item On exec func call
+    \begin{enumerate}
+      \item Caller: Pass args with register and/or stack
+      \item Caller: Save Return PC on Stack
+      \item Callee: Save registers used by callee (Old FP, SP)
+      \item Callee: Alloc space for local vars on stack
+      \item Callee: Adjust SP to point to new stack, adjust FP
+    \end{enumerate}
+  \item On Return from func call
+    \begin{enumerate}
+      \item Callee: Restore saved registers, FP, SP
+      \item Continue execution in caller
+    \end{enumerate}
+\end{enumerate}
+
 \end{multicols*}
 
 \end{document}
