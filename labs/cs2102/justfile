@@ -1,0 +1,8 @@
+init:
+  docker run --name pg -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres 
+
+psql *ARGS:
+  docker exec -it pg psql -U postgres {{ARGS}}
+
+rm: 
+  docker container rm --force pg
