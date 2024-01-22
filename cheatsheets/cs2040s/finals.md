@@ -492,3 +492,20 @@ def prims(AL, numV):
   - (still undefined: what shortest path algorithm to be used here?)
 - take the shortest path to <target rectangle, vertical> as the answer
   - (is this correct? any other vertex to consider?)
+
+### Jetpack solution (DFS)
+- add initial position to queue
+- while queue
+  - add up if it has not been visited
+  - add down if it has not been visited
+- backtrack on the results to generate path
+
+### Conquest (dijkstra)
+- create pqueue of all places i can currently visit
+- while pq
+  - if army at pq > current army, break
+  - if i've been here before, continue
+  - add current to my army
+  - visit current
+  - add current adjacent to heap
+- return armysize
